@@ -1,5 +1,20 @@
 package ui;
 
-public class MainWindow {
+import java.awt.Dimension;
 
+import javax.swing.JFrame;
+
+public class MainWindow extends JFrame{
+	
+	
+	public MainWindow(){
+		
+		this.setSize(new Dimension(800, 600));
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	
+	public static void main(String[] args){
+		new MainWindow().setVisible(true);
+	}
 }
