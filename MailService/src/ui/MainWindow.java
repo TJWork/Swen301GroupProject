@@ -4,6 +4,8 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import UserInterface.KPSUserInterface;
+
 public class MainWindow extends JFrame{
 	
 	
@@ -15,6 +17,7 @@ public class MainWindow extends JFrame{
 	
 	
 	public static void main(String[] args){
-		new MainWindow().setVisible(true);
+		//new MainWindow().setVisible(true);
+		new KPSUserInterface();
 	}
 }
