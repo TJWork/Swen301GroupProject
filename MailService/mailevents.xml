@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mailevents>
+	<mail>
+		<day>10/05/2013</day>
+		<to>Paris</to>
+		<from>Wellington</from>
+		<priority>1</priority>
+	</mail>
+	<mail>
+		<day>10/06/2013</day>
+		<to>Luxembourg</to>
+		<from>Eketahuna</from>
+		<priority>2</priority>
+	</mail>
+	<mail>
+		<day>1/05/2013</day>
+		<to>Helsinki</to>
+		<from>Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu</from>
+		<priority>2</priority>
+	</mail>
+	<mail>
+		<day>12/05/2013</day>
+		<to>Hamilton</to>
+		<from>Onehunga</from>
+		<priority>3</priority>
+	</mail>
+	<package>
+	    <day>18/06/2013</day>
+		<to>Nukuʻalofa</to>
+		<from>Tologa Bay</from>
+		<priority>2</priority>
+		<weight>3</weight>
+		<volume>4</volume>
+	</package>
+	<package>
+	    <day>24/07/2013</day>
+		<to>Timbuktu</to>
+		<from>Bunnythorpe</from>
+		<priority>1</priority>
+		<weight>2</weight>
+		<volume>4</volume>
+	</package>	
+	<package>
+	    <day>13/02/2013</day>
+		<to>Darwin</to>
+		<from>Taihape</from>
+		<priority>1</priority>
+		<weight>3</weight>
+		<volume>1</volume>
+	</package>		
+</mailevents>
+
