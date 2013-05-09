@@ -38,6 +38,10 @@ public class Mail {
 		return priority;
 	}
 	
-	
+	public double getCost(){
+		Cost c = new Cost(this);
+		
+		return c.getPrice();
+	}
 	
 }
