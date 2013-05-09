@@ -19,13 +19,13 @@ public class Cost {
 	}
 	
 	private void calculatePackageCost() {
-		int distance = m.getFrom().getAddress().length() - m.getToAddress().length(); //just uses difference in adress string until proper distances are added
+		int distance = m.getToAddress().length() - m.getToAddress().length(); //just uses difference in adress string until proper distances are added
 		distance = Math.abs(distance);
 		costVal = p.getWeight() *p.getPriority() * distance;
 	}
 
 	private void calculateMailCost() {
-		int distance = m.getFrom().getAddress().length() - m.getToAddress().length(); //just uses difference in adress string until proper distances are added
+		int distance = m.getToAddress().length() - m.getToAddress().length(); //just uses difference in adress string until proper distances are added
 		distance = Math.abs(distance);
 		this.costVal = distance * m.getPriority();
 	}
