@@ -24,29 +24,29 @@
 		<from>Onehunga</from>
 		<priority>3</priority>
 	</mail>
-	<package>
+	<parcel>
 	    <day>18/06/2013</day>
-		<to>Nukuʻalofa</to>
+		<to>Nuku'alofa</to>
 		<from>Tologa Bay</from>
 		<priority>2</priority>
 		<weight>3</weight>
 		<volume>4</volume>
-	</package>
-	<package>
+	</parcel>
+	<parcel>
 	    <day>24/07/2013</day>
 		<to>Timbuktu</to>
 		<from>Bunnythorpe</from>
 		<priority>1</priority>
 		<weight>2</weight>
 		<volume>4</volume>
-	</package>	
-	<package>
+	</parcel>	
+	<parcel>
 	    <day>13/02/2013</day>
 		<to>Darwin</to>
 		<from>Taihape</from>
 		<priority>1</priority>
 		<weight>3</weight>
 		<volume>1</volume>
-	</package>		
+	</parcel>		
 </mailevents>
 

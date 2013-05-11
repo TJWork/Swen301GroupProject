@@ -13,6 +13,29 @@ public class Mail {
 	private int customerID;
 	private int priority;
 	
+	public Mail(){
+		this.day = "";
+		this.toAddress = "";
+		this.from = "";
+		this.customerID = -1;
+		this.priority = -1;
+	}
+	
+	public Mail(String day, String toAddress, String from, String priority) {
+		this.day = day;
+		this.toAddress = toAddress;
+		this.from = from;
+		this.priority = Integer.parseInt(priority);
+	}
+
+	public Mail(String day, String toAddress, String from, String priority, int customerID) {
+		this.day = day;
+		this.toAddress = toAddress;
+		this.from = from;
+		this.customerID = customerID;
+		this.priority = Integer.parseInt(priority);
+	}
+	
 	public Mail(String day, String toAddress, String from, int priority) {
 		this.day = day;
 		this.toAddress = toAddress;
@@ -27,6 +50,15 @@ public class Mail {
 		this.customerID = customerID;
 		this.priority = priority;
 	}
+	/*
+	 * ##########################################################################################
+	 * 
+	 * 			Getters Setters
+	 * 
+	 * ##########################################################################################
+	 * 
+	 */
+	
 	
 	public String getDay() {
 		return day;
@@ -49,12 +81,35 @@ public class Mail {
 		return priority;
 	}
 	
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+	public void setToAddress(String toAddress) {
+		this.toAddress = toAddress;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+	
+	public void setPriority(String priority) {
+		this.priority = Integer.parseInt(priority);
+	}
+	
 	public String toString(){
 		return this.day + " :  To: " + this.toAddress + "  :  From: " + this.from + "  :  Priority: " + this.priority;
 	}
 	
-	
-	
+
 	/*
 	 * ##########################################################################################
 	 * 
