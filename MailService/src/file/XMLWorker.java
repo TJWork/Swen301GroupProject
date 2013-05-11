@@ -14,9 +14,17 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -118,6 +126,30 @@ public class XMLWorker {
 		return doc.getDocumentElement();		
 	}
 
+
+	/**
+	 * Method which loads the given xml file, and returns the root of the xml's tree.
+	 * (This is the tag which contains ALL the data).
+	 * @param filename XML File to read
+	 * @return root node
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
+	private static Document getDocElement(String filename) throws ParserConfigurationException, SAXException, IOException{
+		File file = new File(filename + ".xml");
+
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();		
+		DocumentBuilder db = dbf.newDocumentBuilder();
+		Document doc = db.parse(file);
+		doc.getDocumentElement().normalize();
+
+		//get the root element
+		return doc;		
+	}
+
+	
+	
 	/**
 	 * Method which reads in the list of countries. 
 	 * @return List of countries
@@ -277,8 +309,55 @@ public class XMLWorker {
 
 	}
 
+	/**
+	 * Adds a new mail and or parcel event to the mailevenets database.
+	 * 
+	 * @param mail
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws TransformerException
+	 */
+	public static void addMail(Mail mail) {
+		Document doc;
+		try {
+			doc = getDocElement("mailevents");
+		Element root = doc.getDocumentElement();
+		
+		Element newMail = doc.createElement("mail");
+		String[] tags = new String[]{"day", "to", "from", "priority"};
+		String[] data = mail.getData();
+		
+		if (mail instanceof Parcel){
+			newMail = doc.createElement("parcel");
+			tags = new String[]{"day", "to", "from", "weight", "volume", "priority"};
+			data = ((Parcel)mail).getData();
+		}
+		
+		root.appendChild(newMail);
+		for (int i = 0; i < tags.length; i++){
+			Element e = doc.createElement(tags[i]);
+			e.appendChild(doc.createTextNode(data[i]));
+			newMail.appendChild(e);
+		}
+		
+		finishWritingXML(doc);
+		}catch(Exception e){e.printStackTrace();}
+	}
 
-
+	private static void finishWritingXML(Document doc) throws TransformerException{
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		DOMSource source = new DOMSource(doc);
+		StreamResult result = new StreamResult(new File("mailevents.xml"));
+ 
+		// Output to console for testing
+		// StreamResult result = new StreamResult(System.out);
+ 
+		transformer.transform(source, result);
+	}
 
 
 	public static void main(String[] args){
@@ -294,6 +373,11 @@ public class XMLWorker {
 			System.out.println("Mail: " + m.toString());
 		}		
 
+		XMLWorker.addMail(new Mail("02/02/2012", "Madrid", "Palmerston North", 1));
+		XMLWorker.addMail(new Parcel("02/04/2012", "Ho-Chi Min", "Clive", "2","5", 2));
+		
+	
+		
 		/*
 		try {
 			ArrayList<ArrayList<String>> arr = 	XMLWorker.readTagsConditional("mailevents", "parcel", 

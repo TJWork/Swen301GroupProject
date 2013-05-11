@@ -45,4 +45,8 @@ public class Mail {
 		return c.getPrice();
 	}
 
+	public String[] getData(){
+		return new String[]{this.day, this.toAddress, this.from, "" + this.priority};
+	}
+	
 }
