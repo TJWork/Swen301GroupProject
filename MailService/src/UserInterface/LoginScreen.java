@@ -1,5 +1,13 @@
 package UserInterface;
 
-public class LoginScreen {
+import javax.swing.*;
+
+public class LoginScreen extends JPanel{
+	
+	
+	
+	public LoginScreen(){
+		
+	}
 
 }
