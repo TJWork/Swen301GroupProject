@@ -12,17 +12,20 @@ public class KPSUserInterface extends JFrame{
 	private Time clock;
 	private JPanel topPanel;
 	private JPanel bottomPanel;
+	private JPanel login;
 
 	public KPSUserInterface(){
 		tab = new JTabbedPane();
 		form = new Form();
+		login = new LoginScreen();
 
 		tab.add("Form" , form);
+		tab.add("Login", login);
 
 		setLayout(new BorderLayout());
 		add(tab, BorderLayout.CENTER);
 		add(topPanel(), BorderLayout.NORTH);
-		add(bottomPanel(), BorderLayout.SOUTH);
+//		add(bottomPanel(), BorderLayout.SOUTH);
 		
 		setJMenuBar(menubar());
 		setSize(600, 700);
@@ -30,30 +33,30 @@ public class KPSUserInterface extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	public JPanel bottomPanel(){
-		bottomPanel = new JPanel();
-		bottomPanel.setLayout(new BorderLayout());
-		
-		JButton OK = new JButton("OK");
-		OK.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				confirmDataInput();
-			}
-		});
-		
-		JButton cancel = new JButton("Cancel");
-		cancel.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				form.resetField();
-			}
-		});
-		
-		bottomPanel.add(OK);
-		bottomPanel.add(cancel, BorderLayout.EAST);
-		return bottomPanel;
-	}
+//	public JPanel bottomPanel(){
+//		bottomPanel = new JPanel();
+//		bottomPanel.setLayout(new BorderLayout());
+//		
+//		JButton OK = new JButton("OK");
+//		OK.addActionListener(new ActionListener(){
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				confirmDataInput();
+//			}
+//		});
+//		
+//		JButton cancel = new JButton("Cancel");
+//		cancel.addActionListener(new ActionListener(){
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				form.resetField();
+//			}
+//		});
+//		
+//		bottomPanel.add(OK);
+//		bottomPanel.add(cancel, BorderLayout.EAST);
+//		return bottomPanel;
+//	}
 	
 	public JPanel topPanel(){
 		clock = new Time();
