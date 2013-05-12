@@ -6,7 +6,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class Form extends JPanel{
+public class Form extends JPanel implements ActionListener{
 	JLabel CustomerName;
 	JTextField name;
 
@@ -199,5 +199,11 @@ public class Form extends JPanel{
 		System.out.println(type.getValue().toString());
 		System.out.println(priority.getValue().toString());
 		System.out.println(desCountry.getSelectedItem().toString());
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

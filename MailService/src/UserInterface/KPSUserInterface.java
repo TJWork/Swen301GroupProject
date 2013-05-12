@@ -33,30 +33,7 @@ public class KPSUserInterface extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-//	public JPanel bottomPanel(){
-//		bottomPanel = new JPanel();
-//		bottomPanel.setLayout(new BorderLayout());
-//		
-//		JButton OK = new JButton("OK");
-//		OK.addActionListener(new ActionListener(){
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				confirmDataInput();
-//			}
-//		});
-//		
-//		JButton cancel = new JButton("Cancel");
-//		cancel.addActionListener(new ActionListener(){
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				form.resetField();
-//			}
-//		});
-//		
-//		bottomPanel.add(OK);
-//		bottomPanel.add(cancel, BorderLayout.EAST);
-//		return bottomPanel;
-//	}
+
 	
 	public JPanel topPanel(){
 		clock = new Time();
