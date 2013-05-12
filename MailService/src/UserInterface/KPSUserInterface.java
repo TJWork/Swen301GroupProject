@@ -28,7 +28,7 @@ public class KPSUserInterface extends JFrame{
 //		add(bottomPanel(), BorderLayout.SOUTH);
 		
 		setJMenuBar(menubar());
-		setSize(600, 700);
+		setSize(1000, 700);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
