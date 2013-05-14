@@ -29,7 +29,7 @@ public class LoginScreen extends JPanel implements ActionListener{
 	
 	public LoginScreen(){
 		try {      
-			image = ImageIO.read(new File("Images/LoginBG.jpg"));
+			image = ImageIO.read(new File("Images/BG.jpg"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -37,86 +37,99 @@ public class LoginScreen extends JPanel implements ActionListener{
 		
 		title = new JLabel();
 		title.setText(titlename);
-		title.setFont(new Font("Comic Sans", Font.BOLD, 40));
+		title.setFont(new Font("Verdana", Font.BOLD, 60));
 		
 		teamMembers = new JLabel();
 		teamMembers.setText(members);
+		teamMembers.setFont(new Font("Verdana", Font.ITALIC, 20));
 		
 		cancel = new JButton();
 		cancel = setButton("Cancel_Normal", "Cancel_Pressed", "Cancel_Hover", "cancel");
 	
 		signin = new JButton();
-		signin = setButton("Signin_Normal", "Signin_Pressed", "Signin_Hover", "signin");
+		signin = setButton("Confirm_Normal", "Confirm_Pressed", "Confirm_Hover", "signin");
 		
 		usrName = new JLabel("Username");
+		usrName.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		usrNameField = new JTextField();
+		usrNameField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		
 		passwrd = new JLabel("Password");
+		passwrd.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		passwrdField = new JPasswordField();
+		passwrdField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		
 		type = new JLabel("Login as");
+		type.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		userType = new JSpinner(new SpinnerListModel(new String[] {"Clerk", "Manager"}));
-		
+		userType.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		
 		
 		
         GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);
+        setLayout(layout);
+
+
+        
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(signin)
-                .addGap(30, 30, 30)
-                .addComponent(cancel)
-                .addGap(30, 30, 30))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(title))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(teamMembers)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(usrName)
-                                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(type)
-                                        .addComponent(passwrd)))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(usrNameField)
-                                    .addComponent(passwrdField, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                                    .addComponent(userType))))))
-                .addContainerGap(146, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(title, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(teamMembers)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(usrName)
-                    .addComponent(usrNameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwrd)
-                    .addComponent(passwrdField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(userType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(type))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(signin)
-                    .addComponent(cancel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
-        );
+                    .addGap(34, 34, 34)
+                    .addComponent(cancel)
+                    .addGap(28, 28, 28))
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(150, 150, 150)
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(type, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(userType, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(usrName, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(usrNameField, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(passwrd, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(passwrdField, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(95, 95, 95)
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(teamMembers)
+                                .addComponent(title))))
+                    .addContainerGap(120, Short.MAX_VALUE))
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(70, 70, 70)
+                    .addComponent(title)
+                    .addGap(18, 18, 18)
+                    .addComponent(teamMembers)
+                    .addGap(26, 26, 26)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(usrNameField, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usrName, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                    .addGap(38, 38, 38)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(passwrdField, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(passwrd, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                    .addGap(34, 34, 34)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(userType, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(type, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(signin)
+                        .addComponent(cancel))
+                    .addGap(31, 31, 31))
+            );
+        
+        
 		
 		
 		
@@ -155,8 +168,7 @@ public class LoginScreen extends JPanel implements ActionListener{
 		button.setBorder(null);
 		button.setBackground(new Color(0,0,0,0));
 		button.setActionCommand(command);
-//		button.setPreferredSize(new Dimension(50, 50));
-		
+
 		button.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) {}
@@ -183,17 +195,23 @@ public class LoginScreen extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if("cancel".equals(e.getActionCommand())){
-			actionCommand = "cancel";
+//			actionCommand = "cancel";
 		}
 		else if("signin".equals(e.getActionCommand())){
-			actionCommand = "signin";
+			setVisible(false);
+			
+			
+			if(userType.getValue().toString().equals("Clerk")){
+				getParent().add(new ClerkGUI());
+				System.out.println("clerkgui");
+			}
+			else if(userType.getValue().toString().equals("Manager")){
+				getParent().add(new ManagerGUI());
+				System.out.println("managergui");
+			}
+			
 		}
-		System.out.println(actionCommand);
-	}
-	
-	public String EventAction(){
-		System.out.println(actionCommand);
-		return actionCommand;
+		System.out.println(e.getActionCommand().toString());
 	}
 
 }

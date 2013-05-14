@@ -6,34 +6,57 @@ import java.text.*;
 import java.util.*;
 import javax.swing.*;
 
-public class KPSUserInterface extends JFrame{
-	private Form form;
-	private JTabbedPane tab;
+public class KPSUserInterface extends JFrame implements ComponentListener{
 	private Time clock;
 	private JPanel topPanel;
-	private JPanel bottomPanel;
-	private JPanel login;
+	private LoginScreen login;
 
 	public KPSUserInterface(){
-		tab = new JTabbedPane();
-		form = new Form();
 		login = new LoginScreen();
-
-		tab.add("Form" , form);
-		tab.add("Login", login);
-
-		setLayout(new BorderLayout());
-		add(tab, BorderLayout.CENTER);
-		add(topPanel(), BorderLayout.NORTH);
-//		add(bottomPanel(), BorderLayout.SOUTH);
 		
-		setJMenuBar(menubar());
+		setLayout(new BorderLayout());
+		add(topPanel(), BorderLayout.NORTH);
+
+		add(login).addComponentListener(this);
+		
+		
 		setSize(1000, 700);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		
+		
 	}
+
 	
 
+	@Override
+	public void componentResized(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println(e.getComponent().getClass().getName());
+		
+	}
+
+	
+	
 	
 	public JPanel topPanel(){
 		clock = new Time();
@@ -44,25 +67,7 @@ public class KPSUserInterface extends JFrame{
 		return topPanel;
 	}
 	
-	public JMenuBar menubar(){
-		JMenuBar menubar = new JMenuBar();
-		
-		JMenu menu = new JMenu("File");
-		JMenuItem exit = new JMenuItem("Exit");
-		exit.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		
-		menu.add(exit);
-		menubar.add(menu);
-		return menubar;
-	}
-
 	public void confirmDataInput(){
-		form.logEvent();
 		System.out.println(clock.getCurrentTime());
 		System.out.println(clock.getCurrentDay());
 	}
@@ -110,4 +115,6 @@ public class KPSUserInterface extends JFrame{
 			
 		}
 	}
+
+
 }
