@@ -23,30 +23,18 @@ public class KPSUserInterface extends JFrame implements ComponentListener{
 		setSize(1000, 700);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		
-		
 	}
 
 	
 
 	@Override
-	public void componentResized(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void componentResized(ComponentEvent e) {}
 
 	@Override
-	public void componentMoved(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void componentMoved(ComponentEvent e) {}
 
 	@Override
-	public void componentShown(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void componentShown(ComponentEvent e) {}
 
 	@Override
 	public void componentHidden(ComponentEvent e) {
