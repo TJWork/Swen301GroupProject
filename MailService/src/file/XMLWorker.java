@@ -310,13 +310,10 @@ public class XMLWorker {
 	}
 
 	/**
-	 * Adds a new mail and or parcel event to the mailevenets database.
+	 * Adds a new mail and or parcel event to the mailevents database. Can be as a Mail <br>
+	 * object or Parcel.
 	 * 
-	 * @param mail
-	 * @throws ParserConfigurationException
-	 * @throws SAXException
-	 * @throws IOException
-	 * @throws TransformerException
+	 * @param mail Object to save data of
 	 */
 	public static void addMail(Mail mail) {
 		Document doc;
