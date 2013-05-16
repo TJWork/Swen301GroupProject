@@ -6,54 +6,45 @@ import java.text.*;
 import java.util.*;
 import javax.swing.*;
 
-public class KPSUserInterface extends JFrame{
-	private Form form;
-	private JTabbedPane tab;
+public class KPSUserInterface extends JFrame implements ComponentListener{
 	private Time clock;
 	private JPanel topPanel;
-	private JPanel bottomPanel;
+	private LoginScreen login;
 
 	public KPSUserInterface(){
-		tab = new JTabbedPane();
-		form = new Form();
-
-		tab.add("Form" , form);
-
-		setLayout(new BorderLayout());
-		add(tab, BorderLayout.CENTER);
-		add(topPanel(), BorderLayout.NORTH);
-		add(bottomPanel(), BorderLayout.SOUTH);
+		login = new LoginScreen();
 		
-		setJMenuBar(menubar());
-		setSize(600, 700);
+		setLayout(new BorderLayout());
+		add(topPanel(), BorderLayout.NORTH);
+
+		add(login).addComponentListener(this);
+		
+		
+		setSize(1000, 700);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
+
 	
-	public JPanel bottomPanel(){
-		bottomPanel = new JPanel();
-		bottomPanel.setLayout(new BorderLayout());
+
+	@Override
+	public void componentResized(ComponentEvent e) {}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {}
+
+	@Override
+	public void componentShown(ComponentEvent e) {}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println(e.getComponent().getClass().getName());
 		
-		JButton OK = new JButton("OK");
-		OK.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				confirmDataInput();
-			}
-		});
-		
-		JButton cancel = new JButton("Cancel");
-		cancel.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				form.resetField();
-			}
-		});
-		
-		bottomPanel.add(OK);
-		bottomPanel.add(cancel, BorderLayout.EAST);
-		return bottomPanel;
 	}
+
+	
+	
 	
 	public JPanel topPanel(){
 		clock = new Time();
@@ -64,25 +55,7 @@ public class KPSUserInterface extends JFrame{
 		return topPanel;
 	}
 	
-	public JMenuBar menubar(){
-		JMenuBar menubar = new JMenuBar();
-		
-		JMenu menu = new JMenu("File");
-		JMenuItem exit = new JMenuItem("Exit");
-		exit.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		
-		menu.add(exit);
-		menubar.add(menu);
-		return menubar;
-	}
-
 	public void confirmDataInput(){
-		form.logEvent();
 		System.out.println(clock.getCurrentTime());
 		System.out.println(clock.getCurrentDay());
 	}
@@ -130,4 +103,6 @@ public class KPSUserInterface extends JFrame{
 			
 		}
 	}
+
+
 }
