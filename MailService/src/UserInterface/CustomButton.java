@@ -39,7 +39,7 @@ public class CustomButton extends JButton{
 
 	} 
 	
-	public CustomButton(String text){
+	public CustomButton(String text, String command){
 		setText(text);
 		setForeground(Color.GRAY);
 		setFont(new Font("", Font.PLAIN, 30));
@@ -47,6 +47,7 @@ public class CustomButton extends JButton{
 		setContentAreaFilled(false);
 		setBorder(null);
 		setBackground(new Color(0,0,0,0));
+		setActionCommand(command);
 		
 		addMouseListener(new MouseListener() {
 			@Override
