@@ -104,7 +104,45 @@ public class XMLWorker {
 	}
 
 
+	/**
+	 * 
+	 * @param fileName
+	 * @param keyTag
+	 * @param tags
+	 * @param match
+	 * @return
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
+	public static ArrayList<ArrayList<String>> readTagsConditional(String fileName, String keyTag, String[] tags, String[] match) throws ParserConfigurationException, SAXException, IOException{
+		Element root = getRootElement(fileName);
+		ArrayList<ArrayList<String>> retArr = new ArrayList<ArrayList<String>>();
 
+		NodeList rootList = root.getElementsByTagName(keyTag);
+		for (int i = 0; i < rootList.getLength(); i++){
+			ArrayList<String> dat = new ArrayList<String>();
+			Element e = (Element)rootList.item(i);
+			System.out.println(e.getNodeName());
+			boolean isOk = true;
+			for (int k = 0; k < tags.length; k++){
+				NodeList nl = e.getElementsByTagName(tags[k]);
+				// The list of nodes in indent
+				if(nl != null && nl.getLength() > 0) {
+					Element el = (Element)nl.item(0);
+					
+					if (match[k] == null || (match[k]!= null && el.getTextContent().equals(match[k])))
+						dat.add(el.getTextContent());
+					else isOk = false;
+				}
+			}	
+			if(isOk)
+				retArr.add(dat);
+		}
+
+		return retArr;
+	}
+	
 	/**
 	 * Method which loads the given xml file, and returns the root of the xml's tree.
 	 * (This is the tag which contains ALL the data).
@@ -194,46 +232,66 @@ public class XMLWorker {
 	}
 	
 
+	public static ArrayList<ArrayList<String>> getAllCities(){
+		ArrayList<ArrayList<String>> allCities = new ArrayList<ArrayList<String>>();
+		try {
+			Element root = getRootElement("countrycitytown");
+			NodeList nl = root.getElementsByTagName("country");
+			
+			for (int i = 0; i < nl.getLength(); i++){
+				ArrayList<String> cities = new ArrayList<String>();
+				NodeList cityList = ((Element)nl.item(i)).getElementsByTagName("city");
+				for (int j = 0; j < cityList.getLength(); j++){
+					cities.add(cityList.item(j).getTextContent());
+				}
+				allCities.add(cities);
+			}
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return allCities;
+	}
+	
+	
+
 
 	/**
+	 * Adds a new mail and or parcel event to the mailevents database. Can be as a Mail <br>
+	 * object or Parcel.
 	 * 
-	 * @param fileName
-	 * @param keyTag
-	 * @param tags
-	 * @param match
-	 * @return
-	 * @throws ParserConfigurationException
-	 * @throws SAXException
-	 * @throws IOException
+	 * @param mail Object to save data of
 	 */
-	public static ArrayList<ArrayList<String>> readTagsConditional(String fileName, String keyTag, String[] tags, String[] match) throws ParserConfigurationException, SAXException, IOException{
-		Element root = getRootElement(fileName);
-		ArrayList<ArrayList<String>> retArr = new ArrayList<ArrayList<String>>();
-
-		NodeList rootList = root.getElementsByTagName(keyTag);
-		for (int i = 0; i < rootList.getLength(); i++){
-			ArrayList<String> dat = new ArrayList<String>();
-			Element e = (Element)rootList.item(i);
-			System.out.println(e.getNodeName());
-			boolean isOk = true;
-			for (int k = 0; k < tags.length; k++){
-				NodeList nl = e.getElementsByTagName(tags[k]);
-				// The list of nodes in indent
-				if(nl != null && nl.getLength() > 0) {
-					Element el = (Element)nl.item(0);
-					
-					if (match[k] == null || (match[k]!= null && el.getTextContent().equals(match[k])))
-						dat.add(el.getTextContent());
-					else isOk = false;
-				}
-			}	
-			if(isOk)
-				retArr.add(dat);
+	public static void addMail(Mail mail) {
+		Document doc;
+		try {
+			doc = getDocElement("mailevents");
+		Element root = doc.getDocumentElement();
+		
+		Element newMail = doc.createElement("mail");
+		String[] tags = new String[]{"day", "to", "from", "priority"};
+		String[] data = mail.getData();
+		
+		if (mail instanceof Parcel){
+			newMail = doc.createElement("parcel");
+			tags = new String[]{"day", "to", "from", "weight", "volume", "priority"};
+			data = ((Parcel)mail).getData();
 		}
-
-		return retArr;
+		
+		root.appendChild(newMail);
+		for (int i = 0; i < tags.length; i++){
+			Element e = doc.createElement(tags[i]);
+			e.appendChild(doc.createTextNode(data[i]));
+			newMail.appendChild(e);
+		}
+		
+		finishWritingXML(doc);
+		}catch(Exception e){e.printStackTrace();}
 	}
-
+	
 
 	/**
 	 * Method which digs out all parcel events from the xml file excluding mail <br>
@@ -340,38 +398,6 @@ public class XMLWorker {
 
 	}
 
-	/**
-	 * Adds a new mail and or parcel event to the mailevents database. Can be as a Mail <br>
-	 * object or Parcel.
-	 * 
-	 * @param mail Object to save data of
-	 */
-	public static void addMail(Mail mail) {
-		Document doc;
-		try {
-			doc = getDocElement("mailevents");
-		Element root = doc.getDocumentElement();
-		
-		Element newMail = doc.createElement("mail");
-		String[] tags = new String[]{"day", "to", "from", "priority"};
-		String[] data = mail.getData();
-		
-		if (mail instanceof Parcel){
-			newMail = doc.createElement("parcel");
-			tags = new String[]{"day", "to", "from", "weight", "volume", "priority"};
-			data = ((Parcel)mail).getData();
-		}
-		
-		root.appendChild(newMail);
-		for (int i = 0; i < tags.length; i++){
-			Element e = doc.createElement(tags[i]);
-			e.appendChild(doc.createTextNode(data[i]));
-			newMail.appendChild(e);
-		}
-		
-		finishWritingXML(doc);
-		}catch(Exception e){e.printStackTrace();}
-	}
 
 	private static void finishWritingXML(Document doc) throws TransformerException{
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
