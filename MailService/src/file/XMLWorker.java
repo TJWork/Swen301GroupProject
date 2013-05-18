@@ -150,18 +150,49 @@ public class XMLWorker {
 
 	
 	
+	
 	/**
 	 * Method which reads in the list of countries. 
 	 * @return List of countries
 	 */
 	public static ArrayList<String> loadCountries(){
 		ArrayList<String> data = new ArrayList<String>();
-
-		try { data = readTag("countries", "country"); } 
+		
+		try {
+			Document doc = getDocElement("countrycitytown");
+			Element root = doc.getDocumentElement();
+			NodeList nl = root.getElementsByTagName("country");
+			for (int i = 0; i < nl.getLength(); i++)
+				data.add(nl.item(i).getAttributes().getNamedItem("name").getTextContent());
+			
+		} 
 		catch (Exception e) { e.printStackTrace(); }
-
 		return data;
 	}
+	
+	/**
+	 * Returns the list of mailable locations to the given country.
+	 * @param country Country to get mailable locations from.
+	 * @return Arraylist of cities within the given country.
+	 */
+	public static ArrayList<String> getCitiesFromCountry(String country){
+		ArrayList<String> data = new ArrayList<String>();
+		
+		try {
+			Document doc = getDocElement("countrycitytown");
+			Element root = doc.getDocumentElement();
+			NodeList nl = root.getElementsByTagName("country");
+			for (int i = 0; i < nl.getLength(); i++)
+				if (nl.item(i).getAttributes().getNamedItem("name").getTextContent().equals(country)){
+					NodeList cities = ((Element)(nl.item(i))).getElementsByTagName("city");
+					for (int j = 0; j < cities.getLength(); j++)
+						data.add(cities.item(j).getTextContent());
+				}
+		} 
+		catch (Exception e) { e.printStackTrace(); }
+		return data;
+	}
+	
 
 
 	/**
