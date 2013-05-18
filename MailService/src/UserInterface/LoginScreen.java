@@ -155,21 +155,21 @@ public class LoginScreen extends JPanel implements ActionListener{
 	} 
 
 
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if("cancel".equals(e.getActionCommand())){			
-//			actionCommand = "cancel";
+		if("cancel".equals(e.getActionCommand())){			
+			System.exit(0);
 		}
 		else if("signin".equals(e.getActionCommand())){
-			setVisible(false);		
+			setVisible(false);
+
 			if(userType.getValue().toString().equals("Clerk")){
 				getParent().add(new ClerkGUI());
-				System.out.println("clerkgui");
 			}
 			else if(userType.getValue().toString().equals("Manager")){
 				getParent().add(new ManagerGUI());
-				System.out.println("managergui");
-			}	
+			}
 		}
 		System.out.println(e.getActionCommand().toString());
 	}

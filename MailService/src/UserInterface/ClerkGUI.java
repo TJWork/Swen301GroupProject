@@ -12,21 +12,25 @@ public class ClerkGUI extends JPanel implements ActionListener{
 	private PriceUI priceP;
 	private RoutesUI routesP;
 	private JPanel cardPanel;
+	private DashBoard dashBoard;
 	
 	public ClerkGUI(){
 		form = new Form();
 		priceP = new PriceUI();
 		routesP = new RoutesUI();
-		cardPanel = new JPanel();
+		dashBoard = new DashBoard();
 
 		setLayout(new BorderLayout());
 		
 		add(TopPanel(), BorderLayout.NORTH);
 		
 		cardPanel = new JPanel(new CardLayout());
+		
+		cardPanel.add(dashBoard, "dashboardP");
 		cardPanel.add(form, "form");
 		cardPanel.add(priceP, "priceP");
 		cardPanel.add(routesP, "routeP");
+		
 		
 		add(cardPanel, BorderLayout.CENTER);
 
@@ -37,11 +41,10 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		JPanel topPanel = new JPanel();
 		topPanel.setBackground(new Color(0, 0, 0));
 		FlowLayout layout = new FlowLayout();
-//		SpringLayout layout = new SpringLayout();
 		topPanel.setLayout(layout);
 		
-		
-		
+		CustomButton dash = new CustomButton("DashBoard", "db");
+		dash.addActionListener(this);
 		CustomButton mail = new CustomButton("Mail", "mail");
 		mail.addActionListener(this);
 		CustomButton route = new CustomButton("Route", "route");
@@ -51,6 +54,8 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		CustomButton signout = new CustomButton("Signout", "signout");
 		signout.addActionListener(this);
 
+		topPanel.add(dash);
+		
 		topPanel.add(mail);
 //		layout.setHgap(50);
 		topPanel.add(route);
@@ -59,18 +64,21 @@ public class ClerkGUI extends JPanel implements ActionListener{
 //		layout.setHgap(50);
 		topPanel.add(signout);
 		
+		
 
 		return topPanel;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		CardLayout c = (CardLayout) cardPanel.getLayout();
 		
+
 		if("mail".equals(e.getActionCommand())){
 			c.show(cardPanel, "form");
-			
+		}
+		else if("db".equals(e.getActionCommand())){
+			c.show(cardPanel, "dashboardP");
 		}
 		else if("route".equals(e.getActionCommand())){
 			c.show(cardPanel, "routeP");
@@ -78,11 +86,10 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		}
 		else if("price".equals(e.getActionCommand())){
 			c.show(cardPanel, "priceP");
-			
 		}
 		else if("signout".equals(e.getActionCommand())){
-			System.out.println(e.getActionCommand());
-			
+			setVisible(false);
+			getParent().add(new LoginScreen());
 		}
 		
 	}

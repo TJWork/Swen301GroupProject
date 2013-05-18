@@ -7,18 +7,22 @@ import java.util.*;
 import javax.swing.*;
 
 public class KPSUserInterface extends JFrame implements ComponentListener{
-	private Time clock;
+	public static Time clock;
 	private JPanel topPanel;
-	private LoginScreen login;
+	public static LoginScreen login;
+	public static ClerkGUI clerk;
+	public static ManagerGUI manager;
 
 	public KPSUserInterface(){
 		login = new LoginScreen();
+//		clerk = new ClerkGUI();
+//		manager = new ManagerGUI();
 		
 		setLayout(new BorderLayout());
-		add(topPanel(), BorderLayout.NORTH);
+		add(topPanel(), BorderLayout.SOUTH);
 
-		add(login).addComponentListener(this);
-		
+		add(login);
+
 		
 		setSize(1000, 700);
 		setVisible(true);
@@ -38,20 +42,17 @@ public class KPSUserInterface extends JFrame implements ComponentListener{
 
 	@Override
 	public void componentHidden(ComponentEvent e) {
-		// TODO Auto-generated method stub
 		System.out.println(e.getComponent().getClass().getName());
+		remove(e.getComponent());
 		
 	}
 
-	
-	
-	
 	public JPanel topPanel(){
 		clock = new Time();
 		topPanel = new JPanel();
 		topPanel.setLayout(new BorderLayout());
 		topPanel.add(clock, BorderLayout.EAST);
-
+		topPanel.setBackground(Color.WHITE);
 		return topPanel;
 	}
 	

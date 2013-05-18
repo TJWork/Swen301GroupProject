@@ -7,6 +7,7 @@ public class PriceUI extends JPanel {
 
 	
 	public PriceUI(){
-		setBackground(Color.BLUE);
+		JTable table = new JTable();
+		add(table);
 	}
 }
