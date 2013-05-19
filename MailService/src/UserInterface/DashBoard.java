@@ -7,6 +7,12 @@ public class DashBoard extends JPanel{
 
 	
 	public DashBoard(){
-		setBackground(Color.GREEN);
+		setBackground(Color.WHITE);
+		
+		
+		
+		
+		
+		
 	}
 }

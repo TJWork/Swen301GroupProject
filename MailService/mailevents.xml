@@ -130,4 +130,10 @@
     <volume>5</volume>
     <priority>2.0</priority>
   </parcel>
+<mail>
+    <day>19/05/2013</day>
+    <to>Blenheim</to>
+    <from>Napier</from>
+    <priority>3.0</priority>
+  </mail>
 </mailevents>

@@ -15,7 +15,7 @@ public class KPSUserInterface extends JFrame implements ComponentListener{
 		login = new LoginScreen();
 		
 		setLayout(new BorderLayout());
-		add(topPanel(), BorderLayout.SOUTH);
+		add(topPanel(), BorderLayout.NORTH);
 
 		add(login);
 
@@ -47,23 +47,20 @@ public class KPSUserInterface extends JFrame implements ComponentListener{
 		clock = new Time();
 		topPanel = new JPanel();
 		topPanel.setLayout(new BorderLayout());
-		topPanel.add(clock, BorderLayout.EAST);
-		topPanel.setBackground(Color.WHITE);
+		topPanel.add(clock, BorderLayout.WEST);
+		topPanel.setBackground(Color.BLACK);
 		return topPanel;
 	}
 	
-	public void confirmDataInput(){
-		System.out.println(clock.getCurrentTime());
-		System.out.println(clock.getCurrentDay());
-	}
-	
+
 	/**
 	 * Calculate the current system time and date
 	 */
-	private class Time  extends JLabel implements Runnable{
+	class Time  extends JLabel implements Runnable{
 
 		private String currentTime;
 		public Time(){
+			setForeground(Color.WHITE);
 			new Thread(this).start();
 		}
 
@@ -83,21 +80,12 @@ public class KPSUserInterface extends JFrame implements ComponentListener{
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {}
 			}
-			
-			
 		}
-		
-		public String getCurrentTime(){
-			return (currentTime);
-		}
-		
-		public String getCurrentDay(){
-			Calendar cal = Calendar.getInstance();
-			Date time = cal.getTime();
-			String[] str = time.toString().split("\\s+");
-			
-			return(str[0]+"day");
-			
+
+		public String getCurrentDate(){
+			String[] str = currentTime.split("\\s+");		
+			return(str[0]);
+//			
 		}
 	}
 

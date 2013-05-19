@@ -55,13 +55,13 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		signout.addActionListener(this);
 
 		topPanel.add(dash);
-		
+		layout.setHgap(30);
 		topPanel.add(mail);
-//		layout.setHgap(50);
+		layout.setHgap(30);
 		topPanel.add(route);
-//		layout.setHgap(50);
+		layout.setHgap(30);
 		topPanel.add(price);
-//		layout.setHgap(50);
+		layout.setHgap(30);
 		topPanel.add(signout);
 		
 		

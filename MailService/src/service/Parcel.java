@@ -32,4 +32,17 @@ public class Parcel extends Mail{
 	public String[] getData(){
 		return new String[]{this.getDay(), this.getToAddress(), this.getFrom(), this.weight, this.volume, "" + this.getPriority()};
 	}
+	
+	public String toString(){
+		return (
+					"Day: " + super.getDay() + "\n" + 
+					"Destination: " + super.getToAddress() + "\n" + 
+					"Origin: " + super.getFrom() + "\n" + 
+					"Priority: " + super.getPriority() + "\n" + 
+					"Weight: " + this.getWeight() + "\n" +
+					"Volume: " + this.volume() +"\n"+
+					"Cost: " +  super.getCost()
+					);
+		
+	}
 }
