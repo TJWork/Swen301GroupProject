@@ -6,7 +6,7 @@ public class Route {
 	private String destination;
 	private String company;
 	private int maxWeight;
-	private int maxVolume;
+	private int maxVolume; //Maximum volume
 	private double weightCost;//Cost modifier for weight
 	private double volumeCost;//Cost modifier for Volume
 	private double mailCost;//Standard mail price
