@@ -7,13 +7,13 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class ClerkGUI extends JPanel implements ActionListener{
-	
+
 	private Form form;
 	private PriceUI priceP;
 	private RoutesUI routesP;
 	public static JPanel cardPanel;
-	private DashBoard dashBoard;
-	
+	public static DashBoard dashBoard;
+
 	public ClerkGUI(){
 		form = new Form();
 		priceP = new PriceUI();
@@ -21,28 +21,28 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		dashBoard = new DashBoard();
 
 		setLayout(new BorderLayout());
-		
+
 		add(TopPanel(), BorderLayout.NORTH);
-		
+
 		cardPanel = new JPanel(new CardLayout());
-		
+
 		cardPanel.add(dashBoard, "dashboardP");
 		cardPanel.add(form, "form");
 		cardPanel.add(priceP, "priceP");
 		cardPanel.add(routesP, "routeP");
-		
-		
+
+
 		add(cardPanel, BorderLayout.CENTER);
 
-		
+
 	}
-	
+
 	public JPanel TopPanel(){
 		JPanel topPanel = new JPanel();
 		topPanel.setBackground(new Color(0, 0, 0));
 		FlowLayout layout = new FlowLayout();
 		topPanel.setLayout(layout);
-		
+
 		CustomButton dash = new CustomButton("DashBoard", "db");
 		dash.addActionListener(this);
 		CustomButton mail = new CustomButton("Mail", "mail");
@@ -63,8 +63,8 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		topPanel.add(price);
 		layout.setHgap(30);
 		topPanel.add(signout);
-		
-		
+
+
 
 		return topPanel;
 	}
@@ -72,7 +72,7 @@ public class ClerkGUI extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		CardLayout c = (CardLayout) cardPanel.getLayout();
-		
+
 
 		if("mail".equals(e.getActionCommand())){
 			c.show(cardPanel, "form");
@@ -82,7 +82,7 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		}
 		else if("route".equals(e.getActionCommand())){
 			c.show(cardPanel, "routeP");
-			
+
 		}
 		else if("price".equals(e.getActionCommand())){
 			c.show(cardPanel, "priceP");
@@ -91,7 +91,7 @@ public class ClerkGUI extends JPanel implements ActionListener{
 			setVisible(false);
 			getParent().add(new LoginScreen());
 		}
-		
+
 	}
-	
+
 }

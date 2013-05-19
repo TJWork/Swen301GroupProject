@@ -51,16 +51,16 @@ public class Form extends JPanel implements ActionListener{
 
 	private JLabel price;
 	private JLabel title;
-	
+
 	public Form(){
 
-		try {      
+		try {
 			image = ImageIO.read(new File("Images/BG.jpg"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		title = new JLabel("Form");
 		title.setFont(new Font("Verdana", Font.BOLD, 36));
 		price = new JLabel("Price: ");
@@ -160,7 +160,7 @@ public class Form extends JPanel implements ActionListener{
 					c.show(cardPanel, "parcel");
 				}
 			}
-		});		
+		});
 		typeField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		typeWarning = new JLabel();
 		typeWarning.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
@@ -233,7 +233,7 @@ public class Form extends JPanel implements ActionListener{
 
 		GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
-        
+
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -339,13 +339,13 @@ public class Form extends JPanel implements ActionListener{
 
 
 	/**
-	 *	Creating background image 
+	 *	Creating background image
 	 */
 	public void paintComponent (Graphics g){
 		g.drawImage(image, 0, 0, getParent().getWidth(), getParent().getHeight(), this);
 	}
 
-	
+
 	/**
 	 * Helper method to populate the JComboBox
 	 */
@@ -367,16 +367,18 @@ public class Form extends JPanel implements ActionListener{
 	/**
 	 * Helper method to check if the field taht requires digit is correct
 	 */
-	private boolean isDigit( String input )  {  
-		try {  
+	private boolean isDigit( String input )  {
+		try {
 			Double.parseDouble(input) ;
-			return true;  
-		}  
-		catch(NumberFormatException e ) {  return false;  }  
+			return true;
+		}
+		catch(NumberFormatException e ) {  return false;  }
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
+		CardLayout c = (CardLayout) ClerkGUI.cardPanel.getLayout();
 
 		/*=============================== Submit Button Event ==========================================*/
 
@@ -391,7 +393,7 @@ public class Form extends JPanel implements ActionListener{
 
 			if(originCityField.getSelectedIndex()==-1) {
 				originCityWarning.setText("*Please select origin");
-			} else {originCityWarning.setText("");} 
+			} else {originCityWarning.setText("");}
 
 			/*Parcel Event*/
 			if(typeField.getValue().toString().equals("Parcel")){
@@ -404,7 +406,7 @@ public class Form extends JPanel implements ActionListener{
 					if(isDigit(weightField.getText()) == false)
 						weightLabel.setText("*Please input numbers");
 					else {weightLabel.setText("");}
-				} 
+				}
 
 				if(volumeField.getText().equals("")){
 					volumeLabel.setText("*Please input volume");
@@ -423,6 +425,7 @@ public class Form extends JPanel implements ActionListener{
 
 					System.out.println(p.toString());
 					XMLWorker.addMail(p);
+					ClerkGUI.dashBoard.addItem("Parcel", p.getData());
 				}
 			}
 
@@ -431,21 +434,22 @@ public class Form extends JPanel implements ActionListener{
 				if( (!customerField.getText().equals("")) && (destinationField.getSelectedIndex()>-1) && (originCityField.getSelectedIndex()>-1) ){
 					Mail m = new Mail(KPSUserInterface.clock.getCurrentDate(), destinationField.getSelectedItem().toString().trim(), originCityField.getSelectedItem().toString().trim(),
 							(priorityField.getSelectedIndex()+1));
-					
+
 					System.out.println(m.toString());
 					XMLWorker.addMail(m);
-					
+					ClerkGUI.dashBoard.addItem("Mail", m.getData());
+
 				}
 			}
 		}
-		
+
 		/*=============================== Cancel back to DashBoard ==========================================*/
 		else if(e.getActionCommand().equals("cancel")){
-			CardLayout c = (CardLayout) ClerkGUI.cardPanel.getLayout();
+
 			c.show(ClerkGUI.cardPanel, "dashboardP");
 		}
 
-		getParent().validate();
-		
+		ClerkGUI.dashBoard.revalidate();
+
 	}
 }

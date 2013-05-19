@@ -1,6 +1,8 @@
 package UserInterface;
 
 import javax.swing.*;
+import javax.swing.table.*;
+
 import service.*;
 import file.XMLWorker;
 
@@ -16,9 +18,10 @@ public class DashBoard extends JPanel{
 	private JLabel expenditure;
 	private JLabel revenue;
 	private JLabel numberMailEvents;
-	
+	String[] columnTitle;
+
 	public DashBoard(){
-	
+
 		setBackground(Color.WHITE);
 		title = new JLabel("DashBoard");
 		title.setFont(new Font("Verdana", Font.BOLD, 36));
@@ -28,14 +31,14 @@ public class DashBoard extends JPanel{
 		revenue.setFont(new Font("Verdana", Font.BOLD, 16));
 		numberMailEvents = new JLabel("Mail Events");
 		numberMailEvents.setFont(new Font("Verdana", Font.BOLD, 16));
-		
-		String[] columnTitle = new String[] {"Date", "Type", "Destination", "Origin", "Priority", "Price"};
-		
+
+		columnTitle = new String[] {"Date", "Type", "Destination", "Origin", "Priority", "Price"};
+
 		ArrayList<Mail> mail = XMLWorker.getMail(new String[]{null, null, null, null});
 		ArrayList<Parcel> parcel = XMLWorker.getParcels(new String[] {null, null, null, null, null, null});
-		
+
 		String[][] datas = new String[mail.size()+parcel.size()][6];
-		
+
 		for(int i=0; i<mail.size(); i++){
 			String[] str = mail.get(i).getData();
 			datas[i] = new String[] {str[0], "Mail", str[1], str[2], getPriority(str[3]), str[4]} ;
@@ -44,20 +47,19 @@ public class DashBoard extends JPanel{
 			String[] str = parcel.get(i-mail.size()).getData();
 			datas[i] = new String[] {str[0], "Parcel", str[1], str[2], getPriority(str[5]), str[6]} ;
 		}
-		
-		numberMailEvents.setText("<html><font face=Verdana color=black size=5>Mail Events</font><br> " 
+
+		numberMailEvents.setText("<html><font face=Verdana color=black size=5>Mail Events</font><br> "
 									+ "<font face=Verdana color=black size=6>" + datas.length + "</font></html>");
-		
-		mailEventsTable = new JTable(datas,columnTitle);
-		
+
+		mailEventsTable = new JTable(new DefaultTableModel(datas,columnTitle));
 		mailEventsTable.setFont(new Font("Verdana", Font.PLAIN, 14));
 		mailEventsTable.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 16));
 		mailEventsTable.getTableHeader().setResizingAllowed(false);
 		mailEventsTable.getTableHeader().setReorderingAllowed(false);
 		mailEventsTable.setEnabled(false);
-		
+
 		mailEventsTable.setRowHeight(30);
-		
+
 		mailEventsTable.getColumnModel().getColumn(0).setPreferredWidth(100);
 		mailEventsTable.getColumnModel().getColumn(1).setPreferredWidth(45);
 		mailEventsTable.getColumnModel().getColumn(2).setPreferredWidth(230);
@@ -65,10 +67,10 @@ public class DashBoard extends JPanel{
 		mailEventsTable.getColumnModel().getColumn(4).setPreferredWidth(145);
 		mailEventsTable.getColumnModel().getColumn(5).setPreferredWidth(69);
 
-		
+
 		tableScrollPane = new JScrollPane(mailEventsTable);
-		
-		
+
+
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         this.setLayout(layout);
@@ -101,11 +103,24 @@ public class DashBoard extends JPanel{
                     .addComponent(tableScrollPane, GroupLayout.PREFERRED_SIZE, 349, GroupLayout.PREFERRED_SIZE)
                     .addGap(45, 45, 45))
             );
-				
+
 	}
-	
+
+	public void addItem(String type, String[] data){
+		DefaultTableModel tm = (DefaultTableModel) mailEventsTable.getModel();
+		String[] temp ;
+		if(type.equals("Parcel"))
+			temp = new String[] {data[0], "Parcel", data[1], data[2], getPriority(data[5]), data[6]} ;
+
+		else temp = new String[] {data[0], "Mail", data[1], data[2], getPriority(data[3]), data[4]} ;
+
+		tm.addRow(temp);
+		JTable newTable = new JTable(tm);
+		mailEventsTable = newTable;
+	}
+
 	/**
-	 * Helper method for getting the type of freight by priority 
+	 * Helper method for getting the type of freight by priority
 	 */
 	private String getPriority(String value){
 		double d = Double.parseDouble(value);
