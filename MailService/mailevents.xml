@@ -39,7 +39,7 @@
 		<priority>1</priority>
 		<weight>2</weight>
 		<volume>4</volume>
-	</parcel>	
+	</parcel>
 	<parcel>
 	    <day>13/02/2013</day>
 		<to>Darwin</to>
@@ -47,7 +47,7 @@
 		<priority>1</priority>
 		<weight>3</weight>
 		<volume>1</volume>
-	</parcel>		
+	</parcel>
 <mail>
     <day>02/02/2012</day>
     <to>New York</to>
@@ -141,5 +141,48 @@
     <to>Hastings</to>
     <from>Wairoa</from>
     <priority>3.0</priority>
+  </mail>
+
+<mail>
+    <day>20/05/2013</day>
+    <to>Gore</to>
+    <from>Hastings</from>
+    <priority>4.0</priority>
+  </mail>
+<mail>
+    <day>20/05/2013</day>
+    <to>Upper Hutt</to>
+    <from>Lower Hutt</from>
+    <priority>4.0</priority>
+  </mail>
+<mail>
+    <day>20/05/2013</day>
+    <to>Greymouth</to>
+    <from>Palmerston North</from>
+    <priority>3.0</priority>
+  </mail>
+<mail>
+    <day>20/05/2013</day>
+    <to>Ashburton</to>
+    <from>Nelson</from>
+    <priority>3.0</priority>
+  </mail>
+<mail>
+    <day>20/05/2013</day>
+    <to>Albany</to>
+    <from>Winton</from>
+    <priority>3.0</priority>
+  </mail>
+<mail>
+    <day>20/05/2013</day>
+    <to>Gisborne</to>
+    <from>Gore</from>
+    <priority>4.0</priority>
+  </mail>
+<mail>
+    <day>20/05/2013</day>
+    <to>Greymouth</to>
+    <from>Ashburton</from>
+    <priority>4.0</priority>
   </mail>
 </mailevents>
