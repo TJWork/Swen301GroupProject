@@ -45,8 +45,8 @@ public class DashBoard extends JPanel{
 			datas[i] = new String[] {str[0], "Parcel", str[1], str[2], getPriority(str[5]), str[6]} ;
 		}
 		
-		numberMailEvents.setText("<html><font color=black size=6px>Mail Events</font><br> " 
-									+ "<font color=black>Navy</font></html>");
+		numberMailEvents.setText("<html><font face=Verdana color=black size=5>Mail Events</font><br> " 
+									+ "<font face=Verdana color=black size=6>" + datas.length + "</font></html>");
 		
 		mailEventsTable = new JTable(datas,columnTitle);
 		
