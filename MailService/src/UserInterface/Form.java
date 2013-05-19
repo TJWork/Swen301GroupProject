@@ -8,8 +8,7 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.swing.event.*;
 
 import service.*;
 import file.XMLWorker;
@@ -50,6 +49,9 @@ public class Form extends JPanel implements ActionListener{
 	private JTextField volumeField;
 	private JLabel volumeLabel;
 
+	private JLabel price;
+	private JLabel title;
+	
 	public Form(){
 
 		try {      
@@ -58,6 +60,11 @@ public class Form extends JPanel implements ActionListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		title = new JLabel("Form");
+		title.setFont(new Font("Verdana", Font.BOLD, 36));
+		price = new JLabel("Price: ");
+		price.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 
 
 		/*=========================== Parcel Mail Field ==================================*/
@@ -104,11 +111,11 @@ public class Form extends JPanel implements ActionListener{
 								.addGroup(cardLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 										.addComponent(weightField, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
 										.addComponent(volumeField))
-										.addGap(18, 18, 18)
+										.addGap(40, 40, 40)
 										.addGroup(cardLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 												.addComponent(weightLabel)
 												.addComponent(volumeLabel))
-												.addContainerGap(42, Short.MAX_VALUE))
+												.addContainerGap(50, Short.MAX_VALUE))
 				);
 		cardLayout.setVerticalGroup(
 				cardLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -123,7 +130,7 @@ public class Form extends JPanel implements ActionListener{
 										.addComponent(volume)
 										.addComponent(volumeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(volumeLabel))
-										.addContainerGap(33, Short.MAX_VALUE))
+										.addContainerGap(40, Short.MAX_VALUE))
 				);
 
 
@@ -225,130 +232,109 @@ public class Form extends JPanel implements ActionListener{
 		/*=========================== Form Layout ==================================*/
 
 		GroupLayout layout = new GroupLayout(this);
-		this.setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-						.addContainerGap(120, Short.MAX_VALUE)
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-										.addComponent(customerName)
-										.addGap(10, 10, 10)
-										.addComponent(customerField, 200, 200, 200)
-										.addGap(10, 10, 10)
-										.addComponent(customerWarning,200,200,200))
-										.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-												.addComponent(type)
-												.addGap(10, 10, 10)
-												.addComponent(typeField, 200, 200, 200)
-												.addGap(10, 10, 10)
-												.addComponent(typeWarning,200,200,200))
-												.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-														.addComponent(priority)
-														.addGap(10, 10, 10)
-														.addComponent(priorityField, 200, 200, 200)
-														.addGap(10, 10, 10)
-														.addComponent(priorityWarning,200,200,200))
-														.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-																.addComponent(originCity)
-																.addGap(10, 10, 10)
-																.addComponent(originCityField, 200, 200, 200)
-																.addGap(10, 10, 10)
-																.addComponent(originCityWarning,200,200,200))
-																.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-																		.addComponent(destination)
-																		.addGap(10, 10, 10)
-																		.addComponent(destinationField, 200, 200, 200)
-																		.addGap(10, 10, 10)
-																		.addComponent(destinationWarning,200,200,200))
-																		.addComponent(cardPanel, GroupLayout.Alignment.CENTER, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-																		.addContainerGap(50, Short.MAX_VALUE))
-																		.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-																				.addGap(0, 0, Short.MAX_VALUE)
-																				.addComponent(submit)
-																				.addGap(30, 30, 30)
-																				.addComponent(cancel)
-																				.addGap(50, 50, 50))
-				);
-		layout.setVerticalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addGap(88, 88, 88)
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(layout.createSequentialGroup()
-										.addGap(3, 3, 3)
-										.addComponent(customerName))
-										.addComponent(customerField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(customerWarning, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
-										.addGap(20, 20, 20)
-										.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-												.addComponent(typeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addGroup(layout.createSequentialGroup()
-														.addGap(3, 3, 3)
-														.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-																.addComponent(type)
-																.addComponent(typeWarning))))
-																.addGap(20, 20, 20)
-																.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-																		.addComponent(priorityField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																		.addGroup(layout.createSequentialGroup()
-																				.addGap(3, 3, 3)
-																				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-																						.addComponent(priority)
-																						.addComponent(priorityWarning))))
-																						.addGap(20, 20, 20)
-																						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-																								.addComponent(originCityField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																								.addGroup(layout.createSequentialGroup()
-																										.addGap(3, 3, 3)
-																										.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-																												.addComponent(originCity)
-																												.addComponent(originCityWarning))))
-																												.addGap(20, 20, 20)
-																												.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-																														.addComponent(destination)
-																														.addComponent(destinationField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																														.addGroup(layout.createSequentialGroup()
-																																.addGap(3, 3, 3)
-																																.addComponent(destinationWarning)))
-																																.addGap(28, 28, 28)
-																																.addComponent(cardPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																																.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-																																.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-																																		.addComponent(submit)
-																																		.addComponent(cancel))
-																																		.addGap(45, 45, 45))
-				);
-
-
-
-		/*=========================== Add Components to screen ==================================*/
-
-		add(customerName);
-		add(customerField);
-		add(customerWarning);
-
-		add(type);
-		add(typeField);
-		add(typeWarning);
-
-		add(priority);
-		add(priorityField);
-		add(priorityWarning);
-
-		add(originCity);
-		add(originCityField);
-		add(originCityWarning);
-
-		add(destination);
-		add(destinationField);
-		add(destinationWarning);
-
-		add(cardPanel);
-
-		add(submit);
-		add(cancel);
-
+        this.setLayout(layout);
+        
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap(80, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(title)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(customerName)
+                                .addGap(10, 10, 10)
+                                .addComponent(customerField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(customerWarning, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(type)
+                                .addGap(10, 10, 10)
+                                .addComponent(typeField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(typeWarning, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(priority)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(priorityField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(originCity)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(originCityField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)))
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(originCityWarning, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(priorityWarning, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+                            .addGroup(GroupLayout.Alignment.TRAILING, layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addComponent(price, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(submit)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(cancel))
+                                .addGroup(GroupLayout.Alignment.TRAILING, layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addComponent(cardPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(destination)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(destinationField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(destinationWarning, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))))))
+                    .addContainerGap(80, Short.MAX_VALUE))
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(45, 45, 45)
+                    .addComponent(title)
+                    .addGap(20, 20, 20)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(3, 3, 3)
+                            .addComponent(customerName))
+                        .addComponent(customerField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(customerWarning, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+                    .addGap(20, 20, 20)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(typeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(3, 3, 3)
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(type)
+                                .addComponent(typeWarning))))
+                    .addGap(20, 20, 20)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(priorityField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(3, 3, 3)
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(priority)
+                                .addComponent(priorityWarning))))
+                    .addGap(20, 20, 20)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(originCityWarning)
+                        .addComponent(originCityField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(originCity))
+                    .addGap(20, 20, 20)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(destination)
+                        .addComponent(destinationField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(3, 3, 3)
+                            .addComponent(destinationWarning)))
+                    .addGap(18, 18, 18)
+                    .addComponent(cardPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(price, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(cancel)
+                            .addComponent(submit)))
+                    .addContainerGap(80, Short.MAX_VALUE))
+            );
 	}
 
 
@@ -459,5 +445,7 @@ public class Form extends JPanel implements ActionListener{
 			c.show(ClerkGUI.cardPanel, "dashboardP");
 		}
 
+		getParent().validate();
+		
 	}
 }
