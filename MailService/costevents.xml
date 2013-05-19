@@ -1,4 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <costevents>
-
+    <mail>
+		<origin>New Zealand</origin>
+		<destination>New Zealand</destination>
+   		<priority>4.0</priority>
+    	<pricegram>0.0</pricegram>
+    	<pricecm>0.0</pricecm>
+    </mail>
+    
+    <mail>
+        <origin>Wellington</origin>
+        <destination>New York</destination>
+        <priority>1.0</priority>
+        <pricegram>1.0</pricegram>
+        <pricecm>2.0</pricecm>
+    </mail>
+    
+    <mail>
+        <origin>Wanganui</origin>
+        <destination>Paris</destination>
+        <priority>1.0</priority>
+        <pricegram>2.0</pricegram>
+        <pricecm>3.0</pricecm>
+    </mail>
+    
+    <parcel>
+        <origin>Auckland</origin>
+        <destination>Changi</destination>
+        <priority>2.0</priority>
+        <pricegram>4.0</pricegram>
+        <pricecm>2.0</pricecm>
+    </parcel>
+    
+    <parcel>
+        <origin>Auckland</origin>
+        <destination>Bangkok</destination>
+        <priority>2.0</priority>
+        <pricegram>4.0</pricegram>
+        <pricecm>3.0</pricecm>
+    </parcel>
+    
+    <parcel>
+        <origin></origin>
+        <destination></destination>
+        <priority></priority>
+        <pricegram></pricegram>
+        <pricecm></pricecm>
+    </parcel>
+    
 </costevents>

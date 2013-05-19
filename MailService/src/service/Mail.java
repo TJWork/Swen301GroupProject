@@ -46,7 +46,7 @@ public class Mail {
 	}
 
 	public String[] getData(){
-		return new String[]{this.day, this.toAddress, this.from, "" + this.priority};
+		return new String[]{this.day, this.toAddress, this.from, "" + this.priority, Double.toString(this.getCost())};
 	}
 	
 	public String toString(){

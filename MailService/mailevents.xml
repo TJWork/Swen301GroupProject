@@ -136,4 +136,10 @@
     <from>Napier</from>
     <priority>3.0</priority>
   </mail>
+<mail>
+    <day>19/05/2013</day>
+    <to>Hastings</to>
+    <from>Wairoa</from>
+    <priority>3.0</priority>
+  </mail>
 </mailevents>

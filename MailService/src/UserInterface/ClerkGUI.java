@@ -51,7 +51,7 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		route.addActionListener(this);
 		CustomButton price = new CustomButton("Price", "price");
 		price.addActionListener(this);
-		CustomButton signout = new CustomButton("Signout", "signout");
+		CustomButton signout = new CustomButton("SignOut", "signout");
 		signout.addActionListener(this);
 
 		topPanel.add(dash);
