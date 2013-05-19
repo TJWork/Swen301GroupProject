@@ -31,8 +31,12 @@ public class Cost {
 	}
 
 	public double getPrice() {
-		return costVal*1.125;
+		return costVal*4/3;
 		
+	}
+	
+	public double getCost() {
+		return costVal;
 	}
 
 }

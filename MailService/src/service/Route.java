@@ -1,38 +1,75 @@
 package service;
 
 public class Route {
+
+	private String origin;
 	private String destination;
-	private Depot[] changePoints;
-	
-	
-	
-	public Route(String destination, Depot[] changePoints) {
-		super();
+	private String company;
+	private int maxWeight;
+	private int maxVolume;
+	private double weightCost;//Cost modifier for weight
+	private double volumeCost;//Cost modifier for Volume
+	private double mailCost;//Standard mail price
+	private int frequency;//how often a delivery takes place
+	private int estimatedDeliveryTime;//how long delivery willl take
+
+	public Route(String origin, String destination, String company,
+			int maxWeight, int maxVolume, double weightCost, double volumeCost, double mailCost,
+			int frequency, int estimatedDeliveryTime)  {
+		this.origin = origin;
 		this.destination = destination;
-		this.changePoints = changePoints;
+		this.company = company;
+		this.maxWeight = maxWeight;
+		this.maxVolume = maxVolume;
+		this.weightCost = weightCost;
+		this.volumeCost = volumeCost;
+		this.mailCost = mailCost;
+		this.frequency = frequency;
+		this.estimatedDeliveryTime = estimatedDeliveryTime;
 	}
-	
-	
-	
-	public Route(String destination) {
-		super();
-		this.destination = destination;
+
+	public String getOrigin() {
+		return origin;
 	}
-	
-	
 
 	public String getDestination() {
 		return destination;
 	}
-	public void setDestination(String destination) {
-		this.destination = destination;
+
+	public String getCompany() {
+		return company;
 	}
-	public Depot[] getChangePoints() {
-		return changePoints;
+
+	public int getMaxWeight() {
+		return maxWeight;
 	}
-	public void setChangePoints(Depot[] changePoints) {
-		this.changePoints = changePoints;
+
+	public int getMaxVolume() {
+		return maxVolume;
 	}
-	
-	
+
+	public double getWeightCost() {
+		return weightCost;
+	}
+
+	public double getVolumeCost() {
+		return volumeCost;
+	}
+
+	public int getFrequency() {
+		return frequency;
+	}
+
+	public double getCostOnWeight(double weightValue) {
+		return weightValue*weightCost;
+	}
+
+	public double getCostOnVolume(double volValue) {
+		return volValue*volumeCost;
+	}
+
+	public int calculateDeliveryTime(){ //return delivery time in hours
+		return 1/2*frequency+estimatedDeliveryTime;
+	}
+
 }
