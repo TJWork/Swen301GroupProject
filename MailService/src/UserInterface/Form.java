@@ -8,7 +8,6 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.*;
 import file.XMLWorker;
 
 public class Form extends JPanel implements ActionListener{
@@ -54,6 +53,7 @@ public class Form extends JPanel implements ActionListener{
 		customerWarning = new JLabel();
 		customerWarning.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 
+		/**/
 		type = new JLabel("Mail Type");
 		type.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		typeField = new JSpinner(new SpinnerListModel(new String[] {"Mail", "Parcel"}));
@@ -63,7 +63,25 @@ public class Form extends JPanel implements ActionListener{
 
 		priority = new JLabel("Priority");
 		priority.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-		priorityField = new JComboBox();
+		priorityField = new JComboBox(new String[]{"International Air", "International Sea" , "Domestic Air", "Domestic Land"});
+		priorityField.addItemListener(new ItemListener(){
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+
+				if(e.getItem().toString().equals("International Sea") || e.getItem().toString().equals("International Air")){
+					destinationField.removeAllItems();
+					populateCountries();
+				}
+				else{
+					destinationField.removeAllItems();
+					ArrayList<String> city = XMLWorker.getCitiesFromCountry("New Zealand");
+
+					for(String s: city)
+						destinationField.addItem(s);
+				}
+			}
+		});
 		priorityField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		priorityField.setBackground(Color.WHITE);
 		priorityWarning = new JLabel();
@@ -71,15 +89,18 @@ public class Form extends JPanel implements ActionListener{
 
 		originCity = new JLabel("Origin Address");
 		originCity.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-		originCityField = new JComboBox();
+		originCityField = new JComboBox(XMLWorker.getCitiesFromCountry("New Zealand").toArray());
 		originCityField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		originCityField.setBackground(Color.WHITE);
 		originCityWarning = new JLabel();
 		originCityWarning.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 
+
+
 		destination = new JLabel("Destination Address");
 		destination.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		destinationField = new JComboBox();
+		populateCountries();
 		destinationField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		destinationField.setBackground(Color.WHITE);
 		destinationWarning = new JLabel();
@@ -197,42 +218,41 @@ public class Form extends JPanel implements ActionListener{
 
 	}
 
-	public ArrayList<String> readFiles(String fname){
-		ArrayList<String> text = new ArrayList<String>();
 
-		try {
-			Scanner sc = new Scanner(new File(fname + "txt"));
-			
-			while (sc.hasNextLine()){
-				text.add(sc.nextLine());
-			}
-		}
-
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-
-
-		return text;
-
-	}
 
 	public void paintComponent (Graphics g){
 		g.drawImage(image, 0, 0, getParent().getWidth(), getParent().getHeight(), this);
+	}
+
+	private void populateCountries(){
+		ArrayList<String> countries = XMLWorker.loadCountries();
+
+		for(String s: countries){
+			destinationField.addItem(s);
+			ArrayList<String> cities = XMLWorker.getCitiesFromCountry(s);
+			for(String c: cities){
+				destinationField.addItem("    " + c);
+			}
+
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("submit")){
 			System.out.println(e.getActionCommand());
+			if(customerField.getText().equals("")){
+				customerWarning.setText("Plese input customer name");
+			}
+			
+			
+			
 		}
 		else if(e.getActionCommand().equals("cancel")){
-			System.out.println(e.getActionCommand());
+			CardLayout c = (CardLayout) ClerkGUI.cardPanel.getLayout();
+			c.show(ClerkGUI.cardPanel, "dashboardP");
 		}
 
 	}
-
-
 
 }

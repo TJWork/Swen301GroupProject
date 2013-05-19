@@ -11,7 +11,7 @@ public class ClerkGUI extends JPanel implements ActionListener{
 	private Form form;
 	private PriceUI priceP;
 	private RoutesUI routesP;
-	private JPanel cardPanel;
+	public static JPanel cardPanel;
 	private DashBoard dashBoard;
 	
 	public ClerkGUI(){

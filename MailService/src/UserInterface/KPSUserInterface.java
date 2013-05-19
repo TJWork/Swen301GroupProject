@@ -10,13 +10,9 @@ public class KPSUserInterface extends JFrame implements ComponentListener{
 	public static Time clock;
 	private JPanel topPanel;
 	public static LoginScreen login;
-	public static ClerkGUI clerk;
-	public static ManagerGUI manager;
 
 	public KPSUserInterface(){
 		login = new LoginScreen();
-//		clerk = new ClerkGUI();
-//		manager = new ManagerGUI();
 		
 		setLayout(new BorderLayout());
 		add(topPanel(), BorderLayout.SOUTH);
