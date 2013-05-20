@@ -22,12 +22,14 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import service.City;
 import service.Mail;
 import service.Parcel;
 
@@ -231,7 +233,37 @@ public class XMLWorker {
 		return data;
 	}
 	
-
+	
+	/**
+	 * Returns the list of mailable locations to the given country.
+	 * @param country Country to get mailable locations from.
+	 * @return Arraylist of cities within the given country.
+	 */
+	public static ArrayList<City> getAllCitiesFromCountry(String country){
+		ArrayList<City> data = new ArrayList<City>();
+		try {
+			Document doc = getDocElement("countrycitytownlatlong");
+			Element root = doc.getDocumentElement();
+			NodeList nl = root.getElementsByTagName("country");
+			for (int i = 0; i < nl.getLength(); i++)
+				if (nl.item(i).getAttributes().getNamedItem("name").getTextContent().equals(country)){
+					NodeList cities = ((Element)(nl.item(i))).getElementsByTagName("city");
+					
+					for (int j = 0; j < cities.getLength(); j++){
+						City c = new City();
+						c.setId(i);
+						c.setName(((Element)(cities.item(j))).getElementsByTagName("name").item(0).getTextContent());
+						c.setLatitude(Double.parseDouble(((Element)(cities.item(j))).getElementsByTagName("latitude").item(0).getTextContent()));
+						c.setLongitude(Double.parseDouble(((Element)(cities.item(j))).getElementsByTagName("longitude").item(0).getTextContent()));
+						data.add(c);
+					}
+				}
+		} 
+		catch (Exception e) { e.printStackTrace(); }
+		return data;
+	}
+	
+	
 	public static ArrayList<ArrayList<String>> getAllCities(){
 		ArrayList<ArrayList<String>> allCities = new ArrayList<ArrayList<String>>();
 		try {
@@ -257,7 +289,34 @@ public class XMLWorker {
 	}
 	
 	
-
+	public static ArrayList<ArrayList<City>> getAllCitiesAsCity(){
+		ArrayList<ArrayList<City>> allCities = new ArrayList<ArrayList<City>>();
+		try {
+			Document doc = getDocElement("countrycitytownlatlong");
+			Element root = doc.getDocumentElement();
+			NodeList nl = root.getElementsByTagName("country");
+			for (int i = 0; i < nl.getLength(); i++){
+					NodeList cities = ((Element)(nl.item(i))).getElementsByTagName("city");
+					ArrayList<City> data = new ArrayList<City>();
+					for (int j = 0; j < cities.getLength(); j++){
+						City c = new City();
+						c.setId(i);
+						c.setName(((Element)(cities.item(j))).getElementsByTagName("name").item(0).getTextContent());
+						c.setLatitude(Double.parseDouble(((Element)(cities.item(j))).getElementsByTagName("latitude").item(0).getTextContent()));
+						c.setLongitude(Double.parseDouble(((Element)(cities.item(j))).getElementsByTagName("longitude").item(0).getTextContent()));
+						data.add(c);
+					}
+					allCities.add(data);
+			}
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return allCities;
+	}
 
 	/**
 	 * Adds a new mail and or parcel event to the mailevents database. Can be as a Mail <br>
@@ -416,7 +475,7 @@ public class XMLWorker {
 
 	public static void main(String[] args){
 
-
+/*
 		ArrayList<Parcel> parcels = XMLWorker.getParcels(new String[]{null, null, null, null, null, null});
 		for (Parcel p: parcels){
 			System.out.println("Parcel: " + p.toString());
@@ -429,8 +488,13 @@ public class XMLWorker {
 
 		XMLWorker.addMail(new Mail("02/02/2012", "Madrid", "Palmerston North", 1));
 		XMLWorker.addMail(new Parcel("02/04/2012", "Ho-Chi Min", "Clive", "2","5", 2));
+		*/
 		
-	
+		ArrayList<ArrayList<City>> allcities = XMLWorker.getAllCitiesAsCity();
+		for (ArrayList<City> cities: allcities)
+		for (City city: cities){
+			System.out.println(city.toString());
+		}
 		
 		/*
 		try {
@@ -488,6 +552,8 @@ public class XMLWorker {
 		for (Mail m: filtered){
 			System.out.println(m.toString());
 		}	*/
+		
+		
 	}
 
 }
