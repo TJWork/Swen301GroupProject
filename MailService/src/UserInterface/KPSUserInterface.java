@@ -6,10 +6,10 @@ import java.text.*;
 import java.util.*;
 import javax.swing.*;
 
-public class KPSUserInterface extends JFrame implements ComponentListener{
+public class KPSUserInterface extends JFrame{
 	public static Time clock;
 	private JPanel topPanel;
-	public static LoginScreen login;
+	private LoginScreen login;
 
 	public KPSUserInterface(){
 		login = new LoginScreen();
@@ -25,23 +25,6 @@ public class KPSUserInterface extends JFrame implements ComponentListener{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-	
-
-	@Override
-	public void componentResized(ComponentEvent e) {}
-
-	@Override
-	public void componentMoved(ComponentEvent e) {}
-
-	@Override
-	public void componentShown(ComponentEvent e) {}
-
-	@Override
-	public void componentHidden(ComponentEvent e) {
-		System.out.println(e.getComponent().getClass().getName());
-		remove(e.getComponent());
-		
-	}
 
 	public JPanel topPanel(){
 		clock = new Time();
@@ -60,7 +43,7 @@ public class KPSUserInterface extends JFrame implements ComponentListener{
 
 		private String currentTime;
 		public Time(){
-			setForeground(Color.WHITE);
+			setForeground(Color.LIGHT_GRAY);
 			new Thread(this).start();
 		}
 
@@ -74,7 +57,7 @@ public class KPSUserInterface extends JFrame implements ComponentListener{
 				currentTime = dateFormat.format(cal.getTime());
 				
 				Date time = cal.getTime();
-				setText( time.toString());
+				setText( "  " + time.toString());
 
 				try {
 					Thread.sleep(1000);

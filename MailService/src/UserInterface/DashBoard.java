@@ -11,16 +11,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 
+/**
+ * @author Sam
+ * A Dashboard showing all the mails events occurred to the business.
+ */
 public class DashBoard extends JPanel implements ActionListener{
-
-
 	private JLabel title;
 	private JScrollPane tableScrollPane;
 	private JTable mailEventsTable;
 	private JLabel expenditure;
 	private JLabel revenue;
 	private JLabel numberMailEvents;
-	String[] columnTitle;
+	private String[] columnTitle;
 
 	public DashBoard(){
 
@@ -77,9 +79,9 @@ public class DashBoard extends JPanel implements ActionListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("heloo?'");
-				JDialog dialog = new JDialog();
-				dialog.setContentPane(new Form());
+				Form f = new Form();
+				f.setSize(600, 650);
+				f.setVisible(true);
 			}
 		});
         

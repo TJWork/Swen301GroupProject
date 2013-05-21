@@ -11,11 +11,10 @@ public class ClerkGUI extends JPanel implements ActionListener{
 	private Form form;
 	private PriceUI priceP;
 	private RoutesUI routesP;
-	public static JPanel cardPanel;
+	private JPanel cardPanel;
 	public static DashBoard dashBoard;
 
 	public ClerkGUI(){
-		form = new Form();
 		priceP = new PriceUI();
 		routesP = new RoutesUI();
 		dashBoard = new DashBoard();
@@ -27,7 +26,6 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		cardPanel = new JPanel(new CardLayout());
 
 		cardPanel.add(dashBoard, "dashboardP");
-		cardPanel.add(form, "form");
 		cardPanel.add(priceP, "priceP");
 		cardPanel.add(routesP, "routeP");
 
@@ -47,8 +45,8 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		BorderLayout bl = new BorderLayout();
 		topPanel.setLayout(bl);
 		
-		JLabel label = new JLabel("Clerk");
-		label.setFont(new Font("Verdana", Font.BOLD, 20));
+		JLabel label = new JLabel("  Clerk");
+		label.setFont(new Font("Verdana", Font.BOLD, 24));
 		label.setForeground(Color.LIGHT_GRAY);
 
 		JPanel buttonsPanel = new JPanel();
@@ -58,8 +56,6 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		
 		CustomButton dash = new CustomButton("DashBoard", "db");
 		dash.addActionListener(this);
-		CustomButton mail = new CustomButton("Mail", "mail");
-		mail.addActionListener(this);
 		CustomButton route = new CustomButton("Route", "route");
 		route.addActionListener(this);
 		CustomButton price = new CustomButton("Price", "price");
@@ -68,8 +64,6 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		signout.addActionListener(this);
 
 		buttonsPanel.add(dash);
-		layout.setHgap(30);
-		buttonsPanel.add(mail);
 		layout.setHgap(30);
 		buttonsPanel.add(route);
 		layout.setHgap(30);
@@ -87,11 +81,7 @@ public class ClerkGUI extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		CardLayout c = (CardLayout) cardPanel.getLayout();
 
-
-		if("mail".equals(e.getActionCommand())){
-			c.show(cardPanel, "form");
-		}
-		else if("db".equals(e.getActionCommand())){
+		if("db".equals(e.getActionCommand())){
 			c.show(cardPanel, "dashboardP");
 		}
 		else if("route".equals(e.getActionCommand())){

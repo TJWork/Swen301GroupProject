@@ -331,8 +331,6 @@ public class RoutesUI extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		CardLayout c = (CardLayout) ClerkGUI.cardPanel.getLayout();
-
 		/*=============================== Submit Button Event ==========================================*/
 
 		if(e.getActionCommand().equals("submit")){
@@ -399,10 +397,7 @@ public class RoutesUI extends JPanel implements ActionListener{
 		/*=============================== Cancel back to DashBoard ==========================================*/
 		else if(e.getActionCommand().equals("cancel")){
 
-			c.show(ClerkGUI.cardPanel, "dashboardP");
 		}
-
-		ClerkGUI.dashBoard.revalidate();
 
 	}
 	

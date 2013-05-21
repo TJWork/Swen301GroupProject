@@ -30,7 +30,7 @@ public class ManagerGUI extends JPanel implements ActionListener{
 		cardPanel = new JPanel(new CardLayout());
 
 		cardPanel.add(dashBoard, "dashboardP");
-		cardPanel.add(businessStats, "businessStat");
+		cardPanel.add(businessStats, "businessStatP");
 		cardPanel.add(priceP, "priceP");
 		cardPanel.add(routesP, "routeP");
 
@@ -49,7 +49,7 @@ public class ManagerGUI extends JPanel implements ActionListener{
 		BorderLayout bl = new BorderLayout();
 		topPanel.setLayout(bl);
 		
-		JLabel label = new JLabel("Manager");
+		JLabel label = new JLabel("  Manager");
 		label.setFont(new Font("Verdana", Font.BOLD, 20));
 		label.setForeground(Color.LIGHT_GRAY);
 
@@ -60,7 +60,7 @@ public class ManagerGUI extends JPanel implements ActionListener{
 		
 		CustomButton dash = new CustomButton("DashBoard", "db");
 		dash.addActionListener(this);
-		CustomButton bss = new CustomButton("Business Satistics", "bs");
+		CustomButton bss = new CustomButton("Business Satistics", "bss");
 		dash.addActionListener(this);
 		CustomButton route = new CustomButton("Route", "route");
 		route.addActionListener(this);
@@ -93,8 +93,8 @@ public class ManagerGUI extends JPanel implements ActionListener{
 		if("db".equals(e.getActionCommand())){
 			c.show(cardPanel, "dashboardP");
 		}
-		else if("bs".equals(e.getActionCommand())){
-			c.show(cardPanel, "businessStat");
+		else if("bss".equals(e.getActionCommand())){
+			c.show(cardPanel, "businessStatP");
 
 		}
 		else if("route".equals(e.getActionCommand())){

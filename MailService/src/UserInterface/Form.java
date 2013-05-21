@@ -19,9 +19,11 @@ import file.XMLWorker;
  * The required field for mails are the customer's name, origin address, destination and type of transport.
  * More fields such as volume and weight are required for parcels sending.
  */
-public class Form extends JPanel implements ActionListener{
+public class Form extends JDialog implements ActionListener{
 
 	private BufferedImage image;
+
+	private JPanel panel;
 
 	private JLabel customerName;
 	private JTextField customerField;
@@ -67,32 +69,7 @@ public class Form extends JPanel implements ActionListener{
 		title.setFont(new Font("Verdana", Font.BOLD, 36));
 		price = new JLabel("<html><font face=Verdana size=5>Price: </font></html>");
 		price.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-		price.addComponentListener(new ComponentListener() {
-			
-			@Override
-			public void componentShown(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void componentResized(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void componentMoved(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void componentHidden(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		price.enableInputMethods(true);
 
 
 		/*=========================== Parcel Mail Field ==================================*/
@@ -339,8 +316,14 @@ public class Form extends JPanel implements ActionListener{
 
 		/*=========================== Form Layout ==================================*/
 
-		GroupLayout layout = new GroupLayout(this);
-		this.setLayout(layout);
+		panel = new JPanel(){
+			public void paintComponent(Graphics g) {
+				g.drawImage(image, 0, 0, getParent().getWidth(), getParent().getHeight(), this);
+			}
+		};
+
+		GroupLayout layout = new GroupLayout(panel);
+		panel.setLayout(layout);
 
 		layout.setHorizontalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,6 +427,8 @@ public class Form extends JPanel implements ActionListener{
 																																.addComponent(submit))
 																																.addGap(19, 19, 19))
 				);
+
+		add(panel);
 	}
 
 
@@ -490,11 +475,7 @@ public class Form extends JPanel implements ActionListener{
 	 */	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		CardLayout c = (CardLayout) ClerkGUI.cardPanel.getLayout();
-
 		/*=============================== Submit Button Event ==========================================*/
-
 		if(e.getActionCommand().equals("submit")){
 			/*Parcel Event*/
 			if(typeField.getValue().toString().equals("Parcel")){
@@ -503,8 +484,15 @@ public class Form extends JPanel implements ActionListener{
 					Parcel p = new Parcel(KPSUserInterface.clock.getCurrentDate(), destinationField.getSelectedItem().toString().trim(), originCityField.getSelectedItem().toString().trim(),
 							weightField.getText().trim(), volumeField.getText().trim(), (priorityField.getSelectedIndex() +1));
 
-					XMLWorker.addMail(p);
-					ClerkGUI.dashBoard.addItem("Parcel", p.getData());
+					int option = JOptionPane.showConfirmDialog(this, "Submit Customer details?", "Confirm", JOptionPane.OK_CANCEL_OPTION);
+
+
+					if(option == JOptionPane.YES_OPTION){
+						XMLWorker.addMail(p);
+						ClerkGUI.dashBoard.addItem("Parcel", p.getData());
+						dispose();
+					}
+
 				}
 				else{
 					if(customerField.getText().equals("")) customerWarning.setText("*Plese input customer name");
@@ -522,9 +510,17 @@ public class Form extends JPanel implements ActionListener{
 					Mail m = new Mail(KPSUserInterface.clock.getCurrentDate(), destinationField.getSelectedItem().toString().trim(), originCityField.getSelectedItem().toString().trim(),
 							(priorityField.getSelectedIndex()+1));
 
-					XMLWorker.addMail(m);
-					ClerkGUI.dashBoard.addItem("Mail", m.getData());
 					price.setText("<html><font face=Verdana size=5>Price: </font>\t\t <font size=6>" + m.getCost() + "</font></html>" );
+
+					int option = JOptionPane.showConfirmDialog(this, "Submit Customer details?", "Confirm", JOptionPane.OK_CANCEL_OPTION);
+
+					if(option == JOptionPane.YES_OPTION){
+						XMLWorker.addMail(m);
+						ClerkGUI.dashBoard.addItem("Mail", m.getData());
+						dispose();
+					} 
+
+
 				}
 				else{
 					if(customerField.getText().equals("")) customerWarning.setText("*Plese input customer name");
@@ -532,14 +528,13 @@ public class Form extends JPanel implements ActionListener{
 					if(originCityField.getSelectedIndex()==-1) originCityWarning.setText("*Please select origin");
 					if(priorityField.getSelectedIndex()==-1) priorityWarning.setText("*Please select a priority");
 				}
+
 			}
 		}
 
 		/*=============================== Cancel back to DashBoard ==========================================*/
 		else if(e.getActionCommand().equals("cancel")){
-
-			c.show(ClerkGUI.cardPanel, "dashboardP");
-			repaint();
+			dispose();
 		}
 
 
