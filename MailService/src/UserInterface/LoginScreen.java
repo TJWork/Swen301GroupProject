@@ -171,7 +171,6 @@ public class LoginScreen extends JPanel implements ActionListener{
 				getParent().add(new ManagerGUI());
 			}
 		}
-		System.out.println(e.getActionCommand().toString());
 	}
 
 }

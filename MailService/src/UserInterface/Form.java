@@ -15,7 +15,9 @@ import file.XMLWorker;
 
 /**
  * @author Sam
- *
+ * This is a form for users to input customer details. 
+ * The required field for mails are the customer's name, origin address, destination and type of transport.
+ * More fields such as volume and weight are required for parcels sending.
  */
 public class Form extends JPanel implements ActionListener{
 
@@ -63,8 +65,34 @@ public class Form extends JPanel implements ActionListener{
 
 		title = new JLabel("Form");
 		title.setFont(new Font("Verdana", Font.BOLD, 36));
-		price = new JLabel("Price: ");
+		price = new JLabel("<html><font face=Verdana size=5>Price: </font></html>");
 		price.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
+		price.addComponentListener(new ComponentListener() {
+			
+			@Override
+			public void componentShown(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void componentResized(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void componentMoved(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void componentHidden(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 
 		/*=========================== Parcel Mail Field ==================================*/
@@ -75,12 +103,48 @@ public class Form extends JPanel implements ActionListener{
 		weight.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		weightField = new JTextField();
 		weightField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
+		weightField.addFocusListener(new FocusListener() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(weightField.getText().equals("") ){
+					weightLabel.setText("*Please input weight");
+				}
+
+				else {
+					if(isDigit(weightField.getText()) == false)
+						weightLabel.setText("*Please input numbers");
+					else {weightLabel.setText("");}
+				}
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) { }
+		});
 		weightLabel = new JLabel();
 		weightLabel.setForeground(Color.RED);
+
+
 		volume = new JLabel("Volume (cm3)");
 		volume.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		volumeField = new JTextField();
 		volumeField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
+		volumeField.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(volumeField.getText().equals("")){
+					volumeLabel.setText("*Please input volume");
+				}
+				else {
+					if(isDigit(volumeField.getText()) == false)
+						volumeLabel.setText("*Please input numbers");
+					else {volumeLabel.setText("");}
+				}				
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) { 	}
+		});
 		volumeLabel = new JLabel();
 		volumeLabel.setForeground(Color.RED);
 
@@ -139,9 +203,21 @@ public class Form extends JPanel implements ActionListener{
 		customerName = new JLabel("Customer Name");
 		customerName.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		customerField = new JTextField();
+
 		customerField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
+		customerField.addFocusListener(new FocusListener() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(customerField.getText().equals("")){
+					customerWarning.setText("*Plese input customer name");
+				} else {customerWarning.setText("");}
+			}
+			@Override
+			public void focusGained(FocusEvent e) {	}
+		});
 		customerWarning = new JLabel();
 		customerWarning.setForeground(Color.RED);
+
 
 
 		/*=========================== Mail Type Field ==================================*/
@@ -171,14 +247,14 @@ public class Form extends JPanel implements ActionListener{
 		priority = new JLabel("Priority");
 		priority.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		priorityField = new JComboBox(new String[]{"International Air", "International Sea" , "Domestic Air", "Domestic Land"});
+		priorityField.setSelectedIndex(-1);
 		priorityField.addItemListener(new ItemListener(){
-
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-
 				if(e.getItem().toString().equals("International Sea") || e.getItem().toString().equals("International Air")){
-//					destinationField.removeAllItems();
-//					populateCountries();
+					//					destinationField.removeAllItems();
+					//					populateCountries();
+					destinationField.setSelectedIndex(-1);
 				}
 				else{
 					destinationField.removeAllItems();
@@ -186,13 +262,25 @@ public class Form extends JPanel implements ActionListener{
 
 					for(String s: city)
 						destinationField.addItem(s);
+					destinationField.setSelectedIndex(-1);
 				}
+			}
+		});
+		priorityField.addFocusListener(new FocusListener(){
+			@Override
+			public void focusGained(FocusEvent e) {	}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(priorityField.getSelectedIndex()==-1){
+					priorityWarning.setText("*Please select a priority");
+				} else {priorityWarning.setText("");}
 			}
 		});
 		priorityField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		priorityField.setBackground(Color.WHITE);
 		priorityWarning = new JLabel();
-		priorityWarning.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
+		priorityWarning.setForeground(Color.RED);
 
 
 		/*=========================== Origin City Field ==================================*/
@@ -203,6 +291,17 @@ public class Form extends JPanel implements ActionListener{
 		originCityField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		originCityField.setBackground(Color.WHITE);
 		originCityField.setSelectedIndex(-1);
+		originCityField.addFocusListener(new FocusListener() {			
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(originCityField.getSelectedIndex()==-1) {
+					originCityWarning.setText("*Please select origin");
+				} else {originCityWarning.setText("");}
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) { }
+		});
 		originCityWarning = new JLabel();
 		originCityWarning.setForeground(Color.RED);
 
@@ -216,6 +315,17 @@ public class Form extends JPanel implements ActionListener{
 		destinationField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		destinationField.setBackground(Color.WHITE);
 		destinationField.setSelectedIndex(-1);
+		destinationField.addFocusListener(new FocusListener(){
+			@Override
+			public void focusGained(FocusEvent e) {	}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(destinationField.getSelectedIndex()==-1){
+					destinationWarning.setText("*Please select a destination");
+				} else {destinationWarning.setText("");}
+			}
+		});
 		destinationWarning = new JLabel();
 		destinationWarning.setForeground(Color.RED);
 
@@ -227,114 +337,113 @@ public class Form extends JPanel implements ActionListener{
 		CustomButton cancel = new CustomButton("Cancel_Normal", "Cancel_Pressed", "Cancel_Hover", "cancel");
 		cancel.addActionListener(this);
 
-
-
 		/*=========================== Form Layout ==================================*/
 
 		GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);
+		this.setLayout(layout);
 
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap(80, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(title)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(customerName)
-                                .addGap(10, 10, 10)
-                                .addComponent(customerField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(customerWarning, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(type)
-                                .addGap(10, 10, 10)
-                                .addComponent(typeField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(typeWarning, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(priority)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(priorityField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(originCity)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(originCityField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)))
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(originCityWarning, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(priorityWarning, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
-                            .addGroup(GroupLayout.Alignment.TRAILING, layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addComponent(price, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(submit)
-                                    .addGap(30, 30, 30)
-                                    .addComponent(cancel))
-                                .addGroup(GroupLayout.Alignment.TRAILING, layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(cardPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(destination)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(destinationField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(destinationWarning, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))))))
-                    .addContainerGap(80, Short.MAX_VALUE))
-            );
-            layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(45, 45, 45)
-                    .addComponent(title)
-                    .addGap(20, 20, 20)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(3, 3, 3)
-                            .addComponent(customerName))
-                        .addComponent(customerField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(customerWarning, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
-                    .addGap(20, 20, 20)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(typeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(3, 3, 3)
-                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(type)
-                                .addComponent(typeWarning))))
-                    .addGap(20, 20, 20)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(priorityField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(3, 3, 3)
-                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(priority)
-                                .addComponent(priorityWarning))))
-                    .addGap(20, 20, 20)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(originCityWarning)
-                        .addComponent(originCityField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(originCity))
-                    .addGap(20, 20, 20)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(destination)
-                        .addComponent(destinationField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(3, 3, 3)
-                            .addComponent(destinationWarning)))
-                    .addGap(18, 18, 18)
-                    .addComponent(cardPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(price, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(cancel)
-                            .addComponent(submit)))
-                    .addContainerGap(80, Short.MAX_VALUE))
-            );
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap(62, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(title)
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+												.addComponent(customerName)
+												.addGap(10, 10, 10)
+												.addComponent(customerField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addGap(10, 10, 10)
+												.addComponent(customerWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+												.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+														.addComponent(type)
+														.addGap(10, 10, 10)
+														.addComponent(typeField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addGap(10, 10, 10)
+														.addComponent(typeWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+														.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+																.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+																		.addGroup(layout.createSequentialGroup()
+																				.addComponent(priority)
+																				.addGap(10, 10, 10)
+																				.addComponent(priorityField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+																				.addGroup(layout.createSequentialGroup()
+																						.addComponent(originCity)
+																						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																						.addComponent(originCityField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+																						.addGap(10, 10, 10)
+																						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+																								.addComponent(originCityWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																								.addComponent(priorityWarning, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+																								.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+																										.addGroup(layout.createSequentialGroup()
+																												.addComponent(cardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+																												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																												.addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+																												.addGroup(layout.createSequentialGroup()
+																														.addComponent(destination)
+																														.addGap(10, 10, 10)
+																														.addComponent(destinationField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+																														.addGap(10, 10, 10)
+																														.addComponent(destinationWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+																														.addContainerGap(62, Short.MAX_VALUE))
+																														.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+																																.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																																.addComponent(submit)
+																																.addGap(30, 30, 30)
+																																.addComponent(cancel)
+																																.addGap(60, 60, 60))
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addGap(45, 45, 45)
+						.addComponent(title)
+						.addGap(20, 20, 20)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(layout.createSequentialGroup()
+										.addGap(3, 3, 3)
+										.addComponent(customerName))
+										.addComponent(customerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(customerWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addGap(20, 20, 20)
+										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(typeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addGroup(layout.createSequentialGroup()
+														.addGap(3, 3, 3)
+														.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+																.addComponent(type)
+																.addComponent(typeWarning))))
+																.addGap(20, 20, 20)
+																.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+																		.addComponent(priorityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addGroup(layout.createSequentialGroup()
+																				.addGap(3, 3, 3)
+																				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+																						.addComponent(priority)
+																						.addComponent(priorityWarning))))
+																						.addGap(20, 20, 20)
+																						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+																								.addComponent(originCityWarning)
+																								.addComponent(originCityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addComponent(originCity))
+																								.addGap(20, 20, 20)
+																								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+																										.addComponent(destination)
+																										.addComponent(destinationField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+																										.addGroup(layout.createSequentialGroup()
+																												.addGap(3, 3, 3)
+																												.addComponent(destinationWarning)))
+																												.addGap(18, 18, 18)
+																												.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+																														.addComponent(cardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+																														.addComponent(price, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+																														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																														.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+																																.addComponent(cancel)
+																																.addComponent(submit))
+																																.addGap(19, 19, 19))
+				);
 	}
 
 
@@ -347,7 +456,7 @@ public class Form extends JPanel implements ActionListener{
 
 
 	/**
-	 * Helper method to populate the JComboBox
+	 * Helper method to populate the JComboBox for countries
 	 */
 	private void populateCountries(){
 
@@ -365,7 +474,7 @@ public class Form extends JPanel implements ActionListener{
 	}
 
 	/**
-	 * Helper method to check if the field taht requires digit is correct
+	 * Helper method to check if the field the that requires number is digit.
 	 */
 	private boolean isDigit( String input )  {
 		try {
@@ -375,6 +484,10 @@ public class Form extends JPanel implements ActionListener{
 		catch(NumberFormatException e ) {  return false;  }
 	}
 
+
+	/**
+	 * ActionListener that responds to the button pressed  	
+	 */	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -383,49 +496,23 @@ public class Form extends JPanel implements ActionListener{
 		/*=============================== Submit Button Event ==========================================*/
 
 		if(e.getActionCommand().equals("submit")){
-			if(customerField.getText().equals("")){
-				customerWarning.setText("*Plese input customer name");
-			} else {customerWarning.setText("");}
-
-			if(destinationField.getSelectedIndex()==-1){
-				destinationWarning.setText("*Please select a destination");
-			} else {destinationWarning.setText("");}
-
-			if(originCityField.getSelectedIndex()==-1) {
-				originCityWarning.setText("*Please select origin");
-			} else {originCityWarning.setText("");}
-
 			/*Parcel Event*/
 			if(typeField.getValue().toString().equals("Parcel")){
-
-				if(weightField.getText().equals("") ){
-					weightLabel.setText("*Please input weight");
-				}
-
-				else {
-					if(isDigit(weightField.getText()) == false)
-						weightLabel.setText("*Please input numbers");
-					else {weightLabel.setText("");}
-				}
-
-				if(volumeField.getText().equals("")){
-					volumeLabel.setText("*Please input volume");
-				}
-				else {
-					if(isDigit(volumeField.getText()) == false)
-						volumeLabel.setText("*Please input numbers");
-					else {volumeLabel.setText("");}
-				}
-
 
 				if((!customerField.getText().equals("")) && (isDigit(volumeField.getText()) == true) && (isDigit(weightField.getText()) == true) && (typeField.getValue().toString().equals("Parcel")) && destinationField.getSelectedIndex()>-1){
 					Parcel p = new Parcel(KPSUserInterface.clock.getCurrentDate(), destinationField.getSelectedItem().toString().trim(), originCityField.getSelectedItem().toString().trim(),
 							weightField.getText().trim(), volumeField.getText().trim(), (priorityField.getSelectedIndex() +1));
 
-
-					System.out.println(p.toString());
 					XMLWorker.addMail(p);
 					ClerkGUI.dashBoard.addItem("Parcel", p.getData());
+				}
+				else{
+					if(customerField.getText().equals("")) customerWarning.setText("*Plese input customer name");
+					if(destinationField.getSelectedIndex()==-1) destinationWarning.setText("*Please select a destination");
+					if(originCityField.getSelectedIndex()==-1) originCityWarning.setText("*Please select origin");
+					if(priorityField.getSelectedIndex()==-1) priorityWarning.setText("*Please select a priority");
+					if(weightField.getText().equals("")) weightLabel.setText("*Please input weight");
+					if(volumeField.getText().equals("")) volumeLabel.setText("*Please input numbers");
 				}
 			}
 
@@ -435,10 +522,15 @@ public class Form extends JPanel implements ActionListener{
 					Mail m = new Mail(KPSUserInterface.clock.getCurrentDate(), destinationField.getSelectedItem().toString().trim(), originCityField.getSelectedItem().toString().trim(),
 							(priorityField.getSelectedIndex()+1));
 
-					System.out.println(m.toString());
 					XMLWorker.addMail(m);
 					ClerkGUI.dashBoard.addItem("Mail", m.getData());
-
+					price.setText("<html><font face=Verdana size=5>Price: </font>\t\t <font size=6>" + m.getCost() + "</font></html>" );
+				}
+				else{
+					if(customerField.getText().equals("")) customerWarning.setText("*Plese input customer name");
+					if(destinationField.getSelectedIndex()==-1) destinationWarning.setText("*Please select a destination");
+					if(originCityField.getSelectedIndex()==-1) originCityWarning.setText("*Please select origin");
+					if(priorityField.getSelectedIndex()==-1) priorityWarning.setText("*Please select a priority");
 				}
 			}
 		}
@@ -447,9 +539,10 @@ public class Form extends JPanel implements ActionListener{
 		else if(e.getActionCommand().equals("cancel")){
 
 			c.show(ClerkGUI.cardPanel, "dashboardP");
+			repaint();
 		}
 
-		ClerkGUI.dashBoard.revalidate();
+
 
 	}
 }

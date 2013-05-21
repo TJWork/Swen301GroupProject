@@ -1,43 +1,86 @@
 package UserInterface;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
 public class ManagerGUI extends JPanel implements ActionListener{
-
+	private PriceUI priceP;
+	private RoutesUI routesP;
+	private BusinessStats businessStats;
+	public static JPanel cardPanel;
+	public static DashBoard dashBoard;
 
 	public ManagerGUI(){
+		priceP = new PriceUI();
+		routesP = new RoutesUI();
+		dashBoard = new DashBoard();
+		businessStats = new BusinessStats();
 
+		setLayout(new BorderLayout());
+
+		add(TopPanel(), BorderLayout.NORTH);
+
+		cardPanel = new JPanel(new CardLayout());
+
+		cardPanel.add(dashBoard, "dashboardP");
+		cardPanel.add(businessStats, "businessStat");
+		cardPanel.add(priceP, "priceP");
+		cardPanel.add(routesP, "routeP");
+
+		add(cardPanel, BorderLayout.CENTER);
 
 	}
+	
+	
+	/**
+	 * A customised JPanel for navigation between different components
+	 * @return JPanel
+	 */
 	public JPanel TopPanel(){
 		JPanel topPanel = new JPanel();
 		topPanel.setBackground(new Color(0, 0, 0));
-		FlowLayout layout = new FlowLayout();
-		topPanel.setLayout(layout);
+		BorderLayout bl = new BorderLayout();
+		topPanel.setLayout(bl);
+		
+		JLabel label = new JLabel("Manager");
+		label.setFont(new Font("Verdana", Font.BOLD, 20));
+		label.setForeground(Color.LIGHT_GRAY);
 
+		JPanel buttonsPanel = new JPanel();
+		FlowLayout layout = new FlowLayout();
+		buttonsPanel.setLayout(layout);
+		buttonsPanel.setBackground(new Color(0, 0, 0));
+		
 		CustomButton dash = new CustomButton("DashBoard", "db");
+		dash.addActionListener(this);
+		CustomButton bss = new CustomButton("Business Satistics", "bs");
 		dash.addActionListener(this);
 		CustomButton route = new CustomButton("Route", "route");
 		route.addActionListener(this);
 		CustomButton price = new CustomButton("Price", "price");
 		price.addActionListener(this);
-		CustomButton signout = new CustomButton("Signout", "signout");
+		CustomButton signout = new CustomButton("Sign Out", "signout");
 		signout.addActionListener(this);
 
-		topPanel.add(dash);
+		buttonsPanel.add(dash);
 		layout.setHgap(30);
-		topPanel.add(route);
+		buttonsPanel.add(bss);
 		layout.setHgap(30);
-		topPanel.add(price);
+		buttonsPanel.add(route);
 		layout.setHgap(30);
-		topPanel.add(signout);
+		buttonsPanel.add(price);
+		layout.setHgap(30);
+		buttonsPanel.add(signout);
 
-
+		topPanel.add(label, BorderLayout.WEST);
+		topPanel.add(buttonsPanel, BorderLayout.EAST);
 
 		return topPanel;
 	}
@@ -45,7 +88,26 @@ public class ManagerGUI extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		CardLayout c = (CardLayout) cardPanel.getLayout();
+
+		if("db".equals(e.getActionCommand())){
+			c.show(cardPanel, "dashboardP");
+		}
+		else if("bs".equals(e.getActionCommand())){
+			c.show(cardPanel, "businessStat");
+
+		}
+		else if("route".equals(e.getActionCommand())){
+			c.show(cardPanel, "routeP");
+
+		}
+		else if("price".equals(e.getActionCommand())){
+			c.show(cardPanel, "priceP");
+		}
+		else if("signout".equals(e.getActionCommand())){
+			setVisible(false);
+			getParent().add(new LoginScreen());
+		}
 
 	}
 }

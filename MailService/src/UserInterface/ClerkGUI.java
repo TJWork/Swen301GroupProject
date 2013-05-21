@@ -37,6 +37,10 @@ public class ClerkGUI extends JPanel implements ActionListener{
 
 	}
 
+	/**
+	 * A customised JPanel for navigation between different components
+	 * @return JPanel
+	 */
 	public JPanel TopPanel(){
 		JPanel topPanel = new JPanel();
 		topPanel.setBackground(new Color(0, 0, 0));
@@ -60,7 +64,7 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		route.addActionListener(this);
 		CustomButton price = new CustomButton("Price", "price");
 		price.addActionListener(this);
-		CustomButton signout = new CustomButton("SignOut", "signout");
+		CustomButton signout = new CustomButton("Sign Out", "signout");
 		signout.addActionListener(this);
 
 		buttonsPanel.add(dash);
