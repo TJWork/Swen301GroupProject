@@ -7,19 +7,22 @@ public class Mail {
 	private String toAddress;
 	private String from;
 	private double priority;
-
-	public Mail(String day, String toAddress, String from, int priority) {
+	private double cost;
+	
+	public Mail(String day, String toAddress, String from, double cost, int priority) {
 		this.day = day;
 		this.toAddress = toAddress;
 		this.from = from;
 		this.priority = priority;
+		this.cost = cost;
 	}
 
-	public Mail(String day, String toAddress, String from, String priority) {
+	public Mail(String day, String toAddress, String from, String cost, String priority) {
 		this.day = day;
 		this.toAddress = toAddress;
 		this.from = from;
 		this.priority = Double.parseDouble(priority);
+		this.cost = Double.parseDouble(cost);
 	}	
 
 
@@ -40,13 +43,19 @@ public class Mail {
 	}
 
 	public double getCost(){
-		Cost c = new Cost(this);
+		return this.cost;
+	}
 
-		return c.getPrice();
+	
+	/**
+	 * @param cost the cost to set
+	 */
+	public void setCost(double cost) {
+		this.cost = cost;
 	}
 
 	public String[] getData(){
-		return new String[]{this.day, this.toAddress, this.from, "" + this.priority, Double.toString(this.getCost())};
+		return new String[]{this.day, this.toAddress, this.from, Double.toString(this.getCost()), "" + this.priority};
 	}
 	
 	public String toString(){
@@ -54,8 +63,8 @@ public class Mail {
 				"Day: " + this.getDay() + "\n" + 
 				"Destination: " + this.getToAddress() + "\n" + 
 				"Origin: " + this.getFrom() + "\n" + 
-				"Priority: " + this.getPriority() + "\n" + 
-				"Cost: " +  this.getCost()
+				"Cost: " +  this.getCost() + "\n" + 
+				"Priority: " + this.getPriority()
 				);
 		
 		
