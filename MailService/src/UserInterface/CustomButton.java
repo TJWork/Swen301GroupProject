@@ -42,7 +42,7 @@ public class CustomButton extends JButton{
 	public CustomButton(String text, String command){
 		setText(text);
 		setForeground(Color.GRAY);
-		setFont(new Font("", Font.PLAIN, 30));
+		setFont(new Font("", Font.PLAIN, 22));
 		
 		setContentAreaFilled(false);
 		setBorder(null);

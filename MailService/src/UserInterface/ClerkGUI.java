@@ -40,9 +40,18 @@ public class ClerkGUI extends JPanel implements ActionListener{
 	public JPanel TopPanel(){
 		JPanel topPanel = new JPanel();
 		topPanel.setBackground(new Color(0, 0, 0));
-		FlowLayout layout = new FlowLayout();
-		topPanel.setLayout(layout);
+		BorderLayout bl = new BorderLayout();
+		topPanel.setLayout(bl);
+		
+		JLabel label = new JLabel("Clerk");
+		label.setFont(new Font("Verdana", Font.BOLD, 20));
+		label.setForeground(Color.LIGHT_GRAY);
 
+		JPanel buttonsPanel = new JPanel();
+		FlowLayout layout = new FlowLayout();
+		buttonsPanel.setLayout(layout);
+		buttonsPanel.setBackground(new Color(0, 0, 0));
+		
 		CustomButton dash = new CustomButton("DashBoard", "db");
 		dash.addActionListener(this);
 		CustomButton mail = new CustomButton("Mail", "mail");
@@ -54,17 +63,18 @@ public class ClerkGUI extends JPanel implements ActionListener{
 		CustomButton signout = new CustomButton("SignOut", "signout");
 		signout.addActionListener(this);
 
-		topPanel.add(dash);
+		buttonsPanel.add(dash);
 		layout.setHgap(30);
-		topPanel.add(mail);
+		buttonsPanel.add(mail);
 		layout.setHgap(30);
-		topPanel.add(route);
+		buttonsPanel.add(route);
 		layout.setHgap(30);
-		topPanel.add(price);
+		buttonsPanel.add(price);
 		layout.setHgap(30);
-		topPanel.add(signout);
+		buttonsPanel.add(signout);
 
-
+		topPanel.add(label, BorderLayout.WEST);
+		topPanel.add(buttonsPanel, BorderLayout.EAST);
 
 		return topPanel;
 	}
