@@ -61,7 +61,7 @@ public class ManagerGUI extends JPanel implements ActionListener{
 		CustomButton dash = new CustomButton("DashBoard", "db");
 		dash.addActionListener(this);
 		CustomButton bss = new CustomButton("Business Satistics", "bss");
-		dash.addActionListener(this);
+		bss.addActionListener(this);
 		CustomButton route = new CustomButton("Route", "route");
 		route.addActionListener(this);
 		CustomButton price = new CustomButton("Price", "price");
