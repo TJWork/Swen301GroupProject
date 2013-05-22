@@ -83,7 +83,7 @@ public class DashBoard extends JPanel implements ActionListener{
 
 		tableScrollPane = new JScrollPane(mailEventsTable);
 
-        JButton button = new JButton("add new");//("AddNew_Normal", "AddNew_Pressed", "AddNew_Hover", "");
+        JButton button = new JButton("Add New Mail Event");//("AddNew_Normal", "AddNew_Pressed", "AddNew_Hover", "");
         button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
