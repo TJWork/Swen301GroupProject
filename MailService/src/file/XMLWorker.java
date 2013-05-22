@@ -37,76 +37,6 @@ public class XMLWorker {
 
 
 	/**
-	 * Method which given a file name will seek out all tags with the given name
-	 * and build an arraylist containing the data
-	 * 
-	 * @param filename XML file to read
-	 * @param tagname Tag to get data of
-	 * @return
-	 * @throws Exception
-	 */
-	public static ArrayList<String> readTag(String filename, String tagname) throws Exception{
-
-		//get the root element
-		Element docEle = getRootElement(filename);
-		//get a nodelist of elements
-		ArrayList<String> dat = new ArrayList<String>();
-		NodeList nl = docEle.getElementsByTagName(tagname);
-		// The list of nodes in indent
-		if(nl != null && nl.getLength() > 0) {
-			for(int i = 0 ; i < nl.getLength();i++) {
-				Element e = (Element)nl.item(i);
-				dat.add(e.getTextContent());
-			}
-		}
-
-
-		return dat;
-	}
-
-
-	/**
-	 * Method which reads in the data of multiple tags in the given file.
-	 * Each arraylist will be in the corresponding order as tagname
-	 * 
-	 * An example will illustrate how the data is returned.
-	 * 
-	 * tagname = new String[]{"mailevents", "day", "to", "from"}
-	 * day data arrayList = returnedArrayList.get(0);
-	 * to data arrayList = returnedArrayList.get(1);
-	 * from data arrayList = returnedArrayList.get(2);
-	 * 
-	 * @param filename XML file to read
-	 * @param tagnames Tags to be read
-	 * @return ArrayList of ArrayLists<String> of desired data. Will be returned empty if <br>
-	 * 		   no data exists.
-	 * @throws Exception
-	 */
-	public static ArrayList<ArrayList<String>> readTags(String filename, String ... tagnames) throws Exception{
-
-		//get the root element
-		Element root = getRootElement(filename);
-
-		ArrayList<ArrayList<String>> tagData = new ArrayList<ArrayList<String>>();
-		for (int k = 0; k < tagnames.length; k++){
-			// This gets EVERY tag with given name within root 
-			NodeList nl = root.getElementsByTagName(tagnames[k]);
-			ArrayList<String> dat = new ArrayList<String>();
-			// The list of nodes in indent
-			if(nl != null && nl.getLength() > 0) {
-				for(int i = 0 ; i < nl.getLength();i++) {
-					Element e = (Element)nl.item(i);
-					dat.add(e.getTextContent());
-				}
-				tagData.add(dat);
-			}
-		}
-
-		return tagData;
-	}
-
-
-	/**
 	 * 
 	 * @param fileName
 	 * @param keyTag
@@ -117,7 +47,7 @@ public class XMLWorker {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public static ArrayList<ArrayList<String>> readTagsConditional(String fileName, String keyTag, String[] tags, String[] match) throws ParserConfigurationException, SAXException, IOException{
+	private static ArrayList<ArrayList<String>> readTagsConditional(String fileName, String keyTag, String[] tags, String[] match) throws ParserConfigurationException, SAXException, IOException{
 		Element root = getRootElement(fileName);
 		ArrayList<ArrayList<String>> retArr = new ArrayList<ArrayList<String>>();
 
@@ -125,7 +55,7 @@ public class XMLWorker {
 		for (int i = 0; i < rootList.getLength(); i++){
 			ArrayList<String> dat = new ArrayList<String>();
 			Element e = (Element)rootList.item(i);
-			System.out.println(e.getNodeName());
+
 			boolean isOk = true;
 			for (int k = 0; k < tags.length; k++){
 				NodeList nl = e.getElementsByTagName(tags[k]);
@@ -210,6 +140,7 @@ public class XMLWorker {
 		return data;
 	}
 	
+	
 	/**
 	 * Returns the list of mailable locations to the given country.
 	 * @param country Country to get mailable locations from.
@@ -264,6 +195,12 @@ public class XMLWorker {
 	}
 	
 	
+	/**
+	 * Method which gets all the cities from every country and returns a list of lists of strings <br>
+	 * where each list is a country, and each String is the city name. The countries are in the <br>
+	 * same order as the list returned from XMLWorker.loadCountries(), sorted alphabetically.
+	 * @return
+	 */
 	public static ArrayList<ArrayList<String>> getAllCities(){
 		ArrayList<ArrayList<String>> allCities = new ArrayList<ArrayList<String>>();
 		try {
@@ -288,7 +225,12 @@ public class XMLWorker {
 		return allCities;
 	}
 	
-	
+	/**
+	 * Method which gets all the cities from every country and returns a list of lists of City objects <br>
+	 * where each list is a country, and each City belongs to that city. The countries are in the <br>
+	 * same order as the list returned from XMLWorker.loadCountries(), sorted alphabetically.
+	 * @return
+	 */
 	public static ArrayList<ArrayList<City>> getAllCitiesAsCity(){
 		ArrayList<ArrayList<City>> allCities = new ArrayList<ArrayList<City>>();
 		try {
@@ -319,8 +261,8 @@ public class XMLWorker {
 	}
 
 	/**
-	 * Adds a new mail and or parcel event to the mailevents database. Can be as a Mail <br>
-	 * object or Parcel.
+	 * Adds a new mail or parcel event to the mailevents database. Can be as a Mail <br>
+	 * or Parcel object.
 	 * 
 	 * @param mail Object to save data of
 	 */
@@ -331,12 +273,12 @@ public class XMLWorker {
 		Element root = doc.getDocumentElement();
 		
 		Element newMail = doc.createElement("mail");
-		String[] tags = new String[]{"day", "to", "from", "priority"};
+		String[] tags = new String[]{"day", "to", "from", "cost", "priority"};
 		String[] data = mail.getData();
 		
 		if (mail instanceof Parcel){
 			newMail = doc.createElement("parcel");
-			tags = new String[]{"day", "to", "from", "weight", "volume", "priority"};
+			tags = new String[]{"day", "to", "from", "weight", "volume", "cost", "priority"};
 			data = ((Parcel)mail).getData();
 		}
 		
@@ -347,7 +289,7 @@ public class XMLWorker {
 			newMail.appendChild(e);
 		}
 		
-		finishWritingXML(doc);
+		finishWritingXML(doc, "mailevents");
 		}catch(Exception e){e.printStackTrace();}
 	}
 	
@@ -369,10 +311,10 @@ public class XMLWorker {
 	public static ArrayList<Parcel> getParcels(String[] match){
 		ArrayList<Parcel> parcels = new ArrayList<Parcel>();
 		try {
-			ArrayList<ArrayList<String>> pdata = readTagsConditional("mailevents", "parcel", new String[]{"day", "to", "from", "weight", "volume", "priority"}, match);
+			ArrayList<ArrayList<String>> pdata = readTagsConditional("mailevents", "parcel", new String[]{"day", "to", "from", "weight", "volume", "cost", "priority"}, match);
 
 			for (ArrayList<String> object: pdata)
-				parcels.add(new Parcel(object.get(0), object.get(1), object.get(2), object.get(3), object.get(4), object.get(5)));
+				parcels.add(new Parcel(object.get(0), object.get(1), object.get(2), object.get(3), object.get(4), object.get(5), object.get(6)));
 
 		} 
 		catch (ParserConfigurationException e) {e.printStackTrace();} 
@@ -385,9 +327,9 @@ public class XMLWorker {
 	/**
 	 * Method which digs out all parcel events from the xml file excluding mail <br>
 	 * with the given conditions. <br> 
-	 * -The match length must be 4, and in the order {"day", "to", "from", "priority"} 
-	 * -If you do not want a condition on the corresponding match index <br>
-	 *  make the match string null;<br>
+	 *  -The match length must be 5, and in the order {"day", "to", "from", "cost", "priority"} 
+	 *  -If you do not want a condition on the corresponding match index <br>
+	 *   make the match string null;<br>
 	 *  -Date should be in format dd/mm/yyyy.<br><br>
 	 *  i.e.<br>
 	 *  match = new String[]{"13/01/2013", null, null, null} <br><br>
@@ -399,10 +341,10 @@ public class XMLWorker {
 	public static ArrayList<Mail> getMail(String[] match){
 		ArrayList<Mail> mail = new ArrayList<Mail>();
 		try {
-			ArrayList<ArrayList<String>> pdata = readTagsConditional("mailevents", "mail", new String[]{"day", "to", "from", "priority"}, match);
+			ArrayList<ArrayList<String>> pdata = readTagsConditional("mailevents", "mail", new String[]{"day", "to", "from", "cost", "priority"}, match);
 
 			for (ArrayList<String> object: pdata)
-				mail.add(new Mail(object.get(0), object.get(1), object.get(2), object.get(3)));
+				mail.add(new Mail(object.get(0), object.get(1), object.get(2), object.get(3), object.get(4)));
 
 		} 
 		catch (ParserConfigurationException e) {e.printStackTrace();} 
@@ -411,6 +353,62 @@ public class XMLWorker {
 
 		return mail;
 	}
+
+	/**
+	 * Method which returns the amount of sales between 2 given dates.
+	 * @param fromDate Earliest date
+	 * @param toDate Lates date
+	 * @return sales between dates
+	 */
+	public static double getTotalSalesBetweenDate(String fromDate, String toDate){
+		ArrayList<Mail> mail = XMLWorker.getMail(new String[]{null, null, null, null, null});
+		ArrayList<Parcel> parcels = XMLWorker.getParcels(new String[]{null, null, null, null, null, null, null});
+	
+
+		mail = XMLWorker.getMailBetweenDates(mail, fromDate, toDate);
+		ArrayList<Mail> parcelMail = XMLWorker.getMailBetweenDates(parcels, fromDate, toDate);
+
+		
+		ArrayList<String> nzCities = XMLWorker.getCitiesFromCountry("New Zealand");
+		double total = 0;
+		
+		for (Mail m: mail)
+			if (nzCities.contains(m.getFrom()))
+				total += m.getCost();
+		for (Mail m: parcelMail)
+			if (nzCities.contains(m.getFrom()))
+				total += m.getCost();
+				
+		return total;
+	}
+	
+	/**
+	 * Gets the total sales over all mailevents
+	 * @return all sales
+	 */
+	public static double getTotalSales(){
+		ArrayList<String> nzCities = XMLWorker.getCitiesFromCountry("New Zealand");
+		ArrayList<Mail> mail = XMLWorker.getMail(new String[]{null, null, null, null, null});
+		ArrayList<Parcel> parcels = XMLWorker.getParcels(new String[]{null, null, null, null, null, null, null});
+		
+		double total = 0;
+		
+		for (Mail m: mail)
+			if (nzCities.contains(m.getFrom()))
+				total += m.getCost();
+		for (Parcel p: parcels)
+			if (nzCities.contains(p.getFrom()))
+				total += p.getCost();
+		
+				
+		return total;
+
+	}
+
+
+	
+	
+	
 	/**
 	 * Method which takes a list of Mail and returns a new List of Mail where the dates are <br>
 	 * between the range specified
@@ -419,8 +417,17 @@ public class XMLWorker {
 	 * @param date2
 	 * @return ArrayList<Mail> mail between given date range.
 	 */
-	public static ArrayList<Mail> getMailBetweenDates(ArrayList<Mail> mail, String date1, String date2){
+	public static ArrayList<Mail> getMailBetweenDates(ArrayList<? extends Mail> mail, String date1, String date2){
 		ArrayList<Mail> newList = new ArrayList<Mail>();
+		if (!XMLWorker.dateFormatOK(date1)){
+			System.out.println("date1 is incorrect: " + date1);
+			return newList;
+		}
+		if (!XMLWorker.dateFormatOK(date2)){
+			System.out.println("date2 is incorrect: " + date2);
+			return newList;
+		}
+		
 		Date d1 = XMLWorker.parseDate(date1);
 		Date d2 = XMLWorker.parseDate(date2);
 
@@ -457,14 +464,22 @@ public class XMLWorker {
 
 	}
 
+	private static boolean dateFormatOK(String date){
+		try{
+			Date d1 = XMLWorker.parseDate(date);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
 
-	private static void finishWritingXML(Document doc) throws TransformerException{
+	private static void finishWritingXML(Document doc, String filename) throws TransformerException{
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		DOMSource source = new DOMSource(doc);
-		StreamResult result = new StreamResult(new File("mailevents.xml"));
+		StreamResult result = new StreamResult(new File(filename + ".xml"));
  
 		// Output to console for testing
 		// StreamResult result = new StreamResult(System.out);
@@ -490,11 +505,11 @@ public class XMLWorker {
 		XMLWorker.addMail(new Parcel("02/04/2012", "Ho-Chi Min", "Clive", "2","5", 2));
 		*/
 		
-		ArrayList<ArrayList<City>> allcities = XMLWorker.getAllCitiesAsCity();
+/*		ArrayList<ArrayList<City>> allcities = XMLWorker.getAllCitiesAsCity();
 		for (ArrayList<City> cities: allcities)
 		for (City city: cities){
 			System.out.println(city.toString());
-		}
+		}*/
 		
 		/*
 		try {
@@ -545,15 +560,23 @@ public class XMLWorker {
 		for (Mail m: am){
 			System.out.println(m.toString());
 		}		
-
-		ArrayList<Mail> filtered = XMLWorker.getMailBetweenDates(am, "10/05/2013", "09/06/2013");
-
+		*/
+	/*	ArrayList<Mail> mail  = XMLWorker.getMail(new String[]{null,null,null,null,null,null});
+		ArrayList<Parcel> parcels  = XMLWorker.getParcels(new String[]{null,null, null, null,null,null,null});
+		
+		mail = XMLWorker.getMailBetweenDates(mail, "10/05/2013", "09/06/2013");
+		ArrayList<Mail> filtered = XMLWorker.getMailBetweenDates(parcels, "10/05/2013", "09/06/2013");
+		
+		mail.addAll(filtered);
+		
 		System.out.println("\n\n");
-		for (Mail m: filtered){
-			System.out.println(m.toString());
-		}	*/
+		for (Mail m: mail){
+			System.out.println(m.toString() + "\n");
+		}	
 		
-		
+		System.out.println("Total Sales: " + XMLWorker.getTotalSales());
+		System.out.println("Total Sales between : 10/05/2013 and 09/06/2013: " + XMLWorker.getTotalSalesBetweenDate("10/05/2013", "09/06/2013"));
+	*/
 	}
 
 }
