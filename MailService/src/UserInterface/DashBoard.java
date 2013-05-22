@@ -47,18 +47,18 @@ public class DashBoard extends JPanel implements ActionListener{
 
 		columnTitle = new String[] {"Date", "Type", "Destination", "Origin", "Priority", "Price"};
 
-		ArrayList<Mail> mail = XMLWorker.getMail(new String[]{null, null, null, null});
-		ArrayList<Parcel> parcel = XMLWorker.getParcels(new String[] {null, null, null, null, null, null});
+		ArrayList<Mail> mail = XMLWorker.getMail(new String[]{null, null, null, null, null});
+		ArrayList<Parcel> parcel = XMLWorker.getParcels(new String[] {null, null, null, null, null, null, null});
 
 		String[][] datas = new String[mail.size()+parcel.size()][6];
 
 		for(int i=0; i<mail.size(); i++){
 			String[] str = mail.get(i).getData();
-			datas[i] = new String[] {str[0], "Mail", str[1], str[2], getPriority(str[3]), str[4]} ;
+			datas[i] = new String[] {str[0], "Mail", str[1], str[2], str[3], str[4]} ;
 		}
 		for(int i=mail.size(); i<datas.length; i++){
 			String[] str = parcel.get(i-mail.size()).getData();
-			datas[i] = new String[] {str[0], "Parcel", str[1], str[2], getPriority(str[5]), str[6]} ;
+			datas[i] = new String[] {str[0], "Parcel", str[1], str[2], str[5], str[6]} ;
 		}
 
 		numberMailEvents.setText("<html><font face=Verdana color=black size=5>Mail Events</font><br> "
@@ -83,12 +83,13 @@ public class DashBoard extends JPanel implements ActionListener{
 
 		tableScrollPane = new JScrollPane(mailEventsTable);
 
-        CustomButton button = new CustomButton("AddNew_Normal", "AddNew_Pressed", "AddNew_Hover", "");
+        JButton button = new JButton("add new");//("AddNew_Normal", "AddNew_Pressed", "AddNew_Hover", "");
         button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Form f = new Form();
 				f.setSize(600, 670);
+				f.setResizable(false);
 				f.setVisible(true);
 			}
 		});

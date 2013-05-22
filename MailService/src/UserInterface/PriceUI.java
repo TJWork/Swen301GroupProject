@@ -1,6 +1,8 @@
 package UserInterface;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,14 +16,21 @@ public class PriceUI extends JPanel {
 
 	public PriceUI(){
 		setBackground(Color.WHITE);
-		title = new JLabel("DashBoard");
+		title = new JLabel("Price");
 		title.setFont(new Font("Verdana", Font.BOLD, 36));
 		addPrice = new JButton("Add New Price");
 
-
+		addPrice.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		//Setting the columns for price table
 		String[] columnNames = new String[]{"Origin", "Destination", "Priority", "Price per gram", "Price per cm3" };
 
-		
 		
 		
 
@@ -62,5 +71,17 @@ public class PriceUI extends JPanel {
 		add(title);
 		add(addPrice);
 		add(tableScrollPane);
+	}
+	
+	public void addPrice(){
+		JPanel panel = new JPanel();
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 }
