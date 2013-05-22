@@ -20,7 +20,7 @@ public class ManagerGUI extends JPanel implements ActionListener{
 	public ManagerGUI(){
 		priceP = new PriceUI();
 		routesP = new RoutesUI();
-		dashBoard = new DashBoard();
+		dashBoard = new DashBoard("Manager");
 		businessStats = new BusinessStats();
 
 		setLayout(new BorderLayout());

@@ -17,7 +17,7 @@ public class ClerkGUI extends JPanel implements ActionListener{
 	public ClerkGUI(){
 		priceP = new PriceUI();
 		routesP = new RoutesUI();
-		dashBoard = new DashBoard();
+		dashBoard = new DashBoard("Clerk");
 
 		setLayout(new BorderLayout());
 

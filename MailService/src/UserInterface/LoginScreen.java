@@ -18,8 +18,6 @@ public class LoginScreen extends JPanel implements ActionListener{
 
 	private String titlename = "Welcome to KPSmart";
 	private String members= "Ishan, Joshi, Rory, Samantha, Tony";
-	private String actionCommand;
-
 	private JLabel usrName;
 	private JLabel passwrd;
 	private JLabel type;
@@ -43,7 +41,7 @@ public class LoginScreen extends JPanel implements ActionListener{
 		teamMembers.setText(members);
 		teamMembers.setFont(new Font("Verdana", Font.ITALIC, 20));
 
-		cancel = new CustomButton("Cancel_Normal", "Cancel_Pressed", "Cancel_Hover", "cancel");
+		cancel = new CustomButton("ExitIcon_Normal", "ExitIcon_Pressed", "ExitIcon_Hover", "cancel");
 		cancel.addActionListener(this);
 
 		signin = new CustomButton("Confirm_Normal", "Confirm_Pressed", "Confirm_Hover", "signin");
