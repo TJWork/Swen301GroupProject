@@ -17,6 +17,354 @@
 <route>
     <origin>Wellington</origin>
     <destination>Changi</destination>
+    <companyName>Air New Zealand</companyName>
+    <maxWeight>200</maxWeight>
+    <maxVolume>40</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>100</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Auckland</origin>
+    <destination>San Francisco</destination>
+    <companyName>FedEx</companyName>
+    <maxWeight>500</maxWeight>
+    <maxVolume>40</maxVolume>
+    <weightCost>5.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>120</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Palmerston North</origin>
+    <destination>Chicago</destination>
+    <companyName>Air New Zealand</companyName>
+    <maxWeight>10000</maxWeight>
+    <maxVolume>800</maxVolume>
+    <weightCost>17.0</weightCost>
+    <volumeCost>13.0</volumeCost>
+    <mailcost>3.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>240</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
+  </route>
+<route>
+    <origin>Dunedin</origin>
+    <destination>Hastings</destination>
+    <companyName>New Zealand Post</companyName>
+    <maxWeight>10000</maxWeight>
+    <maxVolume>700</maxVolume>
+    <weightCost>12.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>4.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
+  </route>
+<route>
+    <origin>Napier</origin>
+    <destination>New Castle</destination>
+    <companyName>MainFreight</companyName>
+    <maxWeight>5000</maxWeight>
+    <maxVolume>20</maxVolume>
+    <weightCost>8.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>4.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>130</estimatedDeliveryTime>
+    <priority>International Sea</priority>
+  </route>
+<route>
+    <origin>Wellington</origin>
+    <destination>Mumbai</destination>
+    <companyName>New Zealand Post</companyName>
+    <maxWeight>1000</maxWeight>
+    <maxVolume>25</maxVolume>
+    <weightCost>10.0</weightCost>
+    <volumeCost>8.0</volumeCost>
+    <mailcost>5.0</mailcost>
+    <frequency>5</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Hamilton</origin>
+    <destination>Mumbai</destination>
+    <companyName>Air New Zealand</companyName>
+    <maxWeight>5000</maxWeight>
+    <maxVolume>20</maxVolume>
+    <weightCost>8.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>4.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>130</estimatedDeliveryTime>
+    <priority>International Sea</priority>
+  </route>
+<route>
+    <origin>Napier</origin>
+    <destination>Auckland</destination>
+    <companyName>MainFreight</companyName>
+    <maxWeight>1000</maxWeight>
+    <maxVolume>15</maxVolume>
+    <weightCost>9.0</weightCost>
+    <volumeCost>7.0</volumeCost>
+    <mailcost>3.0</mailcost>
+    <frequency>5</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>International Sea</priority>
+</route><route>
+    <origin>Auckland</origin>
+    <destination>Paris</destination>
+    <companyName>Emirates</companyName>
+    <maxWeight>1500</maxWeight>
+    <maxVolume>200</maxVolume>
+    <weightCost>12.0</weightCost>
+    <volumeCost>10.0</volumeCost>
+    <mailcost>6.0</mailcost>
+    <frequency>5</frequency>
+    <estimatedDeliveryTime>140</estimatedDeliveryTime>
+    <priority>International Sea</priority>
+  </route>
+<route>
+    <origin>Wellington</origin>
+    <destination>Chicago</destination>
+    <companyName>Emirates</companyName>
+    <maxWeight>200</maxWeight>
+    <maxVolume>40</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>100</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Christchurch</origin>
+    <destination>San Francisco</destination>
+    <companyName>FedEx</companyName>
+    <maxWeight>500</maxWeight>
+    <maxVolume>40</maxVolume>
+    <weightCost>5.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>120</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Palmerston North</origin>
+    <destination>Dunedin</destination>
+    <companyName>MainFreight</companyName>
+    <maxWeight>10000</maxWeight>
+    <maxVolume>800</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
+  </route>
+<route>
+    <origin>Chrischurch</origin>
+    <destination>Hastings</destination>
+    <companyName>New Zealand Post</companyName>
+    <maxWeight>10000</maxWeight>
+    <maxVolume>700</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
+  </route>
+<route>
+    <origin>Dunedin</origin>
+    <destination>Johannesburg</destination>
+    <companyName>Emirates</companyName>
+    <maxWeight>2000</maxWeight>
+    <maxVolume>80</maxVolume>
+    <weightCost>17.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>4.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>220</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Wellington</origin>
+    <destination>New Delhi</destination>
+    <companyName>New Zealand Post</companyName>
+    <maxWeight>1000</maxWeight>
+    <maxVolume>250</maxVolume>
+    <weightCost>12.0</weightCost>
+    <volumeCost>10.0</volumeCost>
+    <mailcost>5.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>26</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Hamilton</origin>
+    <destination>New Delhi</destination>
+    <companyName>Air New Zealand</companyName>
+    <maxWeight>5000</maxWeight>
+    <maxVolume>20</maxVolume>
+    <weightCost>8.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>4.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>130</estimatedDeliveryTime>
+    <priority>International Sea</priority>
+  </route>
+<route>
+    <origin>Dunedin</origin>
+    <destination>Auckland</destination>
+    <companyName>MainFreight</companyName>
+    <maxWeight>1000</maxWeight>
+    <maxVolume>15</maxVolume>
+    <weightCost>9.0</weightCost>
+    <volumeCost>7.0</volumeCost>
+    <mailcost>3.0</mailcost>
+    <frequency>5</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>International Sea</priority>
+  </route><route>
+    <origin>Wellington</origin>
+    <destination>Changi</destination>
+    <companyName>Singapore Air</companyName>
+    <maxWeight>2000</maxWeight>
+    <maxVolume>40</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>100</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Christchurch</origin>
+    <destination>Changi</destination>
+    <companyName>Singapore Air</companyName>
+    <maxWeight>200</maxWeight>
+    <maxVolume>40</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>100</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Dunedin</origin>
+    <destination>New York</destination>
+    <companyName>FedEx</companyName>
+    <maxWeight>500</maxWeight>
+    <maxVolume>40</maxVolume>
+    <weightCost>5.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>120</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Palmerston North</origin>
+    <destination>Dunedin</destination>
+    <companyName>MainFreight</companyName>
+    <maxWeight>10000</maxWeight>
+    <maxVolume>800</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
+  </route>
+<route>
+    <origin>Chrischurch</origin>
+    <destination>Hastings</destination>
+    <companyName>New Zealand Post</companyName>
+    <maxWeight>10000</maxWeight>
+    <maxVolume>700</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
+  </route>
+<route>
+    <origin>Napier</origin>
+    <destination>New Castle</destination>
+    <companyName>MainFreight</companyName>
+    <maxWeight>5000</maxWeight>
+    <maxVolume>20</maxVolume>
+    <weightCost>8.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>4.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>130</estimatedDeliveryTime>
+    <priority>International Sea</priority>
+  </route>
+<route>
+    <origin>Wellington </origin>
+    <destination>Mumbai</destination>
+    <companyName>New Zealand Post</companyName>
+    <maxWeight>1000</maxWeight>
+    <maxVolume>25</maxVolume>
+    <weightCost>10.0</weightCost>
+    <volumeCost>8.0</volumeCost>
+    <mailcost>5.0</mailcost>
+    <frequency>5</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Hamilton</origin>
+    <destination>Mumbai</destination>
+    <companyName>Air New Zealand</companyName>
+    <maxWeight>5000</maxWeight>
+    <maxVolume>20</maxVolume>
+    <weightCost>8.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>4.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>130</estimatedDeliveryTime>
+    <priority>International Sea</priority>
+  </route>
+<route>
+    <origin>Napier</origin>
+    <destination>Auckland</destination>
+    <companyName>MainFreight</companyName>
+    <maxWeight>1000</maxWeight>
+    <maxVolume>15</maxVolume>
+    <weightCost>9.0</weightCost>
+    <volumeCost>7.0</volumeCost>
+    <mailcost>3.0</mailcost>
+    <frequency>5</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>International Sea</priority>
+  </route><route>
+    <origin>Dunedin</origin>
+    <destination>Changi</destination>
+    <companyName>Singapore Air</companyName>
+    <maxWeight>2000</maxWeight>
+    <maxVolume>40</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>100</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Wellington</origin>
+    <destination>Johannesburg</destination>
     <companyName>Singapore Air</companyName>
     <maxWeight>200</maxWeight>
     <maxVolume>40</maxVolume>
@@ -68,15 +416,54 @@
   </route>
 <route>
     <origin>Napier</origin>
-    <destination>New Castle</destination>
-    <companyName>MainFreight</companyName>
+    <destination>Paris</destination>
+    <companyName>Emirates</companyName>
     <maxWeight>5000</maxWeight>
+    <maxVolume>200</maxVolume>
+    <weightCost>12.0</weightCost>
+    <volumeCost>10.0</volumeCost>
+    <mailcost>6.0</mailcost>
+    <frequency>1</frequency>
+    <estimatedDeliveryTime>200</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Wellington </origin>
+    <destination>Mumbai</destination>
+    <companyName>FedEx</companyName>
+    <maxWeight>1000</maxWeight>
+    <maxVolume>25</maxVolume>
+    <weightCost>10.0</weightCost>
+    <volumeCost>8.0</volumeCost>
+    <mailcost>5.0</mailcost>
+    <frequency>5</frequency>
+    <estimatedDeliveryTime>240</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Hamilton</origin>
+    <destination>Auckland</destination>
+    <companyName>Air New Zealand</companyName>
+    <maxWeight>1000</maxWeight>
     <maxVolume>20</maxVolume>
-    <weightCost>8.0</weightCost>
-    <volumeCost>6.0</volumeCost>
+    <weightCost>7.0</weightCost>
+    <volumeCost>5.0</volumeCost>
     <mailcost>4.0</mailcost>
     <frequency>3</frequency>
-    <estimatedDeliveryTime>130</estimatedDeliveryTime>
-    <priority>International Sea</priority>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
+  </route>
+<route>
+    <origin>Christchurch</origin>
+    <destination>Auckland</destination>
+    <companyName>FedEx</companyName>
+    <maxWeight>800</maxWeight>
+    <maxVolume>100</maxVolume>
+    <weightCost>9.0</weightCost>
+    <volumeCost>5.0</volumeCost>
+    <mailcost>4.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>Domestic Standard</priority>
   </route>
 </routes>
