@@ -54,11 +54,11 @@ public class DashBoard extends JPanel implements ActionListener{
 
 		for(int i=0; i<mail.size(); i++){
 			String[] str = mail.get(i).getData();
-			datas[i] = new String[] {str[0], "Mail", str[1], str[2], str[3], str[4]} ;
+			datas[i] = new String[] {str[0], "Mail", str[1], str[2], getPriority(str[4]), str[3]} ;
 		}
 		for(int i=mail.size(); i<datas.length; i++){
 			String[] str = parcel.get(i-mail.size()).getData();
-			datas[i] = new String[] {str[0], "Parcel", str[1], str[2], str[5], str[6]} ;
+			datas[i] = new String[] {str[0], "Parcel", str[1], str[2], getPriority(str[6]), str[5]} ;
 		}
 
 		numberMailEvents.setText("<html><font face=Verdana color=black size=5>Mail Events</font><br> "

@@ -60,7 +60,7 @@ public class ManagerGUI extends JPanel implements ActionListener{
 		
 		CustomButton dash = new CustomButton("DashBoard", "db");
 		dash.addActionListener(this);
-		CustomButton bss = new CustomButton("Business Satistics", "bss");
+		CustomButton bss = new CustomButton("Business Statistics", "bss");
 		bss.addActionListener(this);
 		CustomButton route = new CustomButton("Route", "route");
 		route.addActionListener(this);
