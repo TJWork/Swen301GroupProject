@@ -5,7 +5,8 @@ public class Route {
 	private String origin;
 	private String destination;
 	private String company;
-	private int maxWeight;
+	private String priority;
+	private int maxWeight; //Maximum weight
 	private int maxVolume; //Maximum volume
 	private double weightCost;//Cost modifier for weight
 	private double volumeCost;//Cost modifier for Volume
@@ -15,7 +16,7 @@ public class Route {
 
 	public Route(String origin, String destination, String company,
 			int maxWeight, int maxVolume, double weightCost, double volumeCost, double mailCost,
-			int frequency, int estimatedDeliveryTime)  {
+			int frequency, int estimatedDeliveryTime, String priority)  {
 		this.origin = origin;
 		this.destination = destination;
 		this.company = company;
@@ -25,6 +26,7 @@ public class Route {
 		this.volumeCost = volumeCost;
 		this.mailCost = mailCost;
 		this.frequency = frequency;
+		this.priority = priority;
 		this.estimatedDeliveryTime = estimatedDeliveryTime;
 	}
 
@@ -38,6 +40,10 @@ public class Route {
 
 	public String getCompany() {
 		return company;
+	}
+
+	public String getPriority(){
+		return priority;
 	}
 
 	public int getMaxWeight() {
