@@ -5,11 +5,10 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import java.util.*;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.*;
 
+import javax.swing.event.*;
 import service.*;
 import file.XMLWorker;
 
@@ -23,45 +22,45 @@ public class Form extends JDialog implements ActionListener{
 
 	private BufferedImage image;
 
-	private JPanel panel;
+	private final JPanel panel;
 
-	private JLabel customerName;
-	private JTextField customerField;
-	private JLabel customerWarning;
+	private final JLabel customerName;
+	private final JTextField customerField;
+	private final JLabel customerWarning;
 
-	private JLabel type;
-	private JSpinner typeField;
-	private JLabel typeWarning;
+	private final JLabel type;
+	private final JSpinner typeField;
+	private final JLabel typeWarning;
 
-	private JLabel priority;
-	private JComboBox priorityField;
-	private JLabel priorityWarning;
+	private final JLabel priority;
+	private final JComboBox priorityField;
+	private final JLabel priorityWarning;
 
-	private JLabel originCity;
-	private JComboBox originCityField;
-	private JLabel originCityWarning;
+	private final JLabel originCity;
+	private final JComboBox originCityField;
+	private final JLabel originCityWarning;
 
-	private JLabel destination;
-	private JComboBox destinationField;
-	private JLabel destinationWarning;
+	private final JLabel destination;
+	private final JComboBox destinationField;
+	private final JLabel destinationWarning;
 
-	private JPanel cardPanel;
-	private JLabel weight;
-	private JLabel weightLabel;
-	private JTextField weightField;
-	private JLabel volume;
-	private JTextField volumeField;
-	private JLabel volumeLabel;
+	private final JPanel cardPanel;
+	private final JLabel weight;
+	private final JLabel weightLabel;
+	private final JTextField weightField;
+	private final JLabel volume;
+	private final JTextField volumeField;
+	private final JLabel volumeLabel;
 
-	private JLabel price;
-	private JLabel title;
+	private final JLabel price;
+	private final JLabel title;
 
 	private String[] inputValues;
 
 	public Form(){
 		setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-		
-		
+
+
 		try {
 			image = ImageIO.read(new File("Images/BG.jpg"));
 
@@ -91,9 +90,9 @@ public class Form extends JDialog implements ActionListener{
 				}
 
 				else {
-					if(isDigit(weightField.getText()) == false)
+					if(isDigit(weightField.getText()) == false) {
 						weightLabel.setText("*Please input numbers");
-					else {weightLabel.setText("");}
+					} else {weightLabel.setText("");}
 				}
 			}
 
@@ -116,9 +115,9 @@ public class Form extends JDialog implements ActionListener{
 					volumeLabel.setText("*Please input volume");
 				}
 				else {
-					if(isDigit(volumeField.getText()) == false)
+					if(isDigit(volumeField.getText()) == false) {
 						volumeLabel.setText("*Please input numbers");
-					else {volumeLabel.setText("");}
+					} else {volumeLabel.setText("");}
 				}				
 			}
 
@@ -240,8 +239,12 @@ public class Form extends JDialog implements ActionListener{
 					destinationField.removeAllItems();
 					ArrayList<String> city = XMLWorker.getCitiesFromCountry("New Zealand");
 
-					for(String s: city)
+					// sort the city list in alphabetical order
+					Collections.sort(city);
+
+					for(String s: city) {
 						destinationField.addItem(s);
+					}
 					destinationField.setSelectedIndex(-1);
 				}
 			}
@@ -267,7 +270,12 @@ public class Form extends JDialog implements ActionListener{
 
 		originCity = new JLabel("Origin Address");
 		originCity.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-		originCityField = new JComboBox(XMLWorker.getCitiesFromCountry("New Zealand").toArray());
+		ArrayList<String> city = XMLWorker.getCitiesFromCountry("New Zealand");
+
+		// sort the city list in alphabetical order
+		Collections.sort(city);
+
+		originCityField = new JComboBox(city.toArray());
 		originCityField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		originCityField.setBackground(Color.WHITE);
 		originCityField.setSelectedIndex(-1);
@@ -319,6 +327,7 @@ public class Form extends JDialog implements ActionListener{
 		/*=========================== Form Layout ==================================*/
 
 		panel = new JPanel(){
+			@Override
 			public void paintComponent(Graphics g) {
 				g.drawImage(image, 0, 0, getParent().getWidth(), getParent().getHeight(), this);
 			}
@@ -454,10 +463,10 @@ public class Form extends JDialog implements ActionListener{
 	public void allFieldsValue(){
 		Route r;
 		if(checkFields("Mail")==true){
-			
+
 		}
-		
-		
+
+
 		price.setText("");
 	}
 
@@ -465,18 +474,29 @@ public class Form extends JDialog implements ActionListener{
 	 * Helper method to populate the JComboBox for countries
 	 */
 	private void populateCountries(){
-		ArrayList<String> countries = XMLWorker.loadCountries();
-		// Get all cities in order of country
-		ArrayList<ArrayList<String>> allCities = XMLWorker.getAllCities();
-
-		for (int i = 0; i < allCities.size(); i++){
-			destinationField.addItem(countries.get(i));
-
-			for (String city: allCities.get(i)){
-				destinationField.addItem("  " + city);
-
+//		ArrayList<String> countries = XMLWorker.loadCountries();
+//		// Get all cities in order of country
+//		ArrayList<ArrayList<String>> allCities = XMLWorker.getAllCities();
+//
+//		for (int i = 0; i < allCities.size(); i++){
+//			destinationField.addItem(countries.get(i));
+//
+//			for (String city: allCities.get(i)){
+//				destinationField.addItem("  " + city);
+//
+//			}
+//		}
+		
+		ArrayList<Route> routes = XMLWorker.getRoutes();
+		for(Route r: routes ){
+			if(r.getOrigin().equals(originCityField.getSelectedItem().toString().trim())){
+				destinationField.addItem(r.getDestination());
+				
 			}
+			
+			
 		}
+		
 	}
 
 	/**
@@ -499,11 +519,12 @@ public class Form extends JDialog implements ActionListener{
 		}
 		else if(mailType.equals("Mail") && (!customerField.getText().equals("")) && (destinationField.getSelectedIndex()>-1) && (originCityField.getSelectedIndex()>-1) ){
 			return true;
+		} else {
+			return false;
 		}
-		else return false;
 
 	}
-	
+
 	private void notifyPrice(){
 		if((!customerField.getText().equals("")) && (isDigit(volumeField.getText()) == true) && (isDigit(weightField.getText()) == true) && (typeField.getValue().toString().equals("Parcel")) && destinationField.getSelectedIndex()>-1){
 			;
@@ -520,16 +541,63 @@ public class Form extends JDialog implements ActionListener{
 		if(e.getActionCommand().equals("submit")){
 			if(checkFields("Parcel")==true || checkFields("Mail")== true){
 
-				System.out.println("success?");
-				dispose();
+				if(checkFields("Parcel")==true || checkFields("Mail")== true){
+					if(typeField.getValue().toString().equals("Parcel")){
+
+						Parcel p = new Parcel(KPSUserInterface.clock.getCurrentDate(),
+								destinationField.getSelectedItem().toString().trim(), 
+								originCityField.getSelectedItem().toString().trim(), 
+								weightField.getText(), 
+								volumeField.getText(), 
+								0, (priorityField.getSelectedIndex()+1));
+
+						int result = JOptionPane.showConfirmDialog(panel, "Confirm customer details?", "Confirm", JOptionPane.YES_NO_OPTION);;
+
+
+						if(result == JOptionPane.YES_OPTION){
+							ClerkGUI.dashBoard.addItem("Parcel", p.getData());
+							XMLWorker.addMail(p);
+							dispose();
+						}
+
+					}
+
+					else if(typeField.getValue().toString().equals("Mail")){
+						Mail m = new Mail(KPSUserInterface.clock.getCurrentDate(),
+								destinationField.getSelectedItem().toString().trim(), 
+								originCityField.getSelectedItem().toString().trim(), 
+								0, (priorityField.getSelectedIndex()+1));
+
+						int result = JOptionPane.showConfirmDialog(panel, "Confirm customer details?", "Confirm", JOptionPane.YES_NO_OPTION);;
+
+						if(result == JOptionPane.YES_OPTION){
+							ClerkGUI.dashBoard.addItem("Mail", m.getData());
+							XMLWorker.addMail(m);
+							dispose();
+						}
+					}
+
+				}
 			}
 			else{
-				if(customerField.getText().equals("")) customerWarning.setText("*Plese input customer name");
-				if(destinationField.getSelectedIndex()==-1) destinationWarning.setText("*Please select a destination");
-				if(originCityField.getSelectedIndex()==-1) originCityWarning.setText("*Please select origin");
-				if(priorityField.getSelectedIndex()==-1) priorityWarning.setText("*Please select a priority");
-				if(typeField.getValue().equals("Parcel") && weightField.getText().equals("")) weightLabel.setText("*Please input weight");
-				if(typeField.getValue().equals("Parcel") && volumeField.getText().equals("")) volumeLabel.setText("*Please input numbers");
+				if(customerField.getText().equals("")) {
+					customerWarning.setText("*Please input customer name");
+				}
+				if(destinationField.getSelectedIndex()==-1) {
+					destinationWarning.setText("*Please select a destination");
+				}
+				if(originCityField.getSelectedIndex()==-1) {
+					originCityWarning.setText("*Please select origin");
+				}
+				if(priorityField.getSelectedIndex()==-1) {
+					priorityWarning.setText("*Please select a priority");
+				}
+				if(typeField.getValue().equals("Parcel") && weightField.getText().equals("")) {
+					weightLabel.setText("*Please input weight");
+				}
+				if(typeField.getValue().equals("Parcel") && volumeField.getText().equals("")) {
+					volumeLabel.setText("*Please input numbers");
+				}
 
 			}
 

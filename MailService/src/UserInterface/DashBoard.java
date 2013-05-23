@@ -66,10 +66,11 @@ public class DashBoard extends JPanel implements ActionListener{
 
 		mailEventsTable = new JTable(new DefaultTableModel(datas,columnTitle));
 		mailEventsTable.setFont(new Font("Verdana", Font.PLAIN, 14));
-		mailEventsTable.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 16));
+		mailEventsTable.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 14));
 		mailEventsTable.getTableHeader().setResizingAllowed(false);
 		mailEventsTable.getTableHeader().setReorderingAllowed(false);
-		mailEventsTable.setEnabled(false);
+		mailEventsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		mailEventsTable.setEnabled(true);
 
 		mailEventsTable.setRowHeight(30);
 
@@ -88,7 +89,7 @@ public class DashBoard extends JPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Form f = new Form();
-				f.setSize(600, 670);
+				f.setSize(600, 680);
 				f.setResizable(false);
 				f.setVisible(true);
 			}
@@ -137,13 +138,14 @@ public class DashBoard extends JPanel implements ActionListener{
 
 	}
 
-	public void addItem(String type, String[] data){
+	public void addItem(String type, String[] str){
 		DefaultTableModel tm = (DefaultTableModel) mailEventsTable.getModel();
 		String[] temp ;
 		if(type.equals("Parcel"))
-			temp = new String[] {data[0], "Parcel", data[1], data[2], getPriority(data[5]), data[6]} ;
+			//"Date", "Type", "Destination", "Origin", "Priority", "Price"
+			temp = new String[] {str[0], "Parcel", str[1], str[2], getPriority(str[6]), str[5]} ;
 
-		else temp = new String[] {data[0], "Mail", data[1], data[2], getPriority(data[3]), data[4]} ;
+		else temp =  new String[] {str[0], "Mail", str[1], str[2], getPriority(str[4]), str[3]} ;
 
 		tm.addRow(temp);
 		JTable newTable = new JTable(tm);
