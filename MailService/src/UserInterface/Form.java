@@ -1,36 +1,15 @@
 package UserInterface;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dialog;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.*;
+import java.io.*;
+import java.util.*;
 import javax.imageio.ImageIO;
-import javax.swing.GroupLayout;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
-import javax.swing.SpinnerListModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.swing.*;
 
-import service.Route;
+import javax.swing.event.*;
+import service.*;
 import file.XMLWorker;
 
 /**
@@ -295,7 +274,7 @@ public class Form extends JDialog implements ActionListener{
 
 		// sort the city list in alphabetical order
 		Collections.sort(city);
-		
+
 		originCityField = new JComboBox(city.toArray());
 		originCityField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		originCityField.setBackground(Color.WHITE);
@@ -551,8 +530,43 @@ public class Form extends JDialog implements ActionListener{
 		if(e.getActionCommand().equals("submit")){
 			if(checkFields("Parcel")==true || checkFields("Mail")== true){
 
-				System.out.println("success?");
-				dispose();
+				if(checkFields("Parcel")==true || checkFields("Mail")== true){
+					if(typeField.getValue().toString().equals("Parcel")){
+
+						Parcel p = new Parcel(KPSUserInterface.clock.getCurrentDate(),
+								destinationField.getSelectedItem().toString().trim(), 
+								originCityField.getSelectedItem().toString().trim(), 
+								weightField.getText(), 
+								volumeField.getText(), 
+								0, (priorityField.getSelectedIndex()+1));
+
+						int result = JOptionPane.showConfirmDialog(panel, "Confirm?");
+
+
+						if(result == JOptionPane.YES_OPTION){
+							ClerkGUI.dashBoard.addItem("Parcel", p.getData());
+							XMLWorker.addMail(p);
+							dispose();
+						}
+
+					}
+
+					else if(typeField.getValue().toString().equals("Mail")){
+						Mail m = new Mail(KPSUserInterface.clock.getCurrentDate(),
+								destinationField.getSelectedItem().toString().trim(), 
+								originCityField.getSelectedItem().toString().trim(), 
+								0, (priorityField.getSelectedIndex()+1));
+
+						int result = JOptionPane.showConfirmDialog(panel, "Confirm?");
+
+						if(result == JOptionPane.YES_OPTION){
+							ClerkGUI.dashBoard.addItem("Mail", m.getData());
+							XMLWorker.addMail(m);
+							dispose();
+						}
+					}
+
+				}
 			}
 			else{
 				if(customerField.getText().equals("")) {
