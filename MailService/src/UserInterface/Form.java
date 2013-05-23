@@ -474,18 +474,29 @@ public class Form extends JDialog implements ActionListener{
 	 * Helper method to populate the JComboBox for countries
 	 */
 	private void populateCountries(){
-		ArrayList<String> countries = XMLWorker.loadCountries();
-		// Get all cities in order of country
-		ArrayList<ArrayList<String>> allCities = XMLWorker.getAllCities();
-
-		for (int i = 0; i < allCities.size(); i++){
-			destinationField.addItem(countries.get(i));
-
-			for (String city: allCities.get(i)){
-				destinationField.addItem("  " + city);
-
+//		ArrayList<String> countries = XMLWorker.loadCountries();
+//		// Get all cities in order of country
+//		ArrayList<ArrayList<String>> allCities = XMLWorker.getAllCities();
+//
+//		for (int i = 0; i < allCities.size(); i++){
+//			destinationField.addItem(countries.get(i));
+//
+//			for (String city: allCities.get(i)){
+//				destinationField.addItem("  " + city);
+//
+//			}
+//		}
+		
+		ArrayList<Route> routes = XMLWorker.getRoutes();
+		for(Route r: routes ){
+			if(r.getOrigin().equals(originCityField.getSelectedItem().toString().trim())){
+				destinationField.addItem(r.getDestination());
+				
 			}
+			
+			
 		}
+		
 	}
 
 	/**
