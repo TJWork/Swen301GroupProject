@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<routes>
+
+<route>
+    <origin>a</origin>
+    <destination>b</destination>
+    <companyName>c</companyName>
+    <maxWeight>200</maxWeight>
+    <maxVolume>400</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>4</estimatedDeliveryTime>
+    <priority>Air</priority>
+  </route>
+<route>
+    <origin>f</origin>
+    <destination>asdf</destination>
+    <companyName>c</companyName>
+    <maxWeight>200</maxWeight>
+    <maxVolume>400</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>4</estimatedDeliveryTime>
+    <priority>Air</priority>
+  </route>
+<route>
+    <origin>h</origin>
+    <destination>bfds</destination>
+    <companyName>c</companyName>
+    <maxWeight>200</maxWeight>
+    <maxVolume>400</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>4</estimatedDeliveryTime>
+    <priority>Air</priority>
+  </route>
+<route>
+    <origin>re</origin>
+    <destination>uyte</destination>
+    <companyName>c</companyName>
+    <maxWeight>200</maxWeight>
+    <maxVolume>400</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>4</estimatedDeliveryTime>
+    <priority>Air</priority>
+  </route>
+<route>
+    <origin>tre</origin>
+    <destination>234</destination>
+    <companyName>c</companyName>
+    <maxWeight>200</maxWeight>
+    <maxVolume>400</maxVolume>
+    <weightCost>2.0</weightCost>
+    <volumeCost>4.0</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>4</estimatedDeliveryTime>
+    <priority>Air</priority>
+  </route>
+</routes>
