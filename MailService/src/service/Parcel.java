@@ -14,6 +14,13 @@ public class Parcel extends Mail{
 		this.weight = weight;
 		this.volume = volume;
 	}
+	
+	public Parcel(String day, String toAddress, String from, String weight, String volume, double cost, int priority) {
+		super(day, toAddress, from, cost, priority);
+		this.weight = weight;
+		this.volume = volume;
+	}
+
 
 	public double getWeight() {
 		return Double.parseDouble(weight);
