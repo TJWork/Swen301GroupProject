@@ -389,4 +389,50 @@
     <priority>2.0</priority>
     <cost>2</cost>
   </parcel>
+<mail>
+    <day>23/05/2013</day>
+    <to>Christchurch</to>
+    <from>Auckland</from>
+    <cost>0.0</cost>
+    <priority>3.0</priority>
+  </mail>
+<mail>
+    <day>23/05/2013</day>
+    <to>Ashburton</to>
+    <from>Auckland</from>
+    <cost>0.0</cost>
+    <priority>3.0</priority>
+  </mail>
+<mail>
+    <day>23/05/2013</day>
+    <to>Ashburton</to>
+    <from>Auckland</from>
+    <cost>0.0</cost>
+    <priority>3.0</priority>
+  </mail>
+<mail>
+    <day>23/05/2013</day>
+    <to>Ashburton</to>
+    <from>Alexandra</from>
+    <cost>0.0</cost>
+    <priority>3.0</priority>
+  </mail>
+<parcel>
+    <day>23/05/2013</day>
+    <to>Herat</to>
+    <from>Ashburton</from>
+    <weight>12</weight>
+    <volume>32</volume>
+    <cost>0.0</cost>
+    <priority>2.0</priority>
+  </parcel>
+<parcel>
+    <day>23/05/2013</day>
+    <to>Alexandra</to>
+    <from>Blenheim</from>
+    <weight>123</weight>
+    <volume>123</volume>
+    <cost>0.0</cost>
+    <priority>3.0</priority>
+  </parcel>
 </mailevents>

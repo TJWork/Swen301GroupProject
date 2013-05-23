@@ -36,7 +36,14 @@ public class RoutesUI extends JPanel {
 
 		columnTitle = new String[]{"Origin", "Destination", "Carrier Company", "Priority", "Price / gram", "Price / cm3" };
 
-		routesTable = new JTable(new DefaultTableModel(null, columnTitle));
+		ArrayList<Route> routes = XMLWorker.getAllRoutes();
+		String[][] datas = new String[routes.size()][6]; 
+		for(int i=0; i<routes.size(); i++){
+			datas[i] = new String[] {routes.get(i).getOrigin(), routes.get(i).getDestination(), routes.get(i).getCompany(),
+					routes.get(i).getPriority(), "" + routes.get(i).getWeightCost(), "" + routes.get(i).getVolumeCost()};
+		}
+		
+		routesTable = new JTable(new DefaultTableModel(datas, columnTitle));
 		tableScrollPane = new JScrollPane(routesTable);
 
 		routesTable.setFont(new Font("Verdana", Font.PLAIN, 14));
@@ -685,6 +692,7 @@ public class RoutesUI extends JPanel {
 		tm.addRow(temp);
 		JTable newTable = new JTable(tm);
 		routesTable = newTable;
+		XMLWorker.addRoute(r);
 		
 	}
 }

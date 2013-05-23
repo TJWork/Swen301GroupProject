@@ -487,16 +487,13 @@ public class Form extends JDialog implements ActionListener{
 //			}
 //		}
 		
-		ArrayList<Route> routes = XMLWorker.getRoutes();
+		ArrayList<Route> routes = XMLWorker.getAllRoutes();
 		for(Route r: routes ){
 			if(r.getOrigin().equals(originCityField.getSelectedItem().toString().trim())){
 				destinationField.addItem(r.getDestination());
 				
 			}
-			
-			
 		}
-		
 	}
 
 	/**

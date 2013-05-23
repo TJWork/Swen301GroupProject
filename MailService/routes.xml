@@ -2,68 +2,81 @@
 <routes>
 
 <route>
-    <origin>a</origin>
-    <destination>b</destination>
-    <companyName>c</companyName>
-    <maxWeight>200</maxWeight>
-    <maxVolume>400</maxVolume>
+    <origin>Auckland</origin>
+    <destination>Changi</destination>
+    <companyName>Singapore Air</companyName>
+    <maxWeight>2000</maxWeight>
+    <maxVolume>40</maxVolume>
     <weightCost>2.0</weightCost>
     <volumeCost>4.0</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
-    <estimatedDeliveryTime>4</estimatedDeliveryTime>
-    <priority>Air</priority>
+    <estimatedDeliveryTime>100</estimatedDeliveryTime>
+    <priority>International Air</priority>
   </route>
 <route>
-    <origin>f</origin>
-    <destination>asdf</destination>
-    <companyName>c</companyName>
+    <origin>Wellington</origin>
+    <destination>Changi</destination>
+    <companyName>Singapore Air</companyName>
     <maxWeight>200</maxWeight>
-    <maxVolume>400</maxVolume>
+    <maxVolume>40</maxVolume>
     <weightCost>2.0</weightCost>
     <volumeCost>4.0</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
-    <estimatedDeliveryTime>4</estimatedDeliveryTime>
-    <priority>Air</priority>
+    <estimatedDeliveryTime>100</estimatedDeliveryTime>
+    <priority>International Air</priority>
   </route>
 <route>
-    <origin>h</origin>
-    <destination>bfds</destination>
-    <companyName>c</companyName>
-    <maxWeight>200</maxWeight>
-    <maxVolume>400</maxVolume>
-    <weightCost>2.0</weightCost>
-    <volumeCost>4.0</volumeCost>
+    <origin>Auckland</origin>
+    <destination>New York</destination>
+    <companyName>FedEx</companyName>
+    <maxWeight>500</maxWeight>
+    <maxVolume>40</maxVolume>
+    <weightCost>5.0</weightCost>
+    <volumeCost>6.0</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
-    <estimatedDeliveryTime>4</estimatedDeliveryTime>
-    <priority>Air</priority>
+    <estimatedDeliveryTime>120</estimatedDeliveryTime>
+    <priority>International Air</priority>
   </route>
 <route>
-    <origin>re</origin>
-    <destination>uyte</destination>
-    <companyName>c</companyName>
-    <maxWeight>200</maxWeight>
-    <maxVolume>400</maxVolume>
+    <origin>Palmerston North</origin>
+    <destination>Dunedin</destination>
+    <companyName>MainFreight</companyName>
+    <maxWeight>10000</maxWeight>
+    <maxVolume>800</maxVolume>
     <weightCost>2.0</weightCost>
     <volumeCost>4.0</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
-    <estimatedDeliveryTime>4</estimatedDeliveryTime>
-    <priority>Air</priority>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
   </route>
 <route>
-    <origin>tre</origin>
-    <destination>234</destination>
-    <companyName>c</companyName>
-    <maxWeight>200</maxWeight>
-    <maxVolume>400</maxVolume>
+    <origin>Chrischurch</origin>
+    <destination>Hastings</destination>
+    <companyName>New Zealand Post</companyName>
+    <maxWeight>10000</maxWeight>
+    <maxVolume>700</maxVolume>
     <weightCost>2.0</weightCost>
     <volumeCost>4.0</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
-    <estimatedDeliveryTime>4</estimatedDeliveryTime>
-    <priority>Air</priority>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
+  </route>
+<route>
+    <origin>Napier</origin>
+    <destination>New Castle</destination>
+    <companyName>MainFreight</companyName>
+    <maxWeight>5000</maxWeight>
+    <maxVolume>20</maxVolume>
+    <weightCost>8.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>4.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>130</estimatedDeliveryTime>
+    <priority>International Sea</priority>
   </route>
 </routes>
