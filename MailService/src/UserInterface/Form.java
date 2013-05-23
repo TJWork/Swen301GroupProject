@@ -56,8 +56,12 @@ public class Form extends JDialog implements ActionListener{
 	private JLabel price;
 	private JLabel title;
 
-	public Form(){
+	private String[] inputValues;
 
+	public Form(){
+		setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+		
+		
 		try {
 			image = ImageIO.read(new File("Images/BG.jpg"));
 
@@ -70,7 +74,6 @@ public class Form extends JDialog implements ActionListener{
 		price = new JLabel("<html><font face=Verdana size=5>Price: </font></html>");
 		price.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		price.enableInputMethods(true);
-
 
 		/*=========================== Parcel Mail Field ==================================*/
 
@@ -144,7 +147,7 @@ public class Form extends JDialog implements ActionListener{
 		cardLayout.setHorizontalGroup(
 				cardLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(cardLayout.createSequentialGroup()
-						.addGap(10, 10, 10)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(cardLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addComponent(volume)
 								.addComponent(weight))
@@ -152,16 +155,16 @@ public class Form extends JDialog implements ActionListener{
 								.addGroup(cardLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 										.addComponent(weightField, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
 										.addComponent(volumeField))
-										.addGap(40, 40, 40)
-										.addGroup(cardLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-												.addComponent(weightLabel)
-												.addComponent(volumeLabel))
-												.addContainerGap(50, Short.MAX_VALUE))
+										.addGap(18, 18, 18)
+										.addGroup(cardLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+												.addComponent(weightLabel, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+												.addComponent(volumeLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+												.addContainerGap())
 				);
 		cardLayout.setVerticalGroup(
 				cardLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(cardLayout.createSequentialGroup()
-						.addGap(20, 20, 20)
+						.addGap(0, 0, 0)
 						.addGroup(cardLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(weight)
 								.addComponent(weightField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -171,7 +174,7 @@ public class Form extends JDialog implements ActionListener{
 										.addComponent(volume)
 										.addComponent(volumeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(volumeLabel))
-										.addContainerGap(40, Short.MAX_VALUE))
+										.addContainerGap(20, Short.MAX_VALUE))
 				);
 
 
@@ -229,8 +232,8 @@ public class Form extends JDialog implements ActionListener{
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getItem().toString().equals("International Sea") || e.getItem().toString().equals("International Air")){
-					//					destinationField.removeAllItems();
-					//					populateCountries();
+					destinationField.removeAllItems();
+					populateCountries();
 					destinationField.setSelectedIndex(-1);
 				}
 				else{
@@ -288,7 +291,6 @@ public class Form extends JDialog implements ActionListener{
 		destination = new JLabel("Destination Address");
 		destination.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		destinationField = new JComboBox();
-		populateCountries();
 		destinationField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 		destinationField.setBackground(Color.WHITE);
 		destinationField.setSelectedIndex(-1);
@@ -326,107 +328,116 @@ public class Form extends JDialog implements ActionListener{
 		panel.setLayout(layout);
 
 		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
-						.addContainerGap(62, Short.MAX_VALUE)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addContainerGap(25, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addComponent(title)
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+										.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
 												.addComponent(customerName)
 												.addGap(10, 10, 10)
-												.addComponent(customerField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(customerField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 												.addGap(10, 10, 10)
-												.addComponent(customerWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-												.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+												.addComponent(customerWarning, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+												.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
 														.addComponent(type)
 														.addGap(10, 10, 10)
-														.addComponent(typeField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addComponent(typeField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 														.addGap(10, 10, 10)
-														.addComponent(typeWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-														.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-																.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+														.addComponent(typeWarning, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+														.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+																.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 																		.addGroup(layout.createSequentialGroup()
 																				.addComponent(priority)
 																				.addGap(10, 10, 10)
-																				.addComponent(priorityField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+																				.addComponent(priorityField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
 																				.addGroup(layout.createSequentialGroup()
 																						.addComponent(originCity)
-																						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																						.addComponent(originCityField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+																						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+																						.addComponent(originCityField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)))
 																						.addGap(10, 10, 10)
-																						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-																								.addComponent(originCityWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																								.addComponent(priorityWarning, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
-																								.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-																										.addGroup(layout.createSequentialGroup()
-																												.addComponent(cardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-																												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																												.addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+																						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+																								.addComponent(originCityWarning, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																								.addComponent(priorityWarning, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+																								.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+																										.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 																												.addGroup(layout.createSequentialGroup()
 																														.addComponent(destination)
 																														.addGap(10, 10, 10)
-																														.addComponent(destinationField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+																														.addComponent(destinationField, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 																														.addGap(10, 10, 10)
-																														.addComponent(destinationWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-																														.addContainerGap(62, Short.MAX_VALUE))
-																														.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-																																.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																																.addComponent(submit)
-																																.addGap(30, 30, 30)
-																																.addComponent(cancel)
-																																.addGap(60, 60, 60))
+																														.addComponent(destinationWarning, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+																														.addGroup(layout.createSequentialGroup()
+																																.addGap(9, 9, 9)
+																																.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+																																		.addComponent(cardPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																																		.addGroup(layout.createSequentialGroup()
+																																				.addComponent(price, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+																																				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																																				.addComponent(submit)
+																																				.addGap(30, 30, 30)
+																																				.addComponent(cancel)
+																																				.addGap(37, 37, 37)))))
+																																				.addGap(3, 3, 3))))
+																																				.addContainerGap(25, Short.MAX_VALUE))
 				);
 		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 						.addGap(45, 45, 45)
 						.addComponent(title)
 						.addGap(20, 20, 20)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup()
 										.addGap(3, 3, 3)
 										.addComponent(customerName))
-										.addComponent(customerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(customerWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addComponent(customerField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(customerWarning, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
 										.addGap(20, 20, 20)
-										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(typeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+												.addComponent(typeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 												.addGroup(layout.createSequentialGroup()
 														.addGap(3, 3, 3)
-														.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 																.addComponent(type)
 																.addComponent(typeWarning))))
 																.addGap(20, 20, 20)
-																.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-																		.addComponent(priorityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+																		.addComponent(priorityField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 																		.addGroup(layout.createSequentialGroup()
 																				.addGap(3, 3, 3)
-																				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+																				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 																						.addComponent(priority)
 																						.addComponent(priorityWarning))))
 																						.addGap(20, 20, 20)
-																						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+																						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 																								.addComponent(originCityWarning)
-																								.addComponent(originCityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addComponent(originCityField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 																								.addComponent(originCity))
 																								.addGap(20, 20, 20)
-																								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-																										.addComponent(destination)
-																										.addComponent(destinationField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 																										.addGroup(layout.createSequentialGroup()
-																												.addGap(3, 3, 3)
-																												.addComponent(destinationWarning)))
-																												.addGap(18, 18, 18)
-																												.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-																														.addComponent(cardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-																														.addComponent(price, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-																														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																														.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																																.addComponent(cancel)
-																																.addComponent(submit))
-																																.addGap(19, 19, 19))
+																												.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+																														.addComponent(destination)
+																														.addComponent(destinationField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+																														.addGap(18, 18, 18)
+																														.addComponent(cardPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+																														.addGroup(layout.createSequentialGroup()
+																																.addGap(3, 3, 3)
+																																.addComponent(destinationWarning)))
+																																.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+																																.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																																		.addComponent(price, GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+																																		.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																																				.addComponent(cancel)
+																																				.addComponent(submit)))
+																																				.addContainerGap())
 				);
+
+
+
+		price.addNotify();
 
 		add(panel);
 	}
@@ -440,22 +451,32 @@ public class Form extends JDialog implements ActionListener{
 	}
 
 
+	public void allFieldsValue(){
+		Route r;
+		if(checkFields("Mail")==true){
+			
+		}
+		
+		
+		price.setText("");
+	}
+
 	/**
 	 * Helper method to populate the JComboBox for countries
 	 */
 	private void populateCountries(){
+		ArrayList<String> countries = XMLWorker.loadCountries();
+		// Get all cities in order of country
+		ArrayList<ArrayList<String>> allCities = XMLWorker.getAllCities();
 
+		for (int i = 0; i < allCities.size(); i++){
+			destinationField.addItem(countries.get(i));
 
-		//				ArrayList<String> countries = XMLWorker.loadCountries();
+			for (String city: allCities.get(i)){
+				destinationField.addItem("  " + city);
 
-		//				for(String s: countries){
-		//					destinationField.addItem(s);
-		//					ArrayList<String> cities = XMLWorker.getCitiesFromCountry("New Zealand");
-		//					for(String c: cities){
-		//						destinationField.addItem("    " + c);
-		//					}
-
-		//				}
+			}
+		}
 	}
 
 	/**
@@ -469,6 +490,26 @@ public class Form extends JDialog implements ActionListener{
 		catch(NumberFormatException e ) {  return false;  }
 	}
 
+	/**
+	 * Helper method to check if all the input fields are correct
+	 */
+	private boolean checkFields(String mailType){
+		if(mailType.equals("Parcel") && (!customerField.getText().equals("")) && (isDigit(volumeField.getText()) == true) && (isDigit(weightField.getText()) == true) && (typeField.getValue().toString().equals("Parcel")) && destinationField.getSelectedIndex()>-1){
+			return true;
+		}
+		else if(mailType.equals("Mail") && (!customerField.getText().equals("")) && (destinationField.getSelectedIndex()>-1) && (originCityField.getSelectedIndex()>-1) ){
+			return true;
+		}
+		else return false;
+
+	}
+	
+	private void notifyPrice(){
+		if((!customerField.getText().equals("")) && (isDigit(volumeField.getText()) == true) && (isDigit(weightField.getText()) == true) && (typeField.getValue().toString().equals("Parcel")) && destinationField.getSelectedIndex()>-1){
+			;
+		}
+	}
+
 
 	/**
 	 * ActionListener that responds to the button pressed  	
@@ -477,59 +518,21 @@ public class Form extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		/*=============================== Submit Button Event ==========================================*/
 		if(e.getActionCommand().equals("submit")){
-			/*Parcel Event*/
-			if(typeField.getValue().toString().equals("Parcel")){
+			if(checkFields("Parcel")==true || checkFields("Mail")== true){
 
-				if((!customerField.getText().equals("")) && (isDigit(volumeField.getText()) == true) && (isDigit(weightField.getText()) == true) && (typeField.getValue().toString().equals("Parcel")) && destinationField.getSelectedIndex()>-1){
-					Parcel p = new Parcel(KPSUserInterface.clock.getCurrentDate(), destinationField.getSelectedItem().toString().trim(), originCityField.getSelectedItem().toString().trim(),
-							weightField.getText().trim(), volumeField.getText().trim(), (priorityField.getSelectedIndex() +1));
+				System.out.println("success?");
+				dispose();
+			}
+			else{
+				if(customerField.getText().equals("")) customerWarning.setText("*Plese input customer name");
+				if(destinationField.getSelectedIndex()==-1) destinationWarning.setText("*Please select a destination");
+				if(originCityField.getSelectedIndex()==-1) originCityWarning.setText("*Please select origin");
+				if(priorityField.getSelectedIndex()==-1) priorityWarning.setText("*Please select a priority");
+				if(typeField.getValue().equals("Parcel") && weightField.getText().equals("")) weightLabel.setText("*Please input weight");
+				if(typeField.getValue().equals("Parcel") && volumeField.getText().equals("")) volumeLabel.setText("*Please input numbers");
 
-					int option = JOptionPane.showConfirmDialog(this, "Submit Customer details?", "Confirm", JOptionPane.OK_CANCEL_OPTION);
-
-
-					if(option == JOptionPane.YES_OPTION){
-						XMLWorker.addMail(p);
-						ClerkGUI.dashBoard.addItem("Parcel", p.getData());
-						dispose();
-					}
-
-				}
-				else{
-					if(customerField.getText().equals("")) customerWarning.setText("*Plese input customer name");
-					if(destinationField.getSelectedIndex()==-1) destinationWarning.setText("*Please select a destination");
-					if(originCityField.getSelectedIndex()==-1) originCityWarning.setText("*Please select origin");
-					if(priorityField.getSelectedIndex()==-1) priorityWarning.setText("*Please select a priority");
-					if(weightField.getText().equals("")) weightLabel.setText("*Please input weight");
-					if(volumeField.getText().equals("")) volumeLabel.setText("*Please input numbers");
-				}
 			}
 
-			/*Mail Event*/
-			else if(typeField.getValue().toString().equals("Mail")){
-				if( (!customerField.getText().equals("")) && (destinationField.getSelectedIndex()>-1) && (originCityField.getSelectedIndex()>-1) ){
-					Mail m = new Mail(KPSUserInterface.clock.getCurrentDate(), destinationField.getSelectedItem().toString().trim(), originCityField.getSelectedItem().toString().trim(),
-							(priorityField.getSelectedIndex()+1));
-
-					price.setText("<html><font face=Verdana size=5>Price: </font>\t\t <font size=6>" + m.getCost() + "</font></html>" );
-
-					int option = JOptionPane.showConfirmDialog(this, "Submit Customer details?", "Confirm", JOptionPane.OK_CANCEL_OPTION);
-
-					if(option == JOptionPane.YES_OPTION){
-						XMLWorker.addMail(m);
-						ClerkGUI.dashBoard.addItem("Mail", m.getData());
-						dispose();
-					} 
-
-
-				}
-				else{
-					if(customerField.getText().equals("")) customerWarning.setText("*Plese input customer name");
-					if(destinationField.getSelectedIndex()==-1) destinationWarning.setText("*Please select a destination");
-					if(originCityField.getSelectedIndex()==-1) originCityWarning.setText("*Please select origin");
-					if(priorityField.getSelectedIndex()==-1) priorityWarning.setText("*Please select a priority");
-				}
-
-			}
 		}
 
 		/*=============================== Cancel back to DashBoard ==========================================*/

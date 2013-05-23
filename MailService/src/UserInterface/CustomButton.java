@@ -65,8 +65,16 @@ public class CustomButton extends JButton{
 			@Override
 			public void mouseClicked(MouseEvent e) {}
 		});
+	}
+	
+	public CustomButton(String text){
+		setText(text);
+		setForeground(Color.GRAY);
+		setFont(new Font("", Font.PLAIN, 22));
 		
-
+		setContentAreaFilled(false);
+		setBorder(null);
+		setBackground(new Color(0,0,0,0));
 	}
 	
 	

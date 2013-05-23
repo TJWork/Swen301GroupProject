@@ -24,32 +24,41 @@ public class DashBoard extends JPanel implements ActionListener{
 	private JLabel numberMailEvents;
 	private String[] columnTitle;
 
-	public DashBoard(){
+	public DashBoard(String s){
 
 		setBackground(Color.WHITE);
 		title = new JLabel("DashBoard");
 		title.setFont(new Font("Verdana", Font.BOLD, 36));
+		
 		expenditure = new JLabel("Expenditure");
 		expenditure.setFont(new Font("Verdana", Font.BOLD, 16));
+		expenditure.setBorder(BorderFactory.createMatteBorder(
+                1, 5, 1, 1, Color.GRAY));
+		
 		revenue = new JLabel("Revenue");
 		revenue.setFont(new Font("Verdana", Font.BOLD, 16));
+		revenue.setBorder(BorderFactory.createMatteBorder(
+                1, 5, 1, 1, Color.GRAY));
+		
 		numberMailEvents = new JLabel("Mail Events");
 		numberMailEvents.setFont(new Font("Verdana", Font.BOLD, 16));
+		numberMailEvents.setBorder(BorderFactory.createMatteBorder(
+                1, 5, 1, 1, Color.GRAY));
 
 		columnTitle = new String[] {"Date", "Type", "Destination", "Origin", "Priority", "Price"};
 
-		ArrayList<Mail> mail = XMLWorker.getMail(new String[]{null, null, null, null});
-		ArrayList<Parcel> parcel = XMLWorker.getParcels(new String[] {null, null, null, null, null, null});
+		ArrayList<Mail> mail = XMLWorker.getMail(new String[]{null, null, null, null, null});
+		ArrayList<Parcel> parcel = XMLWorker.getParcels(new String[] {null, null, null, null, null, null, null});
 
 		String[][] datas = new String[mail.size()+parcel.size()][6];
 
 		for(int i=0; i<mail.size(); i++){
 			String[] str = mail.get(i).getData();
-			datas[i] = new String[] {str[0], "Mail", str[1], str[2], getPriority(str[3]), str[4]} ;
+			datas[i] = new String[] {str[0], "Mail", str[1], str[2], getPriority(str[4]), str[3]} ;
 		}
 		for(int i=mail.size(); i<datas.length; i++){
 			String[] str = parcel.get(i-mail.size()).getData();
-			datas[i] = new String[] {str[0], "Parcel", str[1], str[2], getPriority(str[5]), str[6]} ;
+			datas[i] = new String[] {str[0], "Parcel", str[1], str[2], getPriority(str[6]), str[5]} ;
 		}
 
 		numberMailEvents.setText("<html><font face=Verdana color=black size=5>Mail Events</font><br> "
@@ -74,57 +83,58 @@ public class DashBoard extends JPanel implements ActionListener{
 
 		tableScrollPane = new JScrollPane(mailEventsTable);
 
-        JButton button = new JButton("Form");
+        JButton button = new JButton("Add New Mail Event");//("AddNew_Normal", "AddNew_Pressed", "AddNew_Hover", "");
         button.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Form f = new Form();
-				f.setSize(600, 650);
+				f.setSize(600, 670);
+				f.setResizable(false);
 				f.setVisible(true);
 			}
 		});
         
+        if(s.equals("Manager")){
+        	button.setVisible(false);
+        }
 
         GroupLayout layout = new GroupLayout(this);
 
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(80, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addComponent(tableScrollPane, GroupLayout.PREFERRED_SIZE, 830, GroupLayout.PREFERRED_SIZE)
                     .addComponent(button)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(title)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(expenditure, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(expenditure, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
                             .addGap(167, 167, 167)
-                            .addComponent(revenue, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(revenue, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
                             .addGap(168, 168, 168)
-                            .addComponent(numberMailEvents, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(numberMailEvents, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(title)
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(expenditure, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(revenue, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numberMailEvents, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(expenditure, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(revenue, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numberMailEvents, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tableScrollPane, GroupLayout.PREFERRED_SIZE, 284, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(90, Short.MAX_VALUE))
         );
 
-
-            
 	}
 
 	public void addItem(String type, String[] data){
