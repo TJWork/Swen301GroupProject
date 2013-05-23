@@ -1,37 +1,23 @@
 package UserInterface;
 
-import java.awt.Color;
-import java.awt.Dialog.ModalityType;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.awt.*;
+import java.awt.Dialog.*;
+import java.awt.event.*;
+import java.util.*;
 
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
+import javax.swing.table.*;
+import service.*;
 
 import file.XMLWorker;
 
 
 public class RoutesUI extends JPanel {
 
-	private final JLabel title;
-	private final JButton addRoutes;
-	private final JScrollPane tableScrollPane;
-	private final JTable routesTable;
+	private JLabel title;
+	private JButton addRoutes;
+	private JScrollPane tableScrollPane;
+	private JTable routesTable;
 	String[] columnTitle;
 
 	public RoutesUI(){
@@ -58,6 +44,7 @@ public class RoutesUI extends JPanel {
 		routesTable.getTableHeader().setResizingAllowed(false);
 		routesTable.getTableHeader().setReorderingAllowed(false);
 		routesTable.setEnabled(false);
+		routesTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		routesTable.setRowHeight(30);
 
@@ -144,13 +131,13 @@ public class RoutesUI extends JPanel {
 	private JLabel frequencyWarning;
 
 	private JLabel EST;
-	private JLabel ESTField;
+	private JTextField ESTField;
 	private JLabel ESTWarning;
 
 
 	public void addRoutesForm(){
 		final JDialog dialog = new JDialog();
-		JPanel panel = new JPanel();
+		final JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 
 		dialogTitle = new JLabel("Routes");
@@ -396,7 +383,7 @@ public class RoutesUI extends JPanel {
 
 
 		//=========================== Frequency ===================================
-		frequency = new JLabel();
+		frequency = new JLabel("Frequency");
 		frequency.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 16));
 		frequencyField = new JTextField();
 		frequencyWarning = new JLabel();
@@ -422,7 +409,7 @@ public class RoutesUI extends JPanel {
 		//========================== Estimated Time =================================
 		EST = new JLabel("Estimated Delivery");
 		EST.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 16));
-		ESTField = new JLabel();
+		ESTField = new JTextField();
 		ESTWarning = new JLabel();
 		ESTWarning.setForeground(Color.RED);
 		ESTField.addFocusListener(new FocusListener() {
@@ -448,8 +435,28 @@ public class RoutesUI extends JPanel {
 		submit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(checkFields() == true){
+					
+					int result = JOptionPane.showConfirmDialog(panel, "Confirm route details?", "Confirm", JOptionPane.YES_NO_OPTION);
 
-				dialog.dispose();				
+					Route r = new Route(originField.getSelectedItem().toString().trim(),
+							destinationField.getSelectedItem().toString().trim(),
+							companyField.getText(),
+							Integer.parseInt(maxWField.getText()),
+							Integer.parseInt(maxVField.getText()),
+							Double.parseDouble(costWField.getText()),
+							Double.parseDouble(costVField.getText()),
+							Double.parseDouble(mailCostField.getText()),
+							Integer.parseInt(frequencyField.getText()),
+							Integer.parseInt(ESTField.getText()),
+							priorityField.getSelectedItem().toString()
+							);
+					if(result == JOptionPane.YES_OPTION){
+						addRoutes(r);
+						dialog.dispose();
+					}
+				}
+								
 			}
 		});
 		CustomButton cancel = new CustomButton("Cancel_Normal", "Cancel_Pressed", "Cancel_Hover", "cancel");
@@ -517,10 +524,10 @@ public class RoutesUI extends JPanel {
 																														.addComponent(maxWWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
 																														.addGroup(layout.createSequentialGroup()
 																																.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-																																		.addComponent(originField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																																		.addComponent(destinationField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																																		.addComponent(priorityField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																																		.addComponent(companyField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+																																		.addComponent(originField, 200,200,200)
+																																		.addComponent(destinationField, 200,200,200)
+																																		.addComponent(priorityField, 200,200,200)
+																																		.addComponent(companyField, 200,200,200))
 																																		.addGap(10, 10, 10)
 																																		.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 																																				.addComponent(companyWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -644,10 +651,40 @@ public class RoutesUI extends JPanel {
 			}
 		}
 	}
-
-	public void addRoute(){
-
-
+	
+	public boolean checkFields(){
+		if( (!companyField.getText().equals("")) && (originField.getSelectedIndex()!=-1) 
+				&& (destinationField.getSelectedIndex()!=-1) 
+				&& (priorityField.getSelectedIndex()!=-1)
+				&& (!maxWField.getText().equals("")) && (isDigit(maxWField.getText()))
+				&& (!maxVField.getText().equals("")) && (isDigit(maxVField.getText())) 
+				&& (!costWField.getText().equals("")) && (isDigit(costWField.getText())) 
+				&& (!costVField.getText().equals("")) && (isDigit(costVField.getText()))
+				&& (!mailCostField.getText().equals("")) && (isDigit(mailCostField.getText())) 
+				&& (!frequencyField.getText().equals("")) && isDigit((frequencyField.getText())) 
+				&& (!ESTField.getText().equals("")) && (isDigit(ESTField.getText()))
+				){
+		
+			return true;
+		}
+		return false;
 	}
 
+	public void addRoutes(Route r){
+		//"Origin", "Destination", "Carrier Company", "Priority", "Price / gram", "Price / cm3"
+		DefaultTableModel tm = (DefaultTableModel) routesTable.getModel();
+		String[] temp = new String[6];
+		
+		temp[0] = originField.getSelectedItem().toString().trim();
+		temp[1] = destinationField.getSelectedItem().toString().trim();
+		temp[2] = companyField.getText();
+		temp[3] = priorityField.getSelectedItem().toString().trim();
+		temp[4] = costWField.getText().toString();
+		temp[5] = costVField.getText().toString();
+		
+		tm.addRow(temp);
+		JTable newTable = new JTable(tm);
+		routesTable = newTable;
+		
+	}
 }

@@ -66,10 +66,11 @@ public class DashBoard extends JPanel implements ActionListener{
 
 		mailEventsTable = new JTable(new DefaultTableModel(datas,columnTitle));
 		mailEventsTable.setFont(new Font("Verdana", Font.PLAIN, 14));
-		mailEventsTable.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 16));
+		mailEventsTable.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 14));
 		mailEventsTable.getTableHeader().setResizingAllowed(false);
 		mailEventsTable.getTableHeader().setReorderingAllowed(false);
-		mailEventsTable.setEnabled(false);
+		mailEventsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		mailEventsTable.setEnabled(true);
 
 		mailEventsTable.setRowHeight(30);
 
@@ -88,7 +89,7 @@ public class DashBoard extends JPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Form f = new Form();
-				f.setSize(600, 670);
+				f.setSize(600, 680);
 				f.setResizable(false);
 				f.setVisible(true);
 			}
