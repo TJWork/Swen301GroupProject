@@ -5,33 +5,27 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import service.City;
 import service.Mail;
 import service.Parcel;
+import service.Route;
 
 public class XMLWorker {
 
@@ -63,7 +57,7 @@ public class XMLWorker {
 				if(nl != null && nl.getLength() > 0) {
 					Element el = (Element)nl.item(0);
 					
-					if (match[k] == null || (match[k]!= null && el.getTextContent().equals(match[k])))
+					if (match == null || match[k] == null || (match[k]!= null && el.getTextContent().equals(match[k])))
 						dat.add(el.getTextContent());
 					else isOk = false;
 				}
@@ -260,6 +254,30 @@ public class XMLWorker {
 		return allCities;
 	}
 
+	
+	public static ArrayList<City> getListOfAllCities(){
+		ArrayList<City> data = new ArrayList<City>();
+		try {
+			Document doc = getDocElement("countrycitytownlatlong");
+			Element root = doc.getDocumentElement();
+			NodeList nl = root.getElementsByTagName("country");
+			for (int i = 0; i < nl.getLength(); i++){
+					NodeList cities = ((Element)(nl.item(i))).getElementsByTagName("city");
+					
+					for (int j = 0; j < cities.getLength(); j++){
+						City c = new City();
+						c.setId(i);
+						c.setName(((Element)(cities.item(j))).getElementsByTagName("name").item(0).getTextContent());
+						c.setLatitude(Double.parseDouble(((Element)(cities.item(j))).getElementsByTagName("latitude").item(0).getTextContent()));
+						c.setLongitude(Double.parseDouble(((Element)(cities.item(j))).getElementsByTagName("longitude").item(0).getTextContent()));
+						data.add(c);
+					}
+				}
+		} 
+		catch (Exception e) { e.printStackTrace(); }
+		return data;
+	}
+	
 	/**
 	 * Adds a new mail or parcel event to the mailevents database. Can be as a Mail <br>
 	 * or Parcel object.
@@ -449,6 +467,60 @@ public class XMLWorker {
 		return newList;
 	}
 
+	public static void addRoute(Route r){
+		Document doc;
+		try {
+			doc = getDocElement("routes");
+		Element root = doc.getDocumentElement();
+		
+		Element newRoute = doc.createElement("route");
+		String[] tags = new String[]{"origin", "destination", "companyName", 
+				"maxWeight","maxVolume", "weightCost", "volumeCost", "mailcost", 
+				"frequency", "estimatedDeliveryTime", "priority"};
+		
+		String[] data = r.getData();
+		
+		
+		root.appendChild(newRoute);
+		for (int i = 0; i < tags.length; i++){
+			Element e = doc.createElement(tags[i]);
+			e.appendChild(doc.createTextNode(data[i]));
+			newRoute.appendChild(e);
+		}
+		
+		finishWritingXML(doc, "routes");
+		}catch(Exception e){e.printStackTrace();}	
+	}
+	
+	
+	public static ArrayList<Route> getAllRoutes(){
+		ArrayList<Route> listORoute = new ArrayList<Route>();
+		try {
+			ArrayList<ArrayList<String>> routes = XMLWorker.readTagsConditional("routes", "route", 
+					new String[]{"origin", "destination", "companyName", 
+					"maxWeight","maxVolume", "weightCost", "volumeCost", "mailcost", 
+					"frequency", "estimatedDeliveryTime", "priority"}, null);
+			
+			
+			for(ArrayList<String> arr: routes){
+				Route r = new Route(arr.get(0), arr.get(1), arr.get(2), Integer.parseInt(arr.get(3)), Integer.parseInt(arr.get(4)),
+						Double.parseDouble(arr.get(5)), Double.parseDouble(arr.get(6)), Double.parseDouble(arr.get(7)), 
+						Integer.parseInt(arr.get(8)), Integer.parseInt(arr.get(9)),  arr.get(10));
+				listORoute.add(r);
+			}
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listORoute;
+	}
 
 	public static Date parseDate(String input){
 		SimpleDateFormat ft = new SimpleDateFormat ("dd/MM/yyyy");
@@ -490,7 +562,27 @@ public class XMLWorker {
 
 	public static void main(String[] args){
 
+		
+/*		
+		XMLWorker.addRoute(new Route("a", "b", "c", 200, 400, 2.0,
+				4.0, 2.0, 3, 4, "Air"));
+		XMLWorker.addRoute(new Route("f", "asdf", "c", 200, 400, 2.0,
+				4.0, 2.0, 3, 4, "Air"));
+		XMLWorker.addRoute(new Route("h", "bfds", "c", 200, 400, 2.0,
+				4.0, 2.0, 3, 4, "Air"));
+		XMLWorker.addRoute(new Route("re", "uyte", "c", 200, 400, 2.0,
+				4.0, 2.0, 3, 4, "Air"));
+		XMLWorker.addRoute(new Route("tre", "234", "c", 200, 400, 2.0,
+				4.0, 2.0, 3, 4, "Air"));
+		
+		
+		ArrayList<Route> routes = XMLWorker.getAllRoutes();
+		for (Route r: routes){
+			System.out.println(r.toString());
+		}*/
 /*
+ * 
+ * 
 		ArrayList<Parcel> parcels = XMLWorker.getParcels(new String[]{null, null, null, null, null, null});
 		for (Parcel p: parcels){
 			System.out.println("Parcel: " + p.toString());

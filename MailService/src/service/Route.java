@@ -77,5 +77,27 @@ public class Route {
 	public int calculateDeliveryTime(){ //return delivery time in hours
 		return 1/2*frequency+estimatedDeliveryTime;
 	}
+	
+	public String[] getData(){
+		
+		return new String[]{this.origin, this.destination, this.company, 
+				"" +this.maxWeight, "" +this.maxVolume, "" +this.weightCost, 
+				"" +this.volumeCost,"" + this.mailCost, "" +this.frequency,
+				"" +this.estimatedDeliveryTime, this.priority};
+	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Route [origin=" + origin + ", destination=" + destination
+				+ ", company=" + company + ", priority=" + priority
+				+ ", maxWeight=" + maxWeight + ", maxVolume=" + maxVolume
+				+ ", weightCost=" + weightCost + ", volumeCost=" + volumeCost
+				+ ", mailCost=" + mailCost + ", frequency=" + frequency
+				+ ", estimatedDeliveryTime=" + estimatedDeliveryTime + "]";
+	}
+	
+	
 }
