@@ -540,7 +540,7 @@ public class Form extends JDialog implements ActionListener{
 								volumeField.getText(), 
 								0, (priorityField.getSelectedIndex()+1));
 
-						int result = JOptionPane.showConfirmDialog(panel, "Confirm?");
+						int result = JOptionPane.showConfirmDialog(panel, "Confirm customer details?", "Confirm", JOptionPane.YES_NO_OPTION);;
 
 
 						if(result == JOptionPane.YES_OPTION){
@@ -557,7 +557,7 @@ public class Form extends JDialog implements ActionListener{
 								originCityField.getSelectedItem().toString().trim(), 
 								0, (priorityField.getSelectedIndex()+1));
 
-						int result = JOptionPane.showConfirmDialog(panel, "Confirm?");
+						int result = JOptionPane.showConfirmDialog(panel, "Confirm customer details?", "Confirm", JOptionPane.YES_NO_OPTION);;
 
 						if(result == JOptionPane.YES_OPTION){
 							ClerkGUI.dashBoard.addItem("Mail", m.getData());
@@ -570,7 +570,7 @@ public class Form extends JDialog implements ActionListener{
 			}
 			else{
 				if(customerField.getText().equals("")) {
-					customerWarning.setText("*Plese input customer name");
+					customerWarning.setText("*Please input customer name");
 				}
 				if(destinationField.getSelectedIndex()==-1) {
 					destinationWarning.setText("*Please select a destination");
