@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
+import service.City;
 import service.Mail;
 import service.Parcel;
 
@@ -27,18 +29,24 @@ import com.googlecode.charts4j.AxisLabels;
 import com.googlecode.charts4j.AxisLabelsFactory;
 import com.googlecode.charts4j.AxisStyle;
 import com.googlecode.charts4j.BarChart;
+import com.googlecode.charts4j.Country;
+import com.googlecode.charts4j.Country.Name;
 import com.googlecode.charts4j.Data;
 import com.googlecode.charts4j.DataUtil;
 import com.googlecode.charts4j.GCharts;
+import com.googlecode.charts4j.GeographicalArea;
 import com.googlecode.charts4j.Line;
 import com.googlecode.charts4j.LineChart;
 import com.googlecode.charts4j.LineStyle;
+import com.googlecode.charts4j.MapChart;
 import com.googlecode.charts4j.PieChart;
 import com.googlecode.charts4j.Plot;
 import com.googlecode.charts4j.Plots;
+import com.googlecode.charts4j.PoliticalBoundary;
 import com.googlecode.charts4j.Shape;
 import com.googlecode.charts4j.Slice;
 import com.googlecode.charts4j.Color.*;
+import com.googlecode.charts4j.Country;
 
 import file.XMLWorker;
 
@@ -53,7 +61,8 @@ public class BusinessStats extends JPanel{
 	private JLabel revenue;
 	private ArrayList<Mail> mail = XMLWorker.getMail(new String[]{null, null, null, null, null});
 	private ArrayList<Parcel> parcel = XMLWorker.getParcels(new String[] {null, null, null, null, null, null, null});
-
+	DecimalFormat df = new DecimalFormat("#.##");
+	
 	public BusinessStats(){
 		title = new JLabel("Business Statistics");
 		title.setFont(new Font("Verdana", Font.BOLD, 36));
@@ -183,11 +192,42 @@ public class BusinessStats extends JPanel{
         return label;
 	}
 	
+	public JLabel destinationsGraph(){
+		MapChart chart = GCharts.newMapChart(GeographicalArea.WORLD);
+		PoliticalBoundary x = new Country(Name.NEW_ZEALAND,80);
+		PoliticalBoundary y = new Country(Name.AUSTRALIA,80);
+		
+		chart.addPoliticalBoundary(x);
+		chart.addPoliticalBoundary(y);
+
+
+        
+        URL url;
+        Icon icon = null;
+        BufferedImage bimg;
+		try {
+			url = new URL(chart.toURLString());
+			bimg = ImageIO.read(url);
+	        icon = new ImageIcon(bimg);
+
+
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+        JLabel label = new JLabel(icon);
+        
+        return label;
+		
+	}
+	
 	public JLabel getTotalExpenditure(){
 		double total=0;
-		total = XMLWorker.getTotalSales()/1.3;
+		total = XMLWorker.getTotalSales();
 		
-		JLabel label = new JLabel("Total Expenditure: " + total);
+		JLabel label = new JLabel("Total Expenditure: " + df.format(total));
 		return label;
 	}
 	
@@ -195,7 +235,7 @@ public class BusinessStats extends JPanel{
 		double total=0;
 		total = XMLWorker.getTotalSales()*1.3;
 		
-		JLabel label = new JLabel("Total Revenue: " + total);
+		JLabel label = new JLabel("Total Revenue: " + df.format(total));
 		return label;
 	}
 	

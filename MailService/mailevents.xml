@@ -15,6 +15,13 @@
 		<cost>2</cost>
 	</mail>
 	<mail>
+		<day>10/06/2013</day>
+		<to>Luxembourg</to>
+		<from>Eketahuna</from>
+		<priority>2</priority>
+		<cost>2</cost>
+	</mail>
+	<mail>
 		<day>1/05/2013</day>
 		<to>Helsinki</to>
 		<from>Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu</from>
