@@ -33,6 +33,13 @@ public class RoutesUI extends JPanel {
 		setBackground(Color.WHITE);
 		title = new JLabel("Routes");
 		title.setFont(new Font("Verdana", Font.BOLD, 36));
+		
+		activeLabel = new JLabel("Active Routes");
+		activeLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+		
+		discontinueLabel = new JLabel("Discontinued Routes");
+		discontinueLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+		
 		addRoutes = new JButton("Add New Routes");
 		addRoutes.addActionListener(new ActionListener() {
 			@Override
@@ -47,30 +54,26 @@ public class RoutesUI extends JPanel {
 
 				if(routesTable.getSelectedRow()!=-1){
 					DefaultTableModel t = (DefaultTableModel) routesTable.getModel();
-
 					int index = routesTable.getSelectedRow();
-
 					String[] str = new String[columnTitle.length] ;
-
 					for(int i=0; i<columnTitle.length; i++){
 						String s = (String) routesTable.getValueAt(index, i);
 						str[i] = s;
 					}
-
 					removeRoute(str);
-
 					t.removeRow(index);
-
 					routesTable.setModel(t);
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Please select a route to delete");
+					JOptionPane.showMessageDialog(getParent(), "Please select a route to delete");
 
 				}
 			}
 		});
 
 
+		//====================================== Active Route Table ======================================
+		
 		columnTitle = new String[]{"Origin", "Destination", "Carrier Company", "Priority", "NZD/g", "NZD/cm3", "NZD/Mail" };
 
 		ArrayList<Route> routes = XMLWorker.getAllRoutes();
@@ -89,7 +92,7 @@ public class RoutesUI extends JPanel {
 		routesScroll = new JScrollPane(routesTable);
 
 		routesTable.setFont(new Font("Verdana", Font.PLAIN, 14));
-		routesTable.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 16));
+		routesTable.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 14));
 		routesTable.getTableHeader().setResizingAllowed(false);
 		routesTable.getTableHeader().setReorderingAllowed(false);
 		routesTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -104,7 +107,82 @@ public class RoutesUI extends JPanel {
 		routesTable.getColumnModel().getColumn(5).setPreferredWidth(50);
 
 
+		//=========================== Discontinued Route Table ===================================
+		
+		ArrayList<Route> disRoutes = XMLWorker.getDiscontinued();
+		String[][] disDatas = new String[disRoutes.size()][7]; 
+		for(int i=0; i<disRoutes.size(); i++){
+			datas[i] = new String[] {disRoutes.get(i).getOrigin(), disRoutes.get(i).getDestination(), disRoutes.get(i).getCompany(),
+					disRoutes.get(i).getPriority(), "" + df.format(disRoutes.get(i).getWeightCost()), "" + df.format(disRoutes.get(i).getVolumeCost()), "" + df.format(disRoutes.get(i).getMailCost())};
+		}
+		
+		discontinueRoutes = new JTable(){
+			public boolean isCellEditable(int rowIndex, int colIndex) {
+				return false;  
+			}
+		};
+		discontinueRoutes.setModel(new DefaultTableModel(datas, columnTitle));
+		discontinueScroll = new JScrollPane(discontinueRoutes);
 
+		discontinueRoutes.setFont(new Font("Verdana", Font.PLAIN, 14));
+		discontinueRoutes.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 14));
+		discontinueRoutes.getTableHeader().setResizingAllowed(false);
+		discontinueRoutes.getTableHeader().setReorderingAllowed(false);
+		discontinueRoutes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		discontinueRoutes.setRowHeight(30);
+
+		discontinueRoutes.getColumnModel().getColumn(0).setPreferredWidth(150);
+		discontinueRoutes.getColumnModel().getColumn(1).setPreferredWidth(150);
+		discontinueRoutes.getColumnModel().getColumn(2).setPreferredWidth(150);
+		discontinueRoutes.getColumnModel().getColumn(3).setPreferredWidth(145);
+		discontinueRoutes.getColumnModel().getColumn(4).setPreferredWidth(50);
+		discontinueRoutes.getColumnModel().getColumn(5).setPreferredWidth(50);
+		
+		
+		
+		//============================== Layout ===================================
+
+	       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+	        this.setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addContainerGap(80, Short.MAX_VALUE)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+	                        .addComponent(title)
+	                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                            .addComponent(activeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                            .addComponent(removeRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addGap(18, 18, 18)
+	                            .addComponent(addRoutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                        .addComponent(routesScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
+	                        .addComponent(discontinueScroll))
+	                    .addComponent(discontinueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                .addContainerGap(80, Short.MAX_VALUE))
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                .addGap(45, 45, 45)
+	                .addComponent(title)
+	                .addGap(18, 18, 18)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+	                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                        .addComponent(addRoutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addComponent(removeRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                    .addComponent(activeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                .addGap(20, 20, 20)
+	                .addComponent(routesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(18, 18, 18)
+	                .addComponent(discontinueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(20, 20, 20)
+	                .addComponent(discontinueScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(33, 33, 33))
+	        );
+		
 	}
 
 
@@ -730,5 +808,20 @@ public class RoutesUI extends JPanel {
 			}
 		}
 		XMLWorker.deleteRoute(route);
+		
+		DefaultTableModel tm = (DefaultTableModel) discontinueRoutes.getModel();
+		String[] temp = new String[7];
+
+		temp[0] = route.getOrigin();//originField.getSelectedItem().toString().trim();
+		temp[1] = route.getDestination();//destinationField.getSelectedItem().toString().trim();
+		temp[2] = route.getCompany();//companyField.getText();
+		temp[3] = route.getPriority();//priorityField.getSelectedItem().toString().trim();
+		temp[4] = Double.toString(route.getWeightCost());//costWField.getText();
+		temp[5] = Double.toString(route.getVolumeCost());//costVField.getText();
+		temp[6] = df.format(route.getMailCost());
+
+		tm.addRow(temp);
+		JTable newTable = new JTable(tm);
+		routesTable = newTable;
 	}
 }

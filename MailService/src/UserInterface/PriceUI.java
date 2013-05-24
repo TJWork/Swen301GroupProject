@@ -50,7 +50,7 @@ public class PriceUI extends JPanel {
 		tableScrollPane.setBackground(Color.WHITE);
 
 		priceTable.setFont(new Font("Verdana", Font.PLAIN, 14));
-		priceTable.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 16));
+		priceTable.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 14));
 		priceTable.getTableHeader().setResizingAllowed(false);
 		priceTable.getTableHeader().setReorderingAllowed(false);
 		priceTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -65,24 +65,24 @@ public class PriceUI extends JPanel {
 		priceTable.getColumnModel().getColumn(5).setPreferredWidth(50);
 
 
-        GroupLayout layout = new GroupLayout(this);
+       GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(80, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(title)
-                    .addComponent(tableScrollPane, GroupLayout.PREFERRED_SIZE, 822, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(title)
-                .addGap(65, 65, 65)
-                .addComponent(tableScrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
 		
