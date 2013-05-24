@@ -20,8 +20,6 @@ public class DashBoard extends JPanel implements ActionListener{
 	private JLabel title;
 	private JScrollPane tableScrollPane;
 	private JTable mailEventsTable;
-	private JLabel expenditure;
-	private JLabel revenue;
 	private JLabel numberMailEvents;
 	private String[] columnTitle;
 	private DecimalFormat df = new DecimalFormat("0.00");
@@ -31,16 +29,6 @@ public class DashBoard extends JPanel implements ActionListener{
 		setBackground(Color.WHITE);
 		title = new JLabel("DashBoard");
 		title.setFont(new Font("Verdana", Font.BOLD, 36));
-		
-		expenditure = new JLabel("Expenditure");
-		expenditure.setFont(new Font("Verdana", Font.BOLD, 16));
-		expenditure.setBorder(BorderFactory.createMatteBorder(
-                1, 5, 1, 1, Color.GRAY));
-		
-		revenue = new JLabel("Revenue");
-		revenue.setFont(new Font("Verdana", Font.BOLD, 16));
-		revenue.setBorder(BorderFactory.createMatteBorder(
-                1, 5, 1, 1, Color.GRAY));
 		
 		numberMailEvents = new JLabel("Mail Events");
 		numberMailEvents.setFont(new Font("Verdana", Font.BOLD, 16));
@@ -108,40 +96,34 @@ public class DashBoard extends JPanel implements ActionListener{
         }
 
         GroupLayout layout = new GroupLayout(this);
-
         this.setLayout(layout);
+
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(80, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addComponent(tableScrollPane, GroupLayout.PREFERRED_SIZE, 830, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(title)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(expenditure, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
-                            .addGap(167, 167, 167)
-                            .addComponent(revenue, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
-                            .addGap(168, 168, 168)
-                            .addComponent(numberMailEvents, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(title)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(numberMailEvents, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(button))
+                        .addComponent(tableScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(title)
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(expenditure, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(revenue, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numberMailEvents, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(button)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableScrollPane, GroupLayout.PREFERRED_SIZE, 284, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(numberMailEvents, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button))
+                .addGap(35, 35, 35)
+                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
 
 	}
