@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mailevents>
+	<mail>
+		<day>10/05/2013</day>
+		<to>Paris</to>
+		<from>Wellington</from>
+		<priority>1</priority>
+		<cost>2</cost>
+	</mail>
+	<mail>
+		<day>10/06/2013</day>
+		<to>Luxembourg</to>
+		<from>Eketahuna</from>
+		<priority>2</priority>
+		<cost>2</cost>
+	</mail>
+	<mail>
+		<day>1/05/2013</day>
+		<to>Helsinki</to>
+		<from>Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu</from>
+		<priority>2</priority>
+		<cost>2</cost>
+	</mail>
+	<mail>
+		<day>12/05/2013</day>
+		<to>Hamilton</to>
+		<from>Onehunga</from>
+		<priority>3</priority>
+		<cost>2.0</cost>
+	</mail>
+	<parcel>
+	    <day>18/06/2013</day>
+		<to>NukuÊ»alofa</to>
+		<from>Tologa Bay</from>
+		<priority>2</priority>
+		<weight>3</weight>
+		<volume>4</volume>
+		<cost>2</cost>
+	</parcel>
+	<parcel>
+	    <day>24/07/2013</day>
+		<to>Timbuktu</to>
+		<from>Bunnythorpe</from>
+		<priority>1</priority>
+		<weight>2</weight>
+		<volume>4</volume>
+		<cost>2</cost>
+	</parcel>
+	<parcel>
+	    <day>13/02/2013</day>
+		<to>Darwin</to>
+		<from>Taihape</from>
+		<priority>1</priority>
+		<weight>3</weight>
+		<volume>1</volume>
+		<cost>2</cost>
+	</parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>New York</to>
+    <from>Wanganui</from>
+    <priority>1</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>02/04/2012</day>
+    <to>Shanghai</to>
+    <from>Greymouth</from>
+    <priority>2</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>02/02/2013</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>02/03/2013</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>02/04/2013</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>  
+<mail>
+    <day>02/02/2013</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>02/02/2013</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+ <mail>
+    <day>02/02/2013</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+ <mail>
+    <day>02/02/2013</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+  <mail>
+    <day>02/02/2013</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>19/05/2013</day>
+    <to>Blenheim</to>
+    <from>Napier</from>
+    <priority>3.0</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>19/05/2013</day>
+    <to>Hastings</to>
+    <from>Wairoa</from>
+    <priority>3.0</priority>
+    <cost>2</cost>
+  </mail>
+
+<mail>
+    <day>20/05/2013</day>
+    <to>Gore</to>
+    <from>Hastings</from>
+    <priority>4.0</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>20/05/2013</day>
+    <to>Upper Hutt</to>
+    <from>Lower Hutt</from>
+    <priority>4.0</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>20/05/2013</day>
+    <to>Greymouth</to>
+    <from>Palmerston North</from>
+    <priority>3.0</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>20/05/2013</day>
+    <to>Ashburton</to>
+    <from>Nelson</from>
+    <priority>3.0</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>20/05/2013</day>
+    <to>Albany</to>
+    <from>Winton</from>
+    <priority>3.0</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>20/05/2013</day>
+    <to>Gisborne</to>
+    <from>Gore</from>
+    <priority>4.0</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>20/05/2013</day>
+    <to>Greymouth</to>
+    <from>Ashburton</from>
+    <priority>4.0</priority>
+    <cost>2</cost>
+  </mail>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/06/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/08/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/09/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/11/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/06/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/08/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/09/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/11/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/06/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/08/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/09/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/11/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/06/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/08/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/09/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/11/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+    <day>02/06/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/08/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/09/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/11/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<parcel>
+    <day>02/10/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/10/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>02/02/2012</day>
+    <to>Madrid</to>
+    <from>Palmerston North</from>
+    <priority>1.0</priority>
+    <cost>2</cost>
+  </mail>
+<parcel>
+    <day>02/04/2012</day>
+    <to>Ho-Chi Min</to>
+    <from>Clive</from>
+    <weight>2</weight>
+    <volume>5</volume>
+    <priority>2.0</priority>
+    <cost>2</cost>
+  </parcel>
+<mail>
+    <day>23/05/2013</day>
+    <to>Christchurch</to>
+    <from>Auckland</from>
+    <cost>0.0</cost>
+    <priority>3.0</priority>
+  </mail>
+<mail>
+    <day>23/05/2013</day>
+    <to>Ashburton</to>
+    <from>Auckland</from>
+    <cost>0.0</cost>
+    <priority>3.0</priority>
+  </mail>
+<mail>
+    <day>23/05/2013</day>
+    <to>Ashburton</to>
+    <from>Auckland</from>
+    <cost>0.0</cost>
+    <priority>3.0</priority>
+  </mail>
+<mail>
+    <day>23/05/2013</day>
+    <to>Ashburton</to>
+    <from>Alexandra</from>
+    <cost>0.0</cost>
+    <priority>3.0</priority>
+  </mail>
+<parcel>
+    <day>23/05/2013</day>
+    <to>Herat</to>
+    <from>Ashburton</from>
+    <weight>12</weight>
+    <volume>32</volume>
+    <cost>0.0</cost>
+    <priority>2.0</priority>
+  </parcel>
+<parcel>
+    <day>23/05/2013</day>
+    <to>Alexandra</to>
+    <from>Blenheim</from>
+    <weight>123</weight>
+    <volume>123</volume>
+    <cost>0.0</cost>
+    <priority>3.0</priority>
+  </parcel>
+</mailevents>
