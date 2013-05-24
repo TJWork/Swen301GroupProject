@@ -1,4 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <costevents>
     
+<route>
+    <origin>Auckland</origin>
+    <destination>San Francisco</destination>
+    <companyName>FedEx</companyName>
+    <maxWeight>500</maxWeight>
+    <maxVolume>40</maxVolume>
+    <weightCost>5.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>4.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>120</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Auckland</origin>
+    <destination>San Francisco</destination>
+    <companyName>FedEx</companyName>
+    <maxWeight>500</maxWeight>
+    <maxVolume>40</maxVolume>
+    <weightCost>5.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>6.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>120</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
 </costevents>
