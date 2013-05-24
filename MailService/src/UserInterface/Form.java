@@ -100,11 +100,13 @@ public class Form extends JDialog implements ActionListener{
 						weightLabel.setText("*Please input numbers");
 					} else {weightLabel.setText("");}
 				}
+				notifyPrice();
 			}
 
 			@Override
-			public void focusGained(FocusEvent e) { }
+			public void focusGained(FocusEvent e) { notifyPrice(); }
 		});
+
 		weightLabel = new JLabel();
 		weightLabel.setForeground(Color.RED);
 
@@ -125,10 +127,11 @@ public class Form extends JDialog implements ActionListener{
 						volumeLabel.setText("*Please input numbers");
 					} else {volumeLabel.setText("");}
 				}
+				notifyPrice();
 			}
 
 			@Override
-			public void focusGained(FocusEvent e) { 	}
+			public void focusGained(FocusEvent e) { notifyPrice();	}
 		});
 		volumeLabel = new JLabel();
 		volumeLabel.setForeground(Color.RED);
@@ -198,7 +201,7 @@ public class Form extends JDialog implements ActionListener{
 				} else {customerWarning.setText("");}
 			}
 			@Override
-			public void focusGained(FocusEvent e) {	}
+			public void focusGained(FocusEvent e) { 	}
 		});
 		customerWarning = new JLabel();
 		customerWarning.setForeground(Color.RED);
@@ -251,13 +254,14 @@ public class Form extends JDialog implements ActionListener{
 		});
 		priorityField.addFocusListener(new FocusListener(){
 			@Override
-			public void focusGained(FocusEvent e) {	}
+			public void focusGained(FocusEvent e) {	notifyPrice(); }
 
 			@Override
 			public void focusLost(FocusEvent e) {
 				if(priorityField.getSelectedIndex()==-1){
 					priorityWarning.setText("*Please select a priority");
 				} else {priorityWarning.setText("");}
+				notifyPrice();
 			}
 		});
 		priorityField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
@@ -285,10 +289,11 @@ public class Form extends JDialog implements ActionListener{
 				if(originCityField.getSelectedIndex()==-1) {
 					originCityWarning.setText("*Please select origin");
 				} else {originCityWarning.setText("");}
+				notifyPrice();
 			}
 
 			@Override
-			public void focusGained(FocusEvent e) { }
+			public void focusGained(FocusEvent e) { notifyPrice(); }
 		});
 		originCityField.addItemListener(new ItemListener() {
 
@@ -318,13 +323,14 @@ public class Form extends JDialog implements ActionListener{
 		destinationField.setSelectedIndex(-1);
 		destinationField.addFocusListener(new FocusListener(){
 			@Override
-			public void focusGained(FocusEvent e) { }
+			public void focusGained(FocusEvent e) { notifyPrice(); }
 
 			@Override
 			public void focusLost(FocusEvent e) {
 				if(destinationField.getSelectedIndex()==-1){
 					destinationWarning.setText("*Please select a destination");
 				} else {destinationWarning.setText("");}
+				notifyPrice();
 			}
 		});
 		destinationWarning = new JLabel();
@@ -343,9 +349,9 @@ public class Form extends JDialog implements ActionListener{
 								ro.getDestination().equals(destinationField.getSelectedItem().toString())){
 
 							temp = ro;
-							System.out.println(temp.toString());
 						}
 					}
+					notifyPrice();
 				}
 			}
 		});
@@ -481,31 +487,8 @@ public class Form extends JDialog implements ActionListener{
 				);
 
 
-
-		price.addNotify();
-
 		add(panel);
 	}
-
-
-	/**
-	 *	Creating background image
-	 */
-	public void paintComponent (Graphics g){
-		g.drawImage(image, 0, 0, getParent().getWidth(), getParent().getHeight(), this);
-	}
-
-
-	public void allFieldsValue(){
-		Route r;
-		if(checkFields("Mail")==true){
-
-		}
-
-
-		price.setText("");
-	}
-
 
 	/**
 	 * Helper method to check if the field the that requires number is digit.
@@ -534,8 +517,18 @@ public class Form extends JDialog implements ActionListener{
 	}
 
 	private void notifyPrice(){
-		if((!customerField.getText().equals("")) && (isDigit(volumeField.getText()) == true) && (isDigit(weightField.getText()) == true) && (typeField.getValue().toString().equals("Parcel")) && destinationField.getSelectedIndex()>-1){
-			;
+		if(checkFields("Mail") || checkFields("Parcel") ){
+			if(typeField.getValue().toString().equals("Mail")){
+				double p = temp.getMailCost() * 1.3;
+				System.out.println(p);
+				price.setText("<html><font face=Verdana size=5>Price: " + p + "</font></html>");
+
+			}
+			else if(typeField.getValue().toString().equals("Parcel")){
+				double p = temp.getCost(Double.parseDouble(weightField.getText()), Double.parseDouble(volumeField.getText()) ) * 1.3;
+
+				price.setText("<html><font face=Verdana size=5>Price: " + p + "</font></html>");
+			}
 		}
 	}
 
@@ -557,7 +550,7 @@ public class Form extends JDialog implements ActionListener{
 								originCityField.getSelectedItem().toString().trim(),
 								weightField.getText(),
 								volumeField.getText(),
-								0, (priorityField.getSelectedIndex()+1));
+								(temp.getMailCost() * 1.3), (priorityField.getSelectedIndex()+1));
 
 						int result = JOptionPane.showConfirmDialog(panel, "Confirm customer details?", "Confirm", JOptionPane.YES_NO_OPTION);;
 
@@ -574,7 +567,7 @@ public class Form extends JDialog implements ActionListener{
 						Mail m = new Mail(KPSUserInterface.clock.getCurrentDate(),
 								destinationField.getSelectedItem().toString().trim(),
 								originCityField.getSelectedItem().toString().trim(),
-								0, (priorityField.getSelectedIndex()+1));
+								(temp.getMailCost() * 1.3), (priorityField.getSelectedIndex()+1));
 
 						int result = JOptionPane.showConfirmDialog(panel, "Confirm customer details?", "Confirm", JOptionPane.YES_NO_OPTION);;
 
