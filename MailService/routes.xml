@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><routes>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<routes>
 
 
 
@@ -80,7 +81,8 @@
     <frequency>5</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
     <priority>International Sea</priority>
-</route><route>
+</route>
+  <route>
     <origin>Auckland</origin>
     <destination>Paris</destination>
     <companyName>Seven Seas</companyName>
@@ -196,7 +198,8 @@
     <frequency>5</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
     <priority>International Sea</priority>
-  </route><route>
+  </route>
+  <route>
     <origin>Wellington</origin>
     <destination>Changi</destination>
     <companyName>Singapore Air</companyName>
@@ -312,7 +315,8 @@
     <frequency>5</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
     <priority>International Sea</priority>
-  </route><route>
+  </route>
+  <route>
     <origin>Dunedin</origin>
     <destination>Changi</destination>
     <companyName>Singapore Air</companyName>
@@ -428,5 +432,22 @@
     <frequency>3</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
     <priority>Domestic Standard</priority>
+  </route>
+
+    
+
+    
+    <route>
+    <origin>Auckland</origin>
+    <destination>San Francisco</destination>
+    <companyName>FedEx</companyName>
+    <maxWeight>500</maxWeight>
+    <maxVolume>40</maxVolume>
+    <weightCost>5.0</weightCost>
+    <volumeCost>6.0</volumeCost>
+    <mailcost>8.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>120</estimatedDeliveryTime>
+    <priority>International Air</priority>
   </route>
 </routes>
