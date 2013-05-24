@@ -487,4 +487,11 @@
     <cost>50</cost>
     <priority>2.0</priority>
   </parcel>
+<mail>
+    <day>24/05/2013</day>
+    <to>Mumbai</to>
+    <from>Hamilton</from>
+    <cost>5.2</cost>
+    <priority>2.0</priority>
+  </mail>
 </mailevents>

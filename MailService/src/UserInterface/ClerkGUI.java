@@ -6,6 +6,10 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+/**
+ * @author Sam
+ * ClerkGUI is slightly different than Manager GUI. Clerk has the ability to input client details
+ */
 public class ClerkGUI extends JPanel implements ActionListener{
 
 	private Form form;

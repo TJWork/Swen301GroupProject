@@ -4,19 +4,7 @@
 
 
 
-<route>
-    <origin>Palmerston North</origin>
-    <destination>Chicago</destination>
-    <companyName>Air New Zealand</companyName>
-    <maxWeight>10000</maxWeight>
-    <maxVolume>800</maxVolume>
-    <weightCost>0.17</weightCost>
-    <volumeCost>0.13</volumeCost>
-    <mailcost>3.0</mailcost>
-    <frequency>3</frequency>
-    <estimatedDeliveryTime>240</estimatedDeliveryTime>
-    <priority>Domestic Air</priority>
-  </route>
+
 <route>
     <origin>Dunedin</origin>
     <destination>Hastings</destination>
@@ -449,5 +437,18 @@
     <frequency>3</frequency>
     <estimatedDeliveryTime>120</estimatedDeliveryTime>
     <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Wellington</origin>
+    <destination>Henan</destination>
+    <companyName>Seven Seas</companyName>
+    <maxWeight>25000</maxWeight>
+    <maxVolume>10000</maxVolume>
+    <weightCost>0.05</weightCost>
+    <volumeCost>0.04</volumeCost>
+    <mailcost>0.8</mailcost>
+    <frequency>2</frequency>
+    <estimatedDeliveryTime>160</estimatedDeliveryTime>
+    <priority>International Sea</priority>
   </route>
 </routes>

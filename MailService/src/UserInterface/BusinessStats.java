@@ -9,6 +9,7 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.*;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
 import service.*;
@@ -40,6 +41,10 @@ import file.XMLWorker;
 
 import static com.googlecode.charts4j.Color.*;
 
+/**
+ * @author Sam
+ * Displays the Business revenue and expendiure overtime
+ */
 public class BusinessStats extends JPanel{
 
 	private JLabel title;
@@ -61,10 +66,40 @@ public class BusinessStats extends JPanel{
 		expenditure = getTotalExpenditure();
 		revenue = getTotalRevenue();
 		
-		add(mailEvents);
-		add(expenditureOverTime);
-		add(expenditure);
-		add(revenue);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mailEvents)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(title)
+                            .addComponent(expenditure, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(expenditureOverTime)
+                            .addComponent(revenue, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(99, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(title)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(expenditure, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(revenue, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mailEvents)
+                    .addComponent(expenditureOverTime))
+                .addContainerGap(271, Short.MAX_VALUE))
+        );
 	}
 	
 	public JLabel mailEvents(){
@@ -215,7 +250,9 @@ public class BusinessStats extends JPanel{
 		double total=0;
 		total = XMLWorker.getTotalSales();
 		
-		JLabel label = new JLabel("Total Expenditure: " + df.format(total));
+		JLabel label = new JLabel("Total Expenditure: " + df.format(total), null, JLabel.CENTER);
+		label.setFont(new Font("Verdana", Font.PLAIN, 20));
+		label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 		return label;
 	}
 	
@@ -223,7 +260,9 @@ public class BusinessStats extends JPanel{
 		double total=0;
 		total = XMLWorker.getTotalSales()*1.3;
 		
-		JLabel label = new JLabel("Total Revenue: " + df.format(total));
+		JLabel label = new JLabel("Total Revenue: " + df.format(total), null, JLabel.CENTER);
+		label.setFont(new Font("Verdana", Font.PLAIN, 20));
+		label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 		return label;
 	}
 	

@@ -14,4 +14,17 @@
     <estimatedDeliveryTime>100</estimatedDeliveryTime>
     <priority>International Air</priority>
   </route>
+<route>
+    <origin>Palmerston North</origin>
+    <destination>Chicago</destination>
+    <companyName>Air New Zealand</companyName>
+    <maxWeight>10000</maxWeight>
+    <maxVolume>800</maxVolume>
+    <weightCost>0.17</weightCost>
+    <volumeCost>0.13</volumeCost>
+    <mailcost>3.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>240</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
+  </route>
 </discontinued>
