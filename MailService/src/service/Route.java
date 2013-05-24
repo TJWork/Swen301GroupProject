@@ -66,22 +66,36 @@ public class Route {
 		return frequency;
 	}
 
-	public double getCostOnWeight(double weightValue) {
+	public double getMailCost(){
+		return mailCost;
+	}
+
+	private double getCostOnWeight(double weightValue) {
 		return weightValue*weightCost;
 	}
 
-	public double getCostOnVolume(double volValue) {
+	private double getCostOnVolume(double volValue) {
 		return volValue*volumeCost;
 	}
+
+	public double getCost(double weight, double volume) {
+		double costOnWeight = getCostOnWeight(weight);
+		double costOnVol = getCostOnVolume(volume);
+		if(costOnWeight>costOnVol)
+			return costOnWeight;
+		else
+			return costOnVol;
+	}
+
 
 	public int calculateDeliveryTime(){ //return delivery time in hours
 		return 1/2*frequency+estimatedDeliveryTime;
 	}
-	
+
 	public String[] getData(){
-		
-		return new String[]{this.origin, this.destination, this.company, 
-				"" +this.maxWeight, "" +this.maxVolume, "" +this.weightCost, 
+
+		return new String[]{this.origin, this.destination, this.company,
+				"" +this.maxWeight, "" +this.maxVolume, "" +this.weightCost,
 				"" +this.volumeCost,"" + this.mailCost, "" +this.frequency,
 				"" +this.estimatedDeliveryTime, this.priority};
 	}
@@ -98,6 +112,6 @@ public class Route {
 				+ ", mailCost=" + mailCost + ", frequency=" + frequency
 				+ ", estimatedDeliveryTime=" + estimatedDeliveryTime + "]";
 	}
-	
-	
+
+
 }
