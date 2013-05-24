@@ -42,7 +42,7 @@ public class XMLWorker {
 	 * @throws IOException
 	 */
 	private static ArrayList<ArrayList<String>> readTagsConditional(String fileName, String keyTag, String[] tags, String[] match) throws ParserConfigurationException, SAXException, IOException{
-		Element root = getRootElement(fileName);
+		Element root = getDocElement(fileName).getDocumentElement();
 		ArrayList<ArrayList<String>> retArr = new ArrayList<ArrayList<String>>();
 
 		NodeList rootList = root.getElementsByTagName(keyTag);
@@ -67,27 +67,6 @@ public class XMLWorker {
 		}
 
 		return retArr;
-	}
-	
-	/**
-	 * Method which loads the given xml file, and returns the root of the xml's tree.
-	 * (This is the tag which contains ALL the data).
-	 * @param filename XML File to read
-	 * @return root node
-	 * @throws ParserConfigurationException
-	 * @throws SAXException
-	 * @throws IOException
-	 */
-	private static Element getRootElement(String filename) throws ParserConfigurationException, SAXException, IOException{
-		File file = new File(filename + ".xml");
-
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();		
-		DocumentBuilder db = dbf.newDocumentBuilder();
-		Document doc = db.parse(file);
-		doc.getDocumentElement().normalize();
-
-		//get the root element
-		return doc.getDocumentElement();		
 	}
 
 
@@ -198,7 +177,7 @@ public class XMLWorker {
 	public static ArrayList<ArrayList<String>> getAllCities(){
 		ArrayList<ArrayList<String>> allCities = new ArrayList<ArrayList<String>>();
 		try {
-			Element root = getRootElement("countrycitytown");
+			Element root = getDocElement("countrycitytown").getDocumentElement();
 			NodeList nl = root.getElementsByTagName("country");
 			
 			for (int i = 0; i < nl.getLength(); i++){
@@ -470,10 +449,15 @@ public class XMLWorker {
 		return newList;
 	}
 
-	public static void addRoute(Route r){
+	
+	public static boolean addRoute(Route r){
+		return addRouteToNode("routes", r);
+	}
+	
+	private static boolean addRouteToNode(String filename, Route r){
 		Document doc;
 		try {
-			doc = getDocElement("routes");
+			doc = getDocElement(filename);
 		Element root = doc.getDocumentElement();
 		
 		Element newRoute = doc.createElement("route");
@@ -491,13 +475,99 @@ public class XMLWorker {
 			newRoute.appendChild(e);
 		}
 		
-		finishWritingXML(doc, "routes");
-		}catch(Exception e){e.printStackTrace();}	
+		finishWritingXML(doc, filename);
+		return true;
+		}catch(Exception e){e.printStackTrace();}
+		return false;
 	}
 	
 	
-	public static void deleteRoute(Route route){
+	public static boolean modifyRoute(Route route){
+		Document doc;
+		try {
+			doc = XMLWorker.getDocElement("routes");
 		
+		Element root = doc.getDocumentElement();
+		NodeList nl = root.getElementsByTagName("origin");
+		
+		for (int i = 0; i < nl.getLength(); i++){
+			
+			Element parent = (Element)nl.item(i).getParentNode();
+			NodeList list = parent.getElementsByTagName("origin");
+			
+			if (list.item(0).getTextContent().equals(route.getOrigin())){
+				list = parent.getElementsByTagName("destination");
+				if (list.item(0).getTextContent().equals(route.getDestination())){
+					list = parent.getElementsByTagName("companyName");
+					if (list.item(0).getTextContent().equals(route.getCompany())){
+						root.removeChild(parent);
+						updateXML(doc, "routes");
+						addRoute(route);
+						addCostEvent(route);
+						return true;
+					}	
+				}
+				
+			}
+			
+			
+		}
+		} 
+		catch (ParserConfigurationException e) { e.printStackTrace(); } 
+		catch (SAXException e) { e.printStackTrace(); } 
+		catch (IOException e) { e.printStackTrace(); }
+		return false;
+	}
+	
+	private static boolean addCostEvent(Route route){
+		return XMLWorker.addRouteToNode("costevents", route);
+	}
+	
+	
+	public static boolean deleteRoute(Route route){
+		Document doc;
+		try {
+			doc = XMLWorker.getDocElement("routes");
+		
+		Element root = doc.getDocumentElement();
+		NodeList nl = root.getElementsByTagName("origin");
+		
+		for (int i = 0; i < nl.getLength(); i++){
+			
+			Element parent = (Element)nl.item(i).getParentNode();
+			NodeList list = parent.getElementsByTagName("origin");
+			
+			if (list.item(0).getTextContent().equals(route.getOrigin())){
+				list = parent.getElementsByTagName("destination");
+				if (list.item(0).getTextContent().equals(route.getDestination())){
+					list = parent.getElementsByTagName("companyName");
+					if (list.item(0).getTextContent().equals(route.getCompany())){
+						root.removeChild(parent);
+						updateXML(doc, "routes");
+						addDiscontinued(route);
+						return true;
+					}	
+				}
+				
+			}
+			
+			
+		}
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	private static void addDiscontinued(Route route){
+		addRouteToNode("discontinued", route);
 	}
 	
 	public static ArrayList<Route> getAllRoutes(){
@@ -552,6 +622,21 @@ public class XMLWorker {
 		}
 	}
 
+	private static void updateXML(Document doc, String filename){
+		
+		try {
+			
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource(doc);
+			StreamResult result = new StreamResult(new File(filename + ".xml"));
+			transformer.transform(source, result);
+			
+		} catch (TransformerException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private static void finishWritingXML(Document doc, String filename) throws TransformerException{
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
@@ -570,6 +655,13 @@ public class XMLWorker {
 	public static void main(String[] args){
 
 		
+	    
+	    Route route = new Route("Wellington", "Changi", "Air New Zealand", 2000, 40, 2.0,
+				4.0, 2.0, 3, 100, "International Air");
+		
+	    System.out.println("Deleted: " + XMLWorker.deleteRoute(route));
+	    
+	    
 /*		
 		XMLWorker.addRoute(new Route("a", "b", "c", 200, 400, 2.0,
 				4.0, 2.0, 3, 4, "Air"));
