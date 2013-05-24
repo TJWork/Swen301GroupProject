@@ -10,8 +10,8 @@
     <companyName>Air New Zealand</companyName>
     <maxWeight>10000</maxWeight>
     <maxVolume>800</maxVolume>
-    <weightCost>17.0</weightCost>
-    <volumeCost>13.0</volumeCost>
+    <weightCost>0.17</weightCost>
+    <volumeCost>0.13</volumeCost>
     <mailcost>3.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>240</estimatedDeliveryTime>
@@ -23,9 +23,9 @@
     <companyName>New Zealand Post</companyName>
     <maxWeight>10000</maxWeight>
     <maxVolume>700</maxVolume>
-    <weightCost>12.0</weightCost>
-    <volumeCost>6.0</volumeCost>
-    <mailcost>4.0</mailcost>
+    <weightCost>0.12</weightCost>
+    <volumeCost>0.06</volumeCost>
+    <mailcost>3.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
     <priority>Domestic Air</priority>
@@ -36,8 +36,8 @@
     <companyName>MainFreight</companyName>
     <maxWeight>5000</maxWeight>
     <maxVolume>20</maxVolume>
-    <weightCost>8.0</weightCost>
-    <volumeCost>6.0</volumeCost>
+    <weightCost>0.08</weightCost>
+    <volumeCost>0.06</volumeCost>
     <mailcost>4.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>130</estimatedDeliveryTime>
@@ -49,8 +49,8 @@
     <companyName>New Zealand Post</companyName>
     <maxWeight>1000</maxWeight>
     <maxVolume>25</maxVolume>
-    <weightCost>10.0</weightCost>
-    <volumeCost>8.0</volumeCost>
+    <weightCost>0.1</weightCost>
+    <volumeCost>0.08</volumeCost>
     <mailcost>5.0</mailcost>
     <frequency>5</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
@@ -62,8 +62,8 @@
     <companyName>Air New Zealand</companyName>
     <maxWeight>5000</maxWeight>
     <maxVolume>20</maxVolume>
-    <weightCost>8.0</weightCost>
-    <volumeCost>6.0</volumeCost>
+    <weightCost>0.08</weightCost>
+    <volumeCost>0.06</volumeCost>
     <mailcost>4.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>130</estimatedDeliveryTime>
@@ -75,8 +75,8 @@
     <companyName>MainFreight</companyName>
     <maxWeight>1000</maxWeight>
     <maxVolume>15</maxVolume>
-    <weightCost>9.0</weightCost>
-    <volumeCost>7.0</volumeCost>
+    <weightCost>0.09</weightCost>
+    <volumeCost>0.07</volumeCost>
     <mailcost>3.0</mailcost>
     <frequency>5</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
@@ -85,11 +85,11 @@
   <route>
     <origin>Auckland</origin>
     <destination>Paris</destination>
-    <companyName>Emirates</companyName>
+    <companyName>Seven Seas</companyName>
     <maxWeight>1500</maxWeight>
     <maxVolume>200</maxVolume>
-    <weightCost>12.0</weightCost>
-    <volumeCost>10.0</volumeCost>
+    <weightCost>0.12</weightCost>
+    <volumeCost>0.1</volumeCost>
     <mailcost>6.0</mailcost>
     <frequency>5</frequency>
     <estimatedDeliveryTime>140</estimatedDeliveryTime>
@@ -101,8 +101,8 @@
     <companyName>Emirates</companyName>
     <maxWeight>200</maxWeight>
     <maxVolume>40</maxVolume>
-    <weightCost>2.0</weightCost>
-    <volumeCost>4.0</volumeCost>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.04</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>100</estimatedDeliveryTime>
@@ -114,8 +114,8 @@
     <companyName>FedEx</companyName>
     <maxWeight>500</maxWeight>
     <maxVolume>40</maxVolume>
-    <weightCost>5.0</weightCost>
-    <volumeCost>6.0</volumeCost>
+    <weightCost>0.05</weightCost>
+    <volumeCost>0.06</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>120</estimatedDeliveryTime>
@@ -127,8 +127,8 @@
     <companyName>MainFreight</companyName>
     <maxWeight>10000</maxWeight>
     <maxVolume>800</maxVolume>
-    <weightCost>2.0</weightCost>
-    <volumeCost>4.0</volumeCost>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.04</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
@@ -140,8 +140,8 @@
     <companyName>New Zealand Post</companyName>
     <maxWeight>10000</maxWeight>
     <maxVolume>700</maxVolume>
-    <weightCost>2.0</weightCost>
-    <volumeCost>4.0</volumeCost>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.04</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
@@ -153,8 +153,8 @@
     <companyName>Emirates</companyName>
     <maxWeight>2000</maxWeight>
     <maxVolume>80</maxVolume>
-    <weightCost>17.0</weightCost>
-    <volumeCost>6.0</volumeCost>
+    <weightCost>0.17</weightCost>
+    <volumeCost>0.06</volumeCost>
     <mailcost>4.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>220</estimatedDeliveryTime>
@@ -166,8 +166,8 @@
     <companyName>New Zealand Post</companyName>
     <maxWeight>1000</maxWeight>
     <maxVolume>250</maxVolume>
-    <weightCost>12.0</weightCost>
-    <volumeCost>10.0</volumeCost>
+    <weightCost>0.12</weightCost>
+    <volumeCost>0.1</volumeCost>
     <mailcost>5.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>26</estimatedDeliveryTime>
@@ -179,8 +179,8 @@
     <companyName>Air New Zealand</companyName>
     <maxWeight>5000</maxWeight>
     <maxVolume>20</maxVolume>
-    <weightCost>8.0</weightCost>
-    <volumeCost>6.0</volumeCost>
+    <weightCost>0.08</weightCost>
+    <volumeCost>0.06</volumeCost>
     <mailcost>4.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>130</estimatedDeliveryTime>
@@ -192,8 +192,8 @@
     <companyName>MainFreight</companyName>
     <maxWeight>1000</maxWeight>
     <maxVolume>15</maxVolume>
-    <weightCost>9.0</weightCost>
-    <volumeCost>7.0</volumeCost>
+    <weightCost>0.09</weightCost>
+    <volumeCost>0.07</volumeCost>
     <mailcost>3.0</mailcost>
     <frequency>5</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
@@ -205,8 +205,8 @@
     <companyName>Singapore Air</companyName>
     <maxWeight>2000</maxWeight>
     <maxVolume>40</maxVolume>
-    <weightCost>2.0</weightCost>
-    <volumeCost>4.0</volumeCost>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.04</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>100</estimatedDeliveryTime>
@@ -218,8 +218,8 @@
     <companyName>Singapore Air</companyName>
     <maxWeight>200</maxWeight>
     <maxVolume>40</maxVolume>
-    <weightCost>2.0</weightCost>
-    <volumeCost>4.0</volumeCost>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.04</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>100</estimatedDeliveryTime>
@@ -231,8 +231,8 @@
     <companyName>FedEx</companyName>
     <maxWeight>500</maxWeight>
     <maxVolume>40</maxVolume>
-    <weightCost>5.0</weightCost>
-    <volumeCost>6.0</volumeCost>
+    <weightCost>0.05</weightCost>
+    <volumeCost>0.06</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>120</estimatedDeliveryTime>
@@ -244,8 +244,8 @@
     <companyName>MainFreight</companyName>
     <maxWeight>10000</maxWeight>
     <maxVolume>800</maxVolume>
-    <weightCost>2.0</weightCost>
-    <volumeCost>4.0</volumeCost>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.04</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
@@ -257,8 +257,8 @@
     <companyName>New Zealand Post</companyName>
     <maxWeight>10000</maxWeight>
     <maxVolume>700</maxVolume>
-    <weightCost>2.0</weightCost>
-    <volumeCost>4.0</volumeCost>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.04</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
@@ -270,8 +270,8 @@
     <companyName>MainFreight</companyName>
     <maxWeight>5000</maxWeight>
     <maxVolume>20</maxVolume>
-    <weightCost>8.0</weightCost>
-    <volumeCost>6.0</volumeCost>
+    <weightCost>0.08</weightCost>
+    <volumeCost>0.06</volumeCost>
     <mailcost>4.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>130</estimatedDeliveryTime>
@@ -283,8 +283,8 @@
     <companyName>New Zealand Post</companyName>
     <maxWeight>1000</maxWeight>
     <maxVolume>25</maxVolume>
-    <weightCost>10.0</weightCost>
-    <volumeCost>8.0</volumeCost>
+    <weightCost>0.1</weightCost>
+    <volumeCost>0.08</volumeCost>
     <mailcost>5.0</mailcost>
     <frequency>5</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
@@ -296,8 +296,8 @@
     <companyName>Air New Zealand</companyName>
     <maxWeight>5000</maxWeight>
     <maxVolume>20</maxVolume>
-    <weightCost>8.0</weightCost>
-    <volumeCost>6.0</volumeCost>
+    <weightCost>0.08</weightCost>
+    <volumeCost>0.06</volumeCost>
     <mailcost>4.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>130</estimatedDeliveryTime>
@@ -309,8 +309,8 @@
     <companyName>MainFreight</companyName>
     <maxWeight>1000</maxWeight>
     <maxVolume>15</maxVolume>
-    <weightCost>9.0</weightCost>
-    <volumeCost>7.0</volumeCost>
+    <weightCost>0.09</weightCost>
+    <volumeCost>0.07</volumeCost>
     <mailcost>3.0</mailcost>
     <frequency>5</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
@@ -322,8 +322,8 @@
     <companyName>Singapore Air</companyName>
     <maxWeight>2000</maxWeight>
     <maxVolume>40</maxVolume>
-    <weightCost>2.0</weightCost>
-    <volumeCost>4.0</volumeCost>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.04</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>100</estimatedDeliveryTime>
@@ -335,8 +335,8 @@
     <companyName>Singapore Air</companyName>
     <maxWeight>200</maxWeight>
     <maxVolume>40</maxVolume>
-    <weightCost>2.0</weightCost>
-    <volumeCost>4.0</volumeCost>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.04</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>100</estimatedDeliveryTime>
@@ -348,8 +348,8 @@
     <companyName>FedEx</companyName>
     <maxWeight>500</maxWeight>
     <maxVolume>40</maxVolume>
-    <weightCost>5.0</weightCost>
-    <volumeCost>6.0</volumeCost>
+    <weightCost>0.05</weightCost>
+    <volumeCost>0.06</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>120</estimatedDeliveryTime>
@@ -361,8 +361,8 @@
     <companyName>MainFreight</companyName>
     <maxWeight>10000</maxWeight>
     <maxVolume>800</maxVolume>
-    <weightCost>2.0</weightCost>
-    <volumeCost>4.0</volumeCost>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.04</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
@@ -374,8 +374,8 @@
     <companyName>New Zealand Post</companyName>
     <maxWeight>10000</maxWeight>
     <maxVolume>700</maxVolume>
-    <weightCost>2.0</weightCost>
-    <volumeCost>4.0</volumeCost>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.04</volumeCost>
     <mailcost>2.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
@@ -387,8 +387,8 @@
     <companyName>Emirates</companyName>
     <maxWeight>5000</maxWeight>
     <maxVolume>200</maxVolume>
-    <weightCost>12.0</weightCost>
-    <volumeCost>10.0</volumeCost>
+    <weightCost>0.12</weightCost>
+    <volumeCost>0.1</volumeCost>
     <mailcost>6.0</mailcost>
     <frequency>1</frequency>
     <estimatedDeliveryTime>200</estimatedDeliveryTime>
@@ -400,8 +400,8 @@
     <companyName>FedEx</companyName>
     <maxWeight>1000</maxWeight>
     <maxVolume>25</maxVolume>
-    <weightCost>10.0</weightCost>
-    <volumeCost>8.0</volumeCost>
+    <weightCost>0.1</weightCost>
+    <volumeCost>0.08</volumeCost>
     <mailcost>5.0</mailcost>
     <frequency>5</frequency>
     <estimatedDeliveryTime>240</estimatedDeliveryTime>
@@ -413,8 +413,8 @@
     <companyName>Air New Zealand</companyName>
     <maxWeight>1000</maxWeight>
     <maxVolume>20</maxVolume>
-    <weightCost>7.0</weightCost>
-    <volumeCost>5.0</volumeCost>
+    <weightCost>0.07</weightCost>
+    <volumeCost>0.05</volumeCost>
     <mailcost>4.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>
@@ -426,8 +426,8 @@
     <companyName>FedEx</companyName>
     <maxWeight>800</maxWeight>
     <maxVolume>100</maxVolume>
-    <weightCost>9.0</weightCost>
-    <volumeCost>5.0</volumeCost>
+    <weightCost>0.09</weightCost>
+    <volumeCost>0.05</volumeCost>
     <mailcost>4.0</mailcost>
     <frequency>3</frequency>
     <estimatedDeliveryTime>24</estimatedDeliveryTime>

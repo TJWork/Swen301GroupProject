@@ -88,7 +88,7 @@ public class Route {
 	}
 
 
-	public int calculateDeliveryTime(){ //return delivery time in hours
+	public double calculateDeliveryTime(){ //return delivery time in hours
 		return 1/2*frequency+estimatedDeliveryTime;
 	}
 
