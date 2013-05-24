@@ -64,7 +64,13 @@ public class DashBoard extends JPanel implements ActionListener{
 		numberMailEvents.setText("<html><font face=Verdana color=black size=5>Mail Events</font><br> "
 									+ "<font face=Verdana color=black size=6>" + datas.length + "</font></html>");
 
-		mailEventsTable = new JTable(new DefaultTableModel(datas,columnTitle));
+		mailEventsTable = new JTable(){
+			public boolean isCellEditable(int rowIndex, int colIndex) {
+		        return false;  
+		    }
+		};
+		
+		mailEventsTable.setModel(new DefaultTableModel(datas,columnTitle));
 		mailEventsTable.setFont(new Font("Verdana", Font.PLAIN, 14));
 		mailEventsTable.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 14));
 		mailEventsTable.getTableHeader().setResizingAllowed(false);

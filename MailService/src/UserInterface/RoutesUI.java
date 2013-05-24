@@ -7,6 +7,7 @@ import java.util.*;
 
 import javax.swing.*;
 import javax.swing.table.*;
+
 import service.*;
 
 import file.XMLWorker;
@@ -16,6 +17,7 @@ public class RoutesUI extends JPanel {
 
 	private JLabel title;
 	private JButton addRoutes;
+	private JButton removeRoute;
 	private JScrollPane tableScrollPane;
 	private JTable routesTable;
 	String[] columnTitle;
@@ -32,9 +34,38 @@ public class RoutesUI extends JPanel {
 				addRoutesForm();
 			}
 		});
+		removeRoute = new JButton("Remove Route");
+		removeRoute.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if(routesTable.getSelectedRow()!=-1){
+					DefaultTableModel t = (DefaultTableModel) routesTable.getModel();
+					
+					int index = routesTable.getSelectedRow();
+					
+					String[] str = new String[columnTitle.length] ;
+					
+					for(int i=0; i<columnTitle.length; i++){
+						String s = (String) routesTable.getValueAt(index, i);
+						str[i] = s;
+					}
+					
+					removeRoute(str);
+					
+					t.removeRow(index);
+					
+					routesTable.setModel(t);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Please select a route to delete");
+					
+				}
+			}
+		});
 
 
-		columnTitle = new String[]{"Origin", "Destination", "Carrier Company", "Priority", "Price / gram", "Price / cm3" };
+		columnTitle = new String[]{"Origin", "Destination", "Carrier Company", "Priority", "Price/g", "Price/cm3" };
 
 		ArrayList<Route> routes = XMLWorker.getAllRoutes();
 		String[][] datas = new String[routes.size()][6]; 
@@ -42,15 +73,19 @@ public class RoutesUI extends JPanel {
 			datas[i] = new String[] {routes.get(i).getOrigin(), routes.get(i).getDestination(), routes.get(i).getCompany(),
 					routes.get(i).getPriority(), "" + routes.get(i).getWeightCost(), "" + routes.get(i).getVolumeCost()};
 		}
-		
-		routesTable = new JTable(new DefaultTableModel(datas, columnTitle));
+
+		routesTable = new JTable(){
+			public boolean isCellEditable(int rowIndex, int colIndex) {
+				return false;  
+			}
+		};
+		routesTable.setModel(new DefaultTableModel(datas, columnTitle));
 		tableScrollPane = new JScrollPane(routesTable);
 
 		routesTable.setFont(new Font("Verdana", Font.PLAIN, 14));
 		routesTable.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 16));
 		routesTable.getTableHeader().setResizingAllowed(false);
 		routesTable.getTableHeader().setReorderingAllowed(false);
-		routesTable.setEnabled(false);
 		routesTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		routesTable.setRowHeight(30);
@@ -65,29 +100,34 @@ public class RoutesUI extends JPanel {
 
 		GroupLayout layout = new GroupLayout(this);
 		this.setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addContainerGap(80, Short.MAX_VALUE)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(title)
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-										.addComponent(addRoutes)
-										.addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)))
-										.addContainerGap(80, Short.MAX_VALUE))
-				);
-		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-						.addGap(45, 45, 45)
-						.addComponent(title)
-						.addGap(20, 20, 20)
-						.addComponent(addRoutes)
-						.addGap(20, 20, 20)
-						.addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(33, 33, 33))
-				);
 
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(80, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(title)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(removeRoute)
+                            .addGap(18, 18, 18)
+                            .addComponent(addRoutes))
+                        .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(80, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(title)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addRoutes)
+                    .addComponent(removeRoute))
+                .addGap(20, 20, 20)
+                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+        );
 	}
 
 
@@ -176,7 +216,7 @@ public class RoutesUI extends JPanel {
 		originWarning = new JLabel();
 		originWarning.setForeground(Color.RED);
 		ArrayList<String> city = XMLWorker.getCitiesFromCountry("New Zealand");
-		
+
 		// sort the city list in alphabetical order
 		Collections.sort(city);
 
@@ -443,7 +483,7 @@ public class RoutesUI extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(checkFields() == true){
-					
+
 					int result = JOptionPane.showConfirmDialog(panel, "Confirm route details?", "Confirm", JOptionPane.YES_NO_OPTION);
 
 					Route r = new Route(originField.getSelectedItem().toString().trim(),
@@ -463,7 +503,7 @@ public class RoutesUI extends JPanel {
 						dialog.dispose();
 					}
 				}
-								
+
 			}
 		});
 		CustomButton cancel = new CustomButton("Cancel_Normal", "Cancel_Pressed", "Cancel_Hover", "cancel");
@@ -628,7 +668,7 @@ public class RoutesUI extends JPanel {
 
 		dialog.add(panel);
 		dialog.setModalityType(ModalityType.APPLICATION_MODAL);
-		dialog.setSize(620, 620);
+		dialog.setSize(630, 620);
 		dialog.setResizable(false);
 		dialog.setVisible(true);
 	}
@@ -658,7 +698,7 @@ public class RoutesUI extends JPanel {
 			}
 		}
 	}
-	
+
 	public boolean checkFields(){
 		if( (!companyField.getText().equals("")) && (originField.getSelectedIndex()!=-1) 
 				&& (destinationField.getSelectedIndex()!=-1) 
@@ -671,28 +711,41 @@ public class RoutesUI extends JPanel {
 				&& (!frequencyField.getText().equals("")) && isDigit((frequencyField.getText())) 
 				&& (!ESTField.getText().equals("")) && (isDigit(ESTField.getText()))
 				){
-		
+
 			return true;
 		}
 		return false;
 	}
 
-	public void addRoutes(Route r){
+	private void addRoutes(Route r){
 		//"Origin", "Destination", "Carrier Company", "Priority", "Price / gram", "Price / cm3"
 		DefaultTableModel tm = (DefaultTableModel) routesTable.getModel();
 		String[] temp = new String[6];
-		
+
 		temp[0] = originField.getSelectedItem().toString().trim();
 		temp[1] = destinationField.getSelectedItem().toString().trim();
 		temp[2] = companyField.getText();
 		temp[3] = priorityField.getSelectedItem().toString().trim();
 		temp[4] = costWField.getText().toString();
 		temp[5] = costVField.getText().toString();
-		
+
 		tm.addRow(temp);
 		JTable newTable = new JTable(tm);
 		routesTable = newTable;
 		XMLWorker.addRoute(r);
-		
+
+	}
+
+	private void removeRoute(String[] data){
+		//"Origin", "Destination", "Carrier Company", "Priority", "Price/g", "Price/cm3" 
+		ArrayList<Route> routes = XMLWorker.getAllRoutes();
+		Route route = null;
+		for(Route r:routes){
+			if(r.getOrigin().equals(data[0]) && r.getDestination().equals(data[1]) &&
+					r.getCompany().equals(data[2]) && r.getPriority().equals(data[3])){
+				route = r;
+			}
+		}
+		XMLWorker.deleteRoute(route);
 	}
 }
