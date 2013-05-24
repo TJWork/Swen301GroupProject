@@ -35,7 +35,7 @@
 		<priority>2</priority>
 		<weight>3</weight>
 		<volume>4</volume>
-		<cost>2</cost>
+		<cost>20</cost>
 	</parcel>
 	<parcel>
 	    <day>24/07/2013</day>
@@ -44,7 +44,7 @@
 		<priority>1</priority>
 		<weight>2</weight>
 		<volume>4</volume>
-		<cost>2</cost>
+		<cost>40</cost>
 	</parcel>
 	<parcel>
 	    <day>13/02/2013</day>
@@ -53,7 +53,7 @@
 		<priority>1</priority>
 		<weight>3</weight>
 		<volume>1</volume>
-		<cost>2</cost>
+		<cost>35</cost>
 	</parcel>
 <mail>
     <day>02/02/2012</day>
@@ -83,7 +83,7 @@
     <weight>2</weight>
     <volume>5</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>22</cost>
   </parcel>
 <mail>
     <day>02/02/2012</day>
@@ -99,7 +99,7 @@
     <weight>2</weight>
     <volume>5</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>27</cost>
   </parcel>
 <mail>
     <day>02/02/2012</day>
@@ -115,7 +115,7 @@
     <weight>2</weight>
     <volume>5</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>29</cost>
   </parcel>
 <mail>
     <day>02/02/2012</day>
@@ -184,10 +184,10 @@
     <day>02/04/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>2000</weight>
+    <volume>200</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>70</cost>
   </parcel>
 <mail>
     <day>02/02/2012</day>
@@ -200,10 +200,10 @@
     <day>02/04/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>200</weight>
+    <volume>500</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>10</cost>
   </parcel>
 <mail>
     <day>19/05/2013</day>
@@ -280,33 +280,33 @@
     <day>02/04/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>2000</weight>
+    <volume>500</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>84</cost>
   </parcel>
 <mail>
     <day>02/02/2012</day>
     <to>Madrid</to>
     <from>Palmerston North</from>
     <priority>1.0</priority>
-    <cost>2</cost>
+    <cost>4</cost>
   </mail>
 <parcel>
     <day>02/04/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>580</weight>
+    <volume>450</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>36</cost>
   </parcel>
 <parcel>
     <day>02/06/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>760</weight>
+    <volume>890</volume>
     <priority>2.0</priority>
     <cost>2</cost>
   </parcel>
@@ -314,82 +314,73 @@
     <day>02/08/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>751</weight>
+    <volume>425</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>86</cost>
   </parcel>
 <parcel>
     <day>02/09/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>2000</weight>
+    <volume>450</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>62</cost>
   </parcel>
 <parcel>
     <day>02/11/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>2000</weight>
+    <volume>500</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>72</cost>
   </parcel>
 <parcel>
     <day>02/04/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>2500</weight>
+    <volume>525</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>82</cost>
   </parcel>
 <parcel>
     <day>02/06/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>8570</weight>
+    <volume>1000</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>150</cost>
   </parcel>
 <parcel>
     <day>02/08/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>10000</weight>
+    <volume>1500</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>200</cost>
   </parcel>
 <parcel>
     <day>02/09/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>26500</weight>
+    <volume>4800</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>500</cost>
   </parcel>
 <parcel>
     <day>02/11/2012</day>
     <to>Ho-Chi Min</to>
     <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
+    <weight>26000</weight>
+    <volume>7800</volume>
     <priority>2.0</priority>
-    <cost>2</cost>
-  </parcel>
-<parcel>
-    <day>02/04/2012</day>
-    <to>Ho-Chi Min</to>
-    <from>Clive</from>
-    <weight>2</weight>
-    <volume>5</volume>
-    <priority>2.0</priority>
-    <cost>2</cost>
+    <cost>230</cost>
   </parcel>
 <parcel>
     <day>02/06/2012</day>
@@ -715,5 +706,14 @@
     <volume>123</volume>
     <cost>0.0</cost>
     <priority>3.0</priority>
+  </parcel>
+<parcel>
+    <day>24/05/2013</day>
+    <to>Paris</to>
+    <from>Auckland</from>
+    <weight>12</weight>
+    <volume>21</volume>
+    <cost>7.800000000000001</cost>
+    <priority>2.0</priority>
   </parcel>
 </mailevents>
