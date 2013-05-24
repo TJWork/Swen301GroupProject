@@ -312,6 +312,9 @@ public class XMLWorker {
 	}
 	
 
+	
+	
+	
 	/**
 	 * Method which digs out all parcel events from the xml file excluding mail <br>
 	 * with the given conditions. <br> 
@@ -492,6 +495,10 @@ public class XMLWorker {
 		}catch(Exception e){e.printStackTrace();}	
 	}
 	
+	
+	public static void deleteRoute(Route route){
+		
+	}
 	
 	public static ArrayList<Route> getAllRoutes(){
 		ArrayList<Route> listORoute = new ArrayList<Route>();
