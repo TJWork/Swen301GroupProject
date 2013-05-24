@@ -524,7 +524,7 @@ public class Form extends JDialog implements ActionListener{
 			if(typeField.getValue().toString().equals("Mail")){
 				double p = temp.getMailCost() * 1.3;
 				System.out.println(p);
-				price.setText("<html><font face=Verdana size=5>Price: " + p + "</font></html>");
+				price.setText("<html><font face=Verdana size=5>Price: " + df.format(p) + "</font></html>");
 
 			}
 			else if(typeField.getValue().toString().equals("Parcel")){

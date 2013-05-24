@@ -494,4 +494,13 @@
     <cost>5.2</cost>
     <priority>2.0</priority>
   </mail>
+<parcel>
+    <day>24/05/2013</day>
+    <to>Paris</to>
+    <from>Auckland</from>
+    <weight>123</weight>
+    <volume>23</volume>
+    <cost>7.800000000000001</cost>
+    <priority>2.0</priority>
+  </parcel>
 </mailevents>
