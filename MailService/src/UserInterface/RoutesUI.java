@@ -3,6 +3,7 @@ package UserInterface;
 import java.awt.*;
 import java.awt.Dialog.*;
 import java.awt.event.*;
+import java.text.DecimalFormat;
 import java.util.*;
 
 import javax.swing.*;
@@ -16,11 +17,16 @@ import file.XMLWorker;
 public class RoutesUI extends JPanel {
 
 	private JLabel title;
+	private JLabel activeLabel;
+	private JLabel discontinueLabel; 
 	private JButton addRoutes;
 	private JButton removeRoute;
-	private JScrollPane tableScrollPane;
+	private JScrollPane routesScroll;
+	private JScrollPane discontinueScroll;
 	private JTable routesTable;
-	String[] columnTitle;
+	private JTable discontinueRoutes;
+	private String[] columnTitle;
+	private DecimalFormat df = new DecimalFormat("0.00");
 
 	public RoutesUI(){
 
@@ -41,37 +47,37 @@ public class RoutesUI extends JPanel {
 
 				if(routesTable.getSelectedRow()!=-1){
 					DefaultTableModel t = (DefaultTableModel) routesTable.getModel();
-					
+
 					int index = routesTable.getSelectedRow();
-					
+
 					String[] str = new String[columnTitle.length] ;
-					
+
 					for(int i=0; i<columnTitle.length; i++){
 						String s = (String) routesTable.getValueAt(index, i);
 						str[i] = s;
 					}
-					
+
 					removeRoute(str);
-					
+
 					t.removeRow(index);
-					
+
 					routesTable.setModel(t);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Please select a route to delete");
-					
+
 				}
 			}
 		});
 
 
-		columnTitle = new String[]{"Origin", "Destination", "Carrier Company", "Priority", "Price/g", "Price/cm3" };
+		columnTitle = new String[]{"Origin", "Destination", "Carrier Company", "Priority", "NZD/g", "NZD/cm3", "NZD/Mail" };
 
 		ArrayList<Route> routes = XMLWorker.getAllRoutes();
-		String[][] datas = new String[routes.size()][6]; 
+		String[][] datas = new String[routes.size()][7]; 
 		for(int i=0; i<routes.size(); i++){
 			datas[i] = new String[] {routes.get(i).getOrigin(), routes.get(i).getDestination(), routes.get(i).getCompany(),
-					routes.get(i).getPriority(), "" + routes.get(i).getWeightCost(), "" + routes.get(i).getVolumeCost()};
+					routes.get(i).getPriority(), "" + df.format(routes.get(i).getWeightCost()), "" + df.format(routes.get(i).getVolumeCost()), "" + df.format(routes.get(i).getMailCost())};
 		}
 
 		routesTable = new JTable(){
@@ -80,7 +86,7 @@ public class RoutesUI extends JPanel {
 			}
 		};
 		routesTable.setModel(new DefaultTableModel(datas, columnTitle));
-		tableScrollPane = new JScrollPane(routesTable);
+		routesScroll = new JScrollPane(routesTable);
 
 		routesTable.setFont(new Font("Verdana", Font.PLAIN, 14));
 		routesTable.getTableHeader().setFont(new Font("Verdana", Font.PLAIN, 16));
@@ -98,36 +104,7 @@ public class RoutesUI extends JPanel {
 		routesTable.getColumnModel().getColumn(5).setPreferredWidth(50);
 
 
-		GroupLayout layout = new GroupLayout(this);
-		this.setLayout(layout);
 
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(title)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(removeRoute)
-                            .addGap(18, 18, 18)
-                            .addComponent(addRoutes))
-                        .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(title)
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addRoutes)
-                    .addComponent(removeRoute))
-                .addGap(20, 20, 20)
-                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
-        );
 	}
 
 
@@ -358,6 +335,7 @@ public class RoutesUI extends JPanel {
 		maxWeight = new JLabel("Maximum Weight");
 		maxWeight.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 16));
 		maxWField = new JTextField();
+		maxWField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 16));
 		maxWWarning = new JLabel();
 		maxWWarning.setForeground(Color.RED);
 		maxWField.addFocusListener(new FocusListener() {
@@ -382,6 +360,7 @@ public class RoutesUI extends JPanel {
 		maxVol = new JLabel("Maximum Volume");
 		maxVol.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 16));
 		maxVField = new JTextField();
+		maxVField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 16));
 		maxVWarning = new JLabel();
 		maxVWarning.setForeground(Color.RED);
 		maxVField.addFocusListener(new FocusListener() {
@@ -408,6 +387,7 @@ public class RoutesUI extends JPanel {
 		mailCost = new JLabel("Mail Cost");
 		mailCost.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 16));
 		mailCostField = new JTextField();
+		mailCostField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 16));
 		mailCostWarning = new JLabel();
 		mailCostWarning.setForeground(Color.RED);
 		mailCostField.addFocusListener(new FocusListener() {
@@ -433,6 +413,7 @@ public class RoutesUI extends JPanel {
 		frequency = new JLabel("Frequency");
 		frequency.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 16));
 		frequencyField = new JTextField();
+		frequencyField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 16));
 		frequencyWarning = new JLabel();
 		frequencyWarning.setForeground(Color.RED);
 		frequencyField.addFocusListener(new FocusListener() {
@@ -457,6 +438,7 @@ public class RoutesUI extends JPanel {
 		EST = new JLabel("Estimated Delivery");
 		EST.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 16));
 		ESTField = new JTextField();
+		ESTField.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 16));
 		ESTWarning = new JLabel();
 		ESTWarning.setForeground(Color.RED);
 		ESTField.addFocusListener(new FocusListener() {
@@ -519,147 +501,147 @@ public class RoutesUI extends JPanel {
 
 		//===================== Layout for DialogBox ===============================
 
-		GroupLayout layout = new javax.swing.GroupLayout(panel);
+		GroupLayout layout = new GroupLayout(panel);
 		panel.setLayout(layout);
 		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 						.addGap(25, 25, 25)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup()
-										.addComponent(EST, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(ESTField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(ESTWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addComponent(EST, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+										.addComponent(ESTField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+										.addComponent(ESTWarning, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
 										.addGroup(layout.createSequentialGroup()
-												.addComponent(frequency, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-												.addComponent(frequencyField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-												.addComponent(frequencyWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+												.addComponent(frequency, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+												.addComponent(frequencyField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+												.addComponent(frequencyWarning, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
 												.addGroup(layout.createSequentialGroup()
-														.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-																.addComponent(mailCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																.addComponent(priority, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																.addComponent(origin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																.addComponent(companyName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																.addComponent(costV, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																.addComponent(costW, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																.addComponent(destination, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																.addComponent(maxWeight, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-																.addComponent(maxVol, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-																.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+																.addComponent(mailCost, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																.addComponent(priority, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																.addComponent(origin, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																.addComponent(companyName, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																.addComponent(costV, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																.addComponent(costW, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																.addComponent(destination, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																.addComponent(maxWeight, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+																.addComponent(maxVol, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+																.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+																.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 																		.addGroup(layout.createSequentialGroup()
-																				.addComponent(costWField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-																				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																				.addComponent(costWWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+																				.addComponent(costWField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+																				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+																				.addComponent(costWWarning, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
 																				.addGroup(layout.createSequentialGroup()
-																						.addComponent(costVField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-																						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																						.addComponent(costVWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-																						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+																						.addComponent(costVField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+																						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+																						.addComponent(costVWarning, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
+																						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 																								.addGroup(layout.createSequentialGroup()
 																										.addComponent(submit)
 																										.addGap(49, 49, 49)
 																										.addComponent(cancel))
-																										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+																										.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 																												.addGroup(layout.createSequentialGroup()
-																														.addComponent(maxWField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-																														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																														.addComponent(maxWWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+																														.addComponent(maxWField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+																														.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+																														.addComponent(maxWWarning, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
 																														.addGroup(layout.createSequentialGroup()
-																																.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+																																.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 																																		.addComponent(originField, 200,200,200)
 																																		.addComponent(destinationField, 200,200,200)
 																																		.addComponent(priorityField, 200,200,200)
 																																		.addComponent(companyField, 200,200,200))
 																																		.addGap(10, 10, 10)
-																																		.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-																																				.addComponent(companyWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																																				.addComponent(priorityWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																																				.addComponent(originWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																																				.addComponent(destinationWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+																																		.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+																																				.addComponent(companyWarning, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																																				.addComponent(priorityWarning, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																																				.addComponent(originWarning, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																																				.addComponent(destinationWarning, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)))
 																																				.addGroup(layout.createSequentialGroup()
-																																						.addComponent(maxVField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-																																						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																																						.addComponent(maxVWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+																																						.addComponent(maxVField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+																																						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+																																						.addComponent(maxVWarning, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))))
 																																						.addGroup(layout.createSequentialGroup()
-																																								.addComponent(mailCostField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-																																								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																																								.addComponent(mailCostWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+																																								.addComponent(mailCostField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+																																								.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+																																								.addComponent(mailCostWarning, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))))
 																																								.addComponent(dialogTitle))
 																																								.addContainerGap(25, Short.MAX_VALUE))
 				);
 		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
 						.addGap(45, 45, 45)
 						.addComponent(dialogTitle)
 						.addGap(18, 18, 18)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup()
-										.addComponent(companyName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(companyName, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 										.addGap(10, 10, 10)
-										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+												.addComponent(priority, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 												.addComponent(priorityWarning))
 												.addGap(10, 10, 10)
-												.addComponent(origin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(origin, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 												.addGap(10, 10, 10)
-												.addComponent(destination, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+												.addComponent(destination, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 												.addGroup(layout.createSequentialGroup()
-														.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(companyField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																.addComponent(companyField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 																.addComponent(companyWarning))
 																.addGap(10, 10, 10)
-																.addComponent(priorityField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addComponent(priorityField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 																.addGap(10, 10, 10)
-																.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																		.addComponent(originField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+																.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																		.addComponent(originField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 																		.addComponent(originWarning))
 																		.addGap(10, 10, 10)
-																		.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																				.addComponent(destinationField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-																				.addComponent(destinationWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))))
+																		.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																				.addComponent(destinationField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+																				.addComponent(destinationWarning, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))))
 																				.addGap(10, 10, 10)
-																				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(maxWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-																						.addComponent(maxWField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+																				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																						.addComponent(maxWeight, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+																						.addComponent(maxWField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 																						.addComponent(maxWWarning))
 																						.addGap(10, 10, 10)
-																						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																								.addComponent(maxVol, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addComponent(maxVField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+																						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																								.addComponent(maxVol, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+																								.addComponent(maxVField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 																								.addComponent(maxVWarning))
 																								.addGap(10, 10, 10)
-																								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																										.addComponent(costWField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-																										.addComponent(costW, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+																								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																										.addComponent(costWField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+																										.addComponent(costW, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 																										.addComponent(costWWarning))
 																										.addGap(10, 10, 10)
-																										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																												.addComponent(costVField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-																												.addComponent(costV, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+																										.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																												.addComponent(costVField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+																												.addComponent(costV, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 																												.addComponent(costVWarning))
 																												.addGap(10, 10, 10)
-																												.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																														.addComponent(mailCost, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-																														.addComponent(mailCostField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+																												.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																														.addComponent(mailCost, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+																														.addComponent(mailCostField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 																														.addComponent(mailCostWarning))
 																														.addGap(10, 10, 10)
-																														.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																																.addComponent(frequency, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-																																.addComponent(frequencyField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+																														.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																																.addComponent(frequency, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+																																.addComponent(frequencyField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 																																.addComponent(frequencyWarning))
 																																.addGap(10, 10, 10)
-																																.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																																		.addComponent(ESTField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+																																.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																																		.addComponent(ESTField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 																																		.addComponent(ESTWarning)
-																																		.addComponent(EST, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-																																		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-																																		.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+																																		.addComponent(EST, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+																																		.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+																																		.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 																																				.addComponent(submit)
 																																				.addComponent(cancel))
 																																				.addContainerGap())
@@ -720,14 +702,15 @@ public class RoutesUI extends JPanel {
 	private void addRoutes(Route r){
 		//"Origin", "Destination", "Carrier Company", "Priority", "Price / gram", "Price / cm3"
 		DefaultTableModel tm = (DefaultTableModel) routesTable.getModel();
-		String[] temp = new String[6];
+		String[] temp = new String[7];
 
 		temp[0] = originField.getSelectedItem().toString().trim();
 		temp[1] = destinationField.getSelectedItem().toString().trim();
 		temp[2] = companyField.getText();
 		temp[3] = priorityField.getSelectedItem().toString().trim();
-		temp[4] = costWField.getText().toString();
-		temp[5] = costVField.getText().toString();
+		temp[4] = costWField.getText();
+		temp[5] = costVField.getText();
+		temp[6] = df.format(Double.parseDouble(mailCostField.getText()));
 
 		tm.addRow(temp);
 		JTable newTable = new JTable(tm);

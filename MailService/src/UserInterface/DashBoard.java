@@ -9,6 +9,7 @@ import file.XMLWorker;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -23,6 +24,7 @@ public class DashBoard extends JPanel implements ActionListener{
 	private JLabel revenue;
 	private JLabel numberMailEvents;
 	private String[] columnTitle;
+	private DecimalFormat df = new DecimalFormat("0.00");
 
 	public DashBoard(String s){
 
@@ -54,11 +56,11 @@ public class DashBoard extends JPanel implements ActionListener{
 
 		for(int i=0; i<mail.size(); i++){
 			String[] str = mail.get(i).getData();
-			datas[i] = new String[] {str[0], "Mail", str[1], str[2], getPriority(str[4]), str[3]} ;
+			datas[i] = new String[] {str[0], "Mail", str[1], str[2], getPriority(str[4]), df.format(Double.parseDouble(str[3]))} ;
 		}
 		for(int i=mail.size(); i<datas.length; i++){
 			String[] str = parcel.get(i-mail.size()).getData();
-			datas[i] = new String[] {str[0], "Parcel", str[1], str[2], getPriority(str[6]), str[5]} ;
+			datas[i] = new String[] {str[0], "Parcel", str[1], str[2], getPriority(str[6]), df.format(Double.parseDouble(str[5]))} ;
 		}
 
 		numberMailEvents.setText("<html><font face=Verdana color=black size=5>Mail Events</font><br> "

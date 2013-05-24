@@ -1,29 +1,17 @@
 package UserInterface;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
+import java.net.*;
+import java.text.*;
+import java.util.*;
 
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
-import service.City;
-import service.Mail;
-import service.Parcel;
+import service.*;
 
 import com.googlecode.charts4j.AxisLabels;
 import com.googlecode.charts4j.AxisLabelsFactory;
@@ -61,7 +49,7 @@ public class BusinessStats extends JPanel{
 	private JLabel revenue;
 	private ArrayList<Mail> mail = XMLWorker.getMail(new String[]{null, null, null, null, null});
 	private ArrayList<Parcel> parcel = XMLWorker.getParcels(new String[] {null, null, null, null, null, null, null});
-	DecimalFormat df = new DecimalFormat("#.##");
+	DecimalFormat df = new DecimalFormat("0.00");
 	
 	public BusinessStats(){
 		title = new JLabel("Business Statistics");

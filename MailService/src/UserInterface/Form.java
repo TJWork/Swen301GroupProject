@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.*;
 
 import javax.imageio.ImageIO;
@@ -59,6 +60,8 @@ public class Form extends JDialog implements ActionListener{
 	private ArrayList<Route> routes = XMLWorker.getAllRoutes();
 	private ArrayList<Route> route = new ArrayList<Route>();
 	private Route temp;
+	
+	private DecimalFormat df = new DecimalFormat("#.##");
 
 
 	public Form(){
@@ -527,7 +530,7 @@ public class Form extends JDialog implements ActionListener{
 			else if(typeField.getValue().toString().equals("Parcel")){
 				double p = temp.getCost(Double.parseDouble(weightField.getText()), Double.parseDouble(volumeField.getText()) ) * 1.3;
 
-				price.setText("<html><font face=Verdana size=5>Price: " + p + "</font></html>");
+				price.setText("<html><font face=Verdana size=5>Price: " + df.format(p) + "</font></html>");
 			}
 		}
 	}
