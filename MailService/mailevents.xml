@@ -478,29 +478,5 @@
     <cost>30</cost>
     <priority>3.0</priority>
   </parcel>
-<parcel>
-    <day>24/05/2013</day>
-    <to>Paris</to>
-    <from>Auckland</from>
-    <weight>1200</weight>
-    <volume>2100</volume>
-    <cost>50</cost>
-    <priority>2.0</priority>
-  </parcel>
-<mail>
-    <day>24/05/2013</day>
-    <to>Mumbai</to>
-    <from>Hamilton</from>
-    <cost>5.2</cost>
-    <priority>2.0</priority>
-  </mail>
-<parcel>
-    <day>24/05/2013</day>
-    <to>Paris</to>
-    <from>Auckland</from>
-    <weight>123</weight>
-    <volume>23</volume>
-    <cost>7.800000000000001</cost>
-    <priority>2.0</priority>
-  </parcel>
+
 </mailevents>

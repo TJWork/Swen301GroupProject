@@ -33,13 +33,13 @@ public class RoutesUI extends JPanel {
 		setBackground(Color.WHITE);
 		title = new JLabel("Routes");
 		title.setFont(new Font("Verdana", Font.BOLD, 36));
-		
+
 		activeLabel = new JLabel("Active Routes");
 		activeLabel.setFont(new Font("Verdana", Font.BOLD, 20));
-		
+
 		discontinueLabel = new JLabel("Discontinued Routes");
 		discontinueLabel.setFont(new Font("Verdana", Font.BOLD, 20));
-		
+
 		addRoutes = new JButton("Add New Routes");
 		addRoutes.addActionListener(new ActionListener() {
 			@Override
@@ -51,18 +51,24 @@ public class RoutesUI extends JPanel {
 		removeRoute.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int index = routesTable.getSelectedRow();
 
 				if(routesTable.getSelectedRow()!=-1){
 					DefaultTableModel t = (DefaultTableModel) routesTable.getModel();
-					int index = routesTable.getSelectedRow();
+
 					String[] str = new String[columnTitle.length] ;
 					for(int i=0; i<columnTitle.length; i++){
 						String s = (String) routesTable.getValueAt(index, i);
 						str[i] = s;
 					}
-					removeRoute(str);
-					t.removeRow(index);
-					routesTable.setModel(t);
+
+					int result = JOptionPane.showConfirmDialog(getParent(), "Confirm remove route?", "Confirm", JOptionPane.YES_NO_OPTION);;
+
+					if(result == JOptionPane.YES_OPTION){
+						removeRoute(str);
+						t.removeRow(index);
+						routesTable.setModel(t);
+					}
 				}
 				else {
 					JOptionPane.showMessageDialog(getParent(), "Please select a route to delete");
@@ -73,7 +79,7 @@ public class RoutesUI extends JPanel {
 
 
 		//====================================== Active Route Table ======================================
-		
+
 		columnTitle = new String[]{"Origin", "Destination", "Carrier Company", "Priority", "NZD/g", "NZD/cm3", "NZD/Mail" };
 
 		ArrayList<Route> routes = XMLWorker.getAllRoutes();
@@ -108,14 +114,14 @@ public class RoutesUI extends JPanel {
 
 
 		//=========================== Discontinued Route Table ===================================
-		
+
 		ArrayList<Route> disRoutes = XMLWorker.getDiscontinued();
 		String[][] disDatas = new String[disRoutes.size()][7]; 
 		for(int i=0; i<disRoutes.size(); i++){
 			datas[i] = new String[] {disRoutes.get(i).getOrigin(), disRoutes.get(i).getDestination(), disRoutes.get(i).getCompany(),
 					disRoutes.get(i).getPriority(), "" + df.format(disRoutes.get(i).getWeightCost()), "" + df.format(disRoutes.get(i).getVolumeCost()), "" + df.format(disRoutes.get(i).getMailCost())};
 		}
-		
+
 		discontinueRoutes = new JTable(){
 			public boolean isCellEditable(int rowIndex, int colIndex) {
 				return false;  
@@ -138,51 +144,51 @@ public class RoutesUI extends JPanel {
 		discontinueRoutes.getColumnModel().getColumn(3).setPreferredWidth(145);
 		discontinueRoutes.getColumnModel().getColumn(4).setPreferredWidth(50);
 		discontinueRoutes.getColumnModel().getColumn(5).setPreferredWidth(50);
-		
-		
-		
+
+
+
 		//============================== Layout ===================================
 
-	       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-	        this.setLayout(layout);
-	        layout.setHorizontalGroup(
-	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addGroup(layout.createSequentialGroup()
-	                .addContainerGap(80, Short.MAX_VALUE)
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-	                        .addComponent(title)
-	                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-	                            .addComponent(activeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	                            .addComponent(removeRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                            .addGap(18, 18, 18)
-	                            .addComponent(addRoutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-	                        .addComponent(routesScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
-	                        .addComponent(discontinueScroll))
-	                    .addComponent(discontinueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-	                .addContainerGap(80, Short.MAX_VALUE))
-	        );
-	        layout.setVerticalGroup(
-	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-	                .addGap(45, 45, 45)
-	                .addComponent(title)
-	                .addGap(18, 18, 18)
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-	                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                        .addComponent(addRoutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                        .addComponent(removeRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-	                    .addComponent(activeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-	                .addGap(20, 20, 20)
-	                .addComponent(routesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                .addGap(18, 18, 18)
-	                .addComponent(discontinueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                .addGap(20, 20, 20)
-	                .addComponent(discontinueScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                .addGap(33, 33, 33))
-	        );
-		
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap(80, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+										.addComponent(title)
+										.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+												.addComponent(activeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(removeRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addGap(18, 18, 18)
+												.addComponent(addRoutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+												.addComponent(routesScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
+												.addComponent(discontinueScroll))
+												.addComponent(discontinueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+												.addContainerGap(80, Short.MAX_VALUE))
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+						.addGap(45, 45, 45)
+						.addComponent(title)
+						.addGap(18, 18, 18)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+										.addComponent(addRoutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(removeRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addComponent(activeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addGap(20, 20, 20)
+										.addComponent(routesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(18, 18, 18)
+										.addComponent(discontinueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(20, 20, 20)
+										.addComponent(discontinueScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(33, 33, 33))
+				);
+
 	}
 
 
@@ -808,7 +814,7 @@ public class RoutesUI extends JPanel {
 			}
 		}
 		XMLWorker.deleteRoute(route);
-		
+
 		DefaultTableModel tm = (DefaultTableModel) discontinueRoutes.getModel();
 		String[] temp = new String[7];
 
@@ -821,7 +827,5 @@ public class RoutesUI extends JPanel {
 		temp[6] = df.format(route.getMailCost());
 
 		tm.addRow(temp);
-		JTable newTable = new JTable(tm);
-		routesTable = newTable;
 	}
 }

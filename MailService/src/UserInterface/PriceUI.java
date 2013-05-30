@@ -37,11 +37,11 @@ public class PriceUI extends JPanel {
 		
 		
 
-		priceTable = new JTable(){
-			public boolean isCellEditable(int rowIndex, int colIndex) {
-				return false;  
-			}
-		};
+		priceTable = new JTable();//{
+//			public boolean isCellEditable(int rowIndex, int colIndex) {
+//				return false;  
+//			}
+//		};
 		
 		priceTable.setModel(new DefaultTableModel(datas, columnTitle));
 		tableScrollPane = new JScrollPane(priceTable);
@@ -65,39 +65,72 @@ public class PriceUI extends JPanel {
 		priceTable.getColumnModel().getColumn(5).setPreferredWidth(50);
 
 
+		JButton button = new JButton("Change Price");
+        button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(getParent(), "Update price details?", "Price Update", JOptionPane.YES_NO_CANCEL_OPTION);
+				if(result == JOptionPane.YES_OPTION){
+					JOptionPane.showConfirmDialog(getParent(), "Customer Price updated", "Confirm", JOptionPane.PLAIN_MESSAGE);
+				}
+			}
+		});
+		
+        
+        
+		
        GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(title)
-                    .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(title)
-                .addGap(20, 20, 20)
-                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
-        );
+//        layout.setHorizontalGroup(
+//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(layout.createSequentialGroup()
+//                .addContainerGap(80, Short.MAX_VALUE)
+//                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                    .addComponent(title)
+//                    .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                .addContainerGap(80, Short.MAX_VALUE))
+//        );
+//        layout.setVerticalGroup(
+//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(layout.createSequentialGroup()
+//                .addGap(45, 45, 45)
+//                .addComponent(title)
+//                .addGap(20, 20, 20)
+//                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                .addGap(33, 33, 33))
+//        );
 		
+        
+        
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap(80, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(title)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+//                                .addComponent(numberMailEvents, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(button))
+                            .addComponent(tableScrollPane, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 830, GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(80, Short.MAX_VALUE))
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(45, 45, 45)
+                    .addComponent(title)
+                    .addGap(20, 20, 20)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+//                        .addComponent(numberMailEvents, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(button))
+                    .addGap(35, 35, 35)
+                    .addComponent(tableScrollPane, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
+                    .addGap(33, 33, 33))
+            );
+        
 
 	}
 	
-	public void addPrice(){
-		JPanel panel = new JPanel();
-		
-		
-		
-		
-		
-		
-		
-		
-	}
 }

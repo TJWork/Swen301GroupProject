@@ -60,7 +60,7 @@ public class Form extends JDialog implements ActionListener{
 	private ArrayList<Route> routes = XMLWorker.getAllRoutes();
 	private ArrayList<Route> route = new ArrayList<Route>();
 	private Route temp;
-	
+
 	private DecimalFormat df = new DecimalFormat("#.##");
 
 
@@ -520,14 +520,16 @@ public class Form extends JDialog implements ActionListener{
 	}
 
 	private void notifyPrice(){
-		if(checkFields("Mail") || checkFields("Parcel") ){
+		if(checkFields("Mail")  ){
 			if(typeField.getValue().toString().equals("Mail")){
 				double p = temp.getMailCost() * 1.3;
 				System.out.println(p);
 				price.setText("<html><font face=Verdana size=5>Price: " + df.format(p) + "</font></html>");
 
 			}
-			else if(typeField.getValue().toString().equals("Parcel")){
+		}
+		if(checkFields("Parcel")){
+			if(typeField.getValue().toString().equals("Parcel")){
 				double p = temp.getCost(Double.parseDouble(weightField.getText()), Double.parseDouble(volumeField.getText()) ) * 1.3;
 
 				price.setText("<html><font face=Verdana size=5>Price: " + df.format(p) + "</font></html>");
@@ -544,44 +546,42 @@ public class Form extends JDialog implements ActionListener{
 		/*=============================== Submit Button Event ==========================================*/
 		if(e.getActionCommand().equals("submit")){
 			if(checkFields("Parcel")==true || checkFields("Mail")== true){
+				if(typeField.getValue().toString().equals("Parcel")){
 
-				if(checkFields("Parcel")==true || checkFields("Mail")== true){
-					if(typeField.getValue().toString().equals("Parcel")){
+					Parcel p = new Parcel(KPSUserInterface.clock.getCurrentDate(),
+							destinationField.getSelectedItem().toString().trim(),
+							originCityField.getSelectedItem().toString().trim(),
+							weightField.getText(),
+							volumeField.getText(),
+							Double.parseDouble(df.format(temp.getMailCost() * 1.3)), (priorityField.getSelectedIndex()+1));
 
-						Parcel p = new Parcel(KPSUserInterface.clock.getCurrentDate(),
-								destinationField.getSelectedItem().toString().trim(),
-								originCityField.getSelectedItem().toString().trim(),
-								weightField.getText(),
-								volumeField.getText(),
-								(temp.getMailCost() * 1.3), (priorityField.getSelectedIndex()+1));
-
-						int result = JOptionPane.showConfirmDialog(panel, "Confirm customer details?", "Confirm", JOptionPane.YES_NO_OPTION);;
+					int result = JOptionPane.showConfirmDialog(panel, "Confirm customer details?", "Confirm", JOptionPane.YES_NO_OPTION);
 
 
-						if(result == JOptionPane.YES_OPTION){
-							ClerkGUI.dashBoard.addItem("Parcel", p.getData());
-							XMLWorker.addMail(p);
-							dispose();
-						}
-
-					}
-
-					else if(typeField.getValue().toString().equals("Mail")){
-						Mail m = new Mail(KPSUserInterface.clock.getCurrentDate(),
-								destinationField.getSelectedItem().toString().trim(),
-								originCityField.getSelectedItem().toString().trim(),
-								(temp.getMailCost() * 1.3), (priorityField.getSelectedIndex()+1));
-
-						int result = JOptionPane.showConfirmDialog(panel, "Confirm customer details?", "Confirm", JOptionPane.YES_NO_OPTION);;
-
-						if(result == JOptionPane.YES_OPTION){
-							ClerkGUI.dashBoard.addItem("Mail", m.getData());
-							XMLWorker.addMail(m);
-							dispose();
-						}
+					if(result == JOptionPane.YES_OPTION){
+						ClerkGUI.dashBoard.addItem("Parcel", p.getData());
+						XMLWorker.addMail(p);
+						dispose();
 					}
 
 				}
+
+				else if(typeField.getValue().toString().equals("Mail")){
+					Mail m = new Mail(KPSUserInterface.clock.getCurrentDate(),
+							destinationField.getSelectedItem().toString().trim(),
+							originCityField.getSelectedItem().toString().trim(),
+							Double.parseDouble(df.format(temp.getMailCost() * 1.3)), (priorityField.getSelectedIndex()+1));
+
+					int result = JOptionPane.showConfirmDialog(panel, "Confirm customer details?", "Confirm", JOptionPane.YES_NO_OPTION);;
+
+					if(result == JOptionPane.YES_OPTION){
+						ClerkGUI.dashBoard.addItem("Mail", m.getData());
+						XMLWorker.addMail(m);
+						dispose();
+					}
+				}
+
+
 			}
 			else{
 				if(customerField.getText().equals("")) {
