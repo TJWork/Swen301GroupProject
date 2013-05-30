@@ -16,17 +16,6 @@
     <priority>International Sea</priority>
   </route>
 
-
-
-
-
-
-
-
-
-
-
-
   <route>
     <origin>Auckland</origin>
     <destination>Paris</destination>
@@ -355,7 +344,110 @@
     <priority>Domestic Standard</priority>
   </route>
 
-    
+    <route>
+    <origin>Napier</origin>
+    <destination>Auckland</destination>
+    <companyName>MainFreight</companyName>
+    <maxWeight>1000</maxWeight>
+    <maxVolume>15</maxVolume>
+    <weightCost>0.09</weightCost>
+    <volumeCost>0.07</volumeCost>
+    <mailcost>3.0</mailcost>
+    <frequency>5</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>International Sea</priority>
+  </route>
+<route>
+    <origin>Dunedin</origin>
+    <destination>Hastings</destination>
+    <companyName>New Zealand Post</companyName>
+    <maxWeight>10000</maxWeight>
+    <maxVolume>700</maxVolume>
+    <weightCost>0.12</weightCost>
+    <volumeCost>0.06</volumeCost>
+    <mailcost>3.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
+  </route>
+<route>
+    <origin>Palmerston North</origin>
+    <destination>Chicago</destination>
+    <companyName>Air New Zealand</companyName>
+    <maxWeight>10000</maxWeight>
+    <maxVolume>800</maxVolume>
+    <weightCost>0.17</weightCost>
+    <volumeCost>0.13</volumeCost>
+    <mailcost>3.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>240</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
+  </route>
+<route>
+    <origin>Porirua</origin>
+    <destination>Hamilton</destination>
+    <companyName>New Zealand Post</companyName>
+    <maxWeight>50000</maxWeight>
+    <maxVolume>60000</maxVolume>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.01</volumeCost>
+    <mailcost>1.8</mailcost>
+    <frequency>5</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>Domestic Land</priority>
+  </route>
+<route>
+    <origin>Wellington</origin>
+    <destination>Mumbai</destination>
+    <companyName>New Zealand Post</companyName>
+    <maxWeight>1000</maxWeight>
+    <maxVolume>25</maxVolume>
+    <weightCost>0.1</weightCost>
+    <volumeCost>0.08</volumeCost>
+    <mailcost>5.0</mailcost>
+    <frequency>5</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
+<route>
+    <origin>Hamilton</origin>
+    <destination>Mumbai</destination>
+    <companyName>Air New Zealand</companyName>
+    <maxWeight>5000</maxWeight>
+    <maxVolume>20</maxVolume>
+    <weightCost>0.08</weightCost>
+    <volumeCost>0.06</volumeCost>
+    <mailcost>4.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>130</estimatedDeliveryTime>
+    <priority>International Sea</priority>
+  </route>
+<route>
+    <origin>Chrischurch</origin>
+    <destination>Hastings</destination>
+    <companyName>New Zealand Post</companyName>
+    <maxWeight>10000</maxWeight>
+    <maxVolume>700</maxVolume>
+    <weightCost>0.02</weightCost>
+    <volumeCost>0.04</volumeCost>
+    <mailcost>2.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>24</estimatedDeliveryTime>
+    <priority>Domestic Air</priority>
+  </route>
+<route>
+    <origin>Dunedin</origin>
+    <destination>Johannesburg</destination>
+    <companyName>Emirates</companyName>
+    <maxWeight>2000</maxWeight>
+    <maxVolume>80</maxVolume>
+    <weightCost>0.17</weightCost>
+    <volumeCost>0.06</volumeCost>
+    <mailcost>4.0</mailcost>
+    <frequency>3</frequency>
+    <estimatedDeliveryTime>220</estimatedDeliveryTime>
+    <priority>International Air</priority>
+  </route>
 
     
     <route>

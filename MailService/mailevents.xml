@@ -479,4 +479,13 @@
     <priority>3.0</priority>
   </parcel>
 
+<parcel>
+    <day>30/05/2013</day>
+    <to>Paris</to>
+    <from>Auckland</from>
+    <weight>120</weight>
+    <volume>35</volume>
+    <cost>7.8</cost>
+    <priority>2.0</priority>
+  </parcel>
 </mailevents>
